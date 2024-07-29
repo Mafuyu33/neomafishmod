@@ -1,0 +1,2 @@
+#在neoforge.mods.toml里面取消注释mixin，
+

@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.mafuyu33.neomafishmod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ExampleMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
