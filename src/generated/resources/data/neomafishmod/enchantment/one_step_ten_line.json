@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.my_auto_smelt"
+    "translate": "enchantment.neomafishmod.one_step_ten_line"
   },
   "max_cost": {
     "base": 50,
@@ -13,8 +13,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "mainhand"
+    "feet"
   ],
-  "supported_items": "#minecraft:enchantable/mining",
+  "supported_items": "#minecraft:enchantable/foot_armor",
   "weight": 2
 }

@@ -1,4 +1,4 @@
-package com.mafuyu33.neomafishmod.enchantment;
+package com.mafuyu33.neomafishmod.datagen;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import net.minecraft.core.HolderLookup;

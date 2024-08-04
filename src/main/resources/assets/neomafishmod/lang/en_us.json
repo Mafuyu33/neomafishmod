@@ -1,7 +1,9 @@
 {
-
+  "itemGroup.neomafishmod": "neomafishmod",
   "item.neomafishmod.mafish": "Mafish",
 
+  "enchantment.neomafishmod.adam": "adam",
+  "enchantment.neomafishmod.one_step_ten_line": "one_step_ten_line"
 
-  "itemGroup.neomafishmod": "neomafishmod"
+
 }

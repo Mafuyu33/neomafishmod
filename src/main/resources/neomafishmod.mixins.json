@@ -1,9 +1,12 @@
 {
   "required": true,
   "package": "com.mafuyu33.neomafishmod.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin"
+    "ExampleMixin",
+    "enchantmentitemmixin.adam_mace.MaceItemMixin",
+    "enchantmentitemmixin.quick_windcharge.WindChargeItemMixin",
+    "item.lead.LeashableMixin"
   ],
   "client": [
   ],

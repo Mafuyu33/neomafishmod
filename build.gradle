@@ -24,6 +24,9 @@ repositories {
         name = "CleanroomMC"
         url = "https://maven.cleanroommc.com"
     }
+    maven {
+        url = "https://jitpack.io"
+    }
 }
 
 base {
@@ -120,6 +123,7 @@ configurations {
 dependencies {
     // 添加 MixinBooter 依赖项
     implementation "zone.rong:mixinbooter:8.5"
+    implementation "com.github.Virtuoel:Pehkui:${pehkui_version}"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

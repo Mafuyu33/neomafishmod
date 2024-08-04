@@ -1,6 +1,7 @@
-package com.mafuyu33.neomafishmod.enchantment;
+package com.mafuyu33.neomafishmod.datagen;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
+import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
