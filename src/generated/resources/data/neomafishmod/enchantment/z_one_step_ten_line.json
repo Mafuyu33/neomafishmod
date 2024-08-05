@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.adam"
+    "translate": "enchantment.neomafishmod.z_one_step_ten_line"
   },
   "max_cost": {
     "base": 50,
@@ -13,8 +13,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "mainhand"
+    "feet"
   ],
-  "supported_items": "#minecraft:enchantable/mace",
+  "supported_items": "#minecraft:enchantable/foot_armor",
   "weight": 2
 }

@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.Block;
 // 自定义附魔类，用于定义和注册新的附魔
 public class ModEnchantments {
     // 自定义附魔资源键
-    public static final ResourceKey<Enchantment> ADAM = key("adam");
-    public static final ResourceKey<Enchantment> ONE_STEP_TEN_LINE = key("one_step_ten_line");
+    public static final ResourceKey<Enchantment> ADAM = key("z_adam");
+    public static final ResourceKey<Enchantment> ONE_STEP_TEN_LINE = key("z_one_step_ten_line");
 
     // 引导方法，用于初始化附魔注册
     public static <DamageType> void bootstrap(BootstrapContext<Enchantment> context)
