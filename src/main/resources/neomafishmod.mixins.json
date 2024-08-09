@@ -6,6 +6,7 @@
     "ExampleMixin",
     "enchantmentitemmixin.adam_mace.MaceItemMixin",
     "enchantmentitemmixin.quick_windcharge.WindChargeItemMixin",
+    "item.colliableitem.EntityMixin",
     "item.lead.LeashableMixin"
   ],
   "client": [

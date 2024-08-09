@@ -49,8 +49,8 @@ public interface LeashableMixin {
                     } else if ((double)f > 6.0) {
                         ((Leashable)p_entity).elasticRangeLeashBehaviour(entity, f);
                         p_entity.checkSlowFallDistance();
-                        player.hurt(player.damageSources().generic(),1);//尝试伤害玩家
-                        player.setDeltaMovement(0,1,0);//尝试位移玩家
+//                        player.hurt(player.damageSources().generic(),1);//尝试伤害玩家
+//                        player.setDeltaMovement(0,1,0);//尝试位移玩家
                     } else {
                         ((Leashable)p_entity).closeRangeLeashBehaviour(entity);
                     }

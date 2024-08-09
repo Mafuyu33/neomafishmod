@@ -1,2 +1,4 @@
 #在neoforge.mods.toml里面取消注释mixin，
 
+给玩家发送消息：
+player.sendSystemMessage(Component.literal(  "被"+ player.getName().getString() +"捡起来了!(*/ω＼*)"));
