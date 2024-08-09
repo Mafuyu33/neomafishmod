@@ -1,6 +1,7 @@
 package com.mafuyu33.neomafishmod.ui;
 
 import com.mafuyu33.neomafishmod.block.ModBlock;
+
 import com.mafuyu33.neomafishmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
