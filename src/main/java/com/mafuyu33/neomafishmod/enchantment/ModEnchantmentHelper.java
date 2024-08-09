@@ -4,11 +4,15 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.ConditionalEffect;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.enchantment.effects.EnchantmentValueEffect;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * 辅助类，用于处理与附魔相关的逻辑。
@@ -36,4 +40,6 @@ public class ModEnchantmentHelper {
         //没有附魔则返回0。
         return 0;
     }
+
+
 }

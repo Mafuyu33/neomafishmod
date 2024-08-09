@@ -1,9 +1,15 @@
 package com.mafuyu33.neomafishmod.datagen;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
+import com.mafuyu33.neomafishmod.datagen.item.tags.ModBlockTagsProvider;
+import com.mafuyu33.neomafishmod.datagen.item.tags.ModEnchantmentTagsProvider;
+import com.mafuyu33.neomafishmod.datagen.item.tags.ModtemTagsProvider;
+import com.mafuyu33.neomafishmod.datagen.recipe.ModRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -24,5 +30,12 @@ public class ModDataGenerator {
 
         // 为数据生成器添加一个自定义的数据包内置条目提供者
         generator.addProvider(event.includeServer(), new ModDatapackBuiltinEntriesProvider(output, lookupProvider));
+
+
+        generator.addProvider(event.includeServer(),new ModRecipe(output,lookupProvider));
+        TagsProvider<Block> tagsprovider4 = generator.addProvider(event.includeServer(),new ModBlockTagsProvider(output,lookupProvider,NeoMafishMod.MODID,existingFileHelper));
+        //
+        generator.addProvider(event.includeServer(),new ModtemTagsProvider(output,lookupProvider,tagsprovider4.contentsGetter(),NeoMafishMod.MODID,existingFileHelper));
+        generator.addProvider(event.includeServer(),new ModEnchantmentTagsProvider(output,lookupProvider,existingFileHelper));
     }
 }

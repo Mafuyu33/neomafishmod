@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "neomafishmod:block/potato_tnt"
+    },
+    "type=double": {
+      "model": "neomafishmod:block/potato_tnt"
+    },
+    "type=top": {
+      "model": "neomafishmod:block/potato_tnt"
+    }
+  }
+}

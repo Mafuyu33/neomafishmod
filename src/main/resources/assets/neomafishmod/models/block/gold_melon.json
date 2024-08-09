@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "neomafishmod:block/gold_melon_top",
+    "side": "neomafishmod:block/gold_melon_side"
+  }
+}

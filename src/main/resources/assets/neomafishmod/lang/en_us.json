@@ -1,9 +1,172 @@
 {
-  "itemGroup.neomafishmod": "neomafishmod",
+  "itemGroup.neomafishmod": "neoneomafishmod",
   "item.neomafishmod.mafish": "Mafish",
 
-  "enchantment.neomafishmod.z_adam": "adam",
-  "enchantment.neomafishmod.z_one_step_ten_line": "one_step_ten_line"
+  "enchantment.neoneomafishmod.z_adam": "adam",
+  "enchantment.neoneomafishmod.z_one_step_ten_line": "one_step_ten_line",
 
+  "text.autoconfig.neomafishmod.title": "Link Start!",
+
+  "text.autoconfig.neomafishmod.option.isQinNa": "isQinNa",
+  "text.autoconfig.neomafishmod.option.isLlamaSpitForever": "isLlamaSpitForever",
+  "text.autoconfig.neomafishmod.option.isGoatDashTogether": "isGoatDashTogether",
+  "text.autoconfig.neomafishmod.option.isGoatDashForever": "isGoatDashForever",
+  "text.autoconfig.neomafishmod.option.isBeeRideable": "isBeeRideable",
+  "text.autoconfig.neomafishmod.option.isNestedBoxInfinite": "isNestedBoxInfinite",
+  "text.autoconfig.neomafishmod.option.isShieldDashable": "isShieldDashable",
+  "text.autoconfig.neomafishmod.option.isBowDashable": "isBowDashable",
+  "text.autoconfig.neomafishmod.option.isSwimTripwire": "isSwimTripwire",
+  "text.autoconfig.neomafishmod.option.isSpyglassCanPin": "isSpyglassCanPin",
+  "text.autoconfig.neomafishmod.option.lead": "lead",
+  "text.autoconfig.neomafishmod.option.lead.isLeadCanLinkEveryMob": "isLeadCanLinkEveryMob",
+  "text.autoconfig.neomafishmod.option.lead.isLeadCanLinkTogether": "isLeadCanLinkTogether",
+  "text.autoconfig.neomafishmod.option.lead.breakDistance": "breakDistance",
+  "text.autoconfig.neomafishmod.option.isAlwaysEnchantable": "isAlwaysEnchantable",
+  "text.autoconfig.neomafishmod.option.isFireworkCanUseOnEntity": "isFireworkCanUseOnEntity",
+  "text.autoconfig.neomafishmod.option.isFireworkCanHitOnEntity": "isFireworkCanHitOnEntity",
+  "text.autoconfig.neomafishmod.option.isFuThrowable": "isFuThrowable",
+  "text.autoconfig.neomafishmod.option.toggleA": "toggleA",
+  "text.autoconfig.neomafishmod.option.toggleB": "toggleB",
+  "text.autoconfig.neomafishmod.option.stuff": "stuff",
+
+
+  "tooltip.mafishmod.metal_detector.tooltip": "Find valuables underground",
+  "tooltip.mafishmod.villager_item.tooltip": "Delicious",
+  "tooltip.mafishmod.ruby_stuff.tooltip": "§e",
+  "tooltip.mafishmod.vr_pen.tooltip": "Holding dye in the off-hand changes the color, and the quantity of the item in the off-hand determines the size of the square brush",
+  "tooltip.mafishmod.vr_rubber.tooltip": "The quantity of the item in the off-hand determines the size of the eraser, and holding a ruby in the off-hand clears a large area.",
+  "tooltip.mafishmod.vr_compasses.tooltip": "Draw a circle by selecting three points: the first point is the center of the circle, the second determines the radius, and the third establishes the plane.",
+
+
+  "item.neomafishmod.ruby": "Mafish",
+  "item.neomafishmod.raw_ruby": "Fired Mafish",
+  "item.neomafishmod.cool_glass": "COOL GLASS",
+  "item.neomafishmod.cool_glass2": "COOL GLASS2",
+  "item.neomafishmod.metal_detector": "Metal Detector",
+  "item.neomafishmod.tomato": "Tomato",
+  "item.neomafishmod.coal_briquette": "Coal Briquette",
+
+  "item.neomafishmod.ruby_staff": "§eMagic stuff",
+
+  "item.neomafishmod.ruby_pickaxe": "RUBY PICKAXE",
+
+  "item.neomafishmod.ruby_helmet": "Ruby Helmet",
+  "item.neomafishmod.ruby_chestplate": "Ruby Chestplate",
+  "item.neomafishmod.ruby_leggings": "Ruby Leggings",
+  "item.neomafishmod.ruby_boots": "Ruby Boots",
+
+  "block.neomafishmod.ruby_block": "RUBY_BLOCK",
+  "block.neomafishmod.raw_ruby_block": "RAW RUBY BLOCK",
+  "block.neomafishmod.white_cat_block": "WHITE CAT BLOCK",
+  "block.neomafishmod.gold_melon": "gold_melon",
+  "block.neomafishmod.potato_tnt_prepare": "potato_tnt_prepare",
+  "block.neomafishmod.potato_tnt": "potato_tnt",
+  "block.neomafishmod.gem_polishing_station": "Gem Polishing Station",
+
+  "tooltip.neomafishmod.fire_happy": "Fire Happy",
+
+
+
+
+
+  "entity.minecraft.villager.sound_master": "Soundmaster",
+
+  "itemgroup.ruby": "Ruby Tutorial Group",
+
+  "item.neomafishmod.bread_sword": "bread_sword",
+  "item.neomafishmod.bread_sword_hot": "bread_sword_hot",
+  "item.neomafishmod.bread_sword_very_hot": "bread_sword_very_hot",
+  "item.neomafishmod.tnt_ball": "TNT Ball",
+  "item.neomafishmod.stone_ball": "Stone Ball",
+  "item.neomafishmod.apple_vision_pro": "Apple Vision Pro",
+  "item.neomafishmod.fu": "FU",
+  "item.neomafishmod.iron_fake": "Tieding",
+  "item.neomafishmod.zhuge": "zhuge",
+  "item.neomafishmod.poison_sword": "poison_sword",
+  "item.neomafishmod.firework_arrow": "firework_arrow",
+  "item.neomafishmod.stargazy_pie": "stargazy_pie",
+  "item.neomafishmod.time_stop": "time_stop",
+  "item.neomafishmod.math_sword": "math_sword",
+  "item.neomafishmod.colliable": "colliable",
+  "item.neomafishmod.lightning_ball": "lightning_ball",
+  "item.neomafishmod.milk_flesh": "milk_flesh",
+  "item.neomafishmod.cheese_berger": "cheese_berger",
+  "item.neomafishmod.rtx4090": "RTX4090",
+  "item.neomafishmod.llama_item": "llama_item",
+  "item.neomafishmod.villager_item": "villager_item",
+  "item.neomafishmod.iron_golem_item": "iron_golem_item",
+  "item.neomafishmod.lightning_item": "lightning_item",
+  "item.neomafishmod.switch": "switch",
+
+  "item.neomafishmod.vr_pen": "vr_pen",
+  "item.neomafishmod.vr_rubber": "vr_rubber",
+  "item.neomafishmod.vr_ruler": "vr_ruler",
+  "item.neomafishmod.vr_compasses": "vr_compasses",
+  "item.neomafishmod.vr_magic": "vr_magic",
+  "item.neomafishmod.vr_getting_over_it": "vr_getting_over_it",
+
+
+  "enchantment.neomafishmod.bad_luck_of_sea": "bad_luck_of_sea",
+  "enchantment.neomafishmod.eight_gods_pass_sea": "eight_gods_pass_sea",
+  "enchantment.neomafishmod.kill_chicken_get_egg": "kill_chicken_get_egg",
+  "enchantment.neomafishmod.go_to_sky": "go_to_sky",
+  "enchantment.neomafishmod.gong_xi_fa_cai": "gong_xi_fa_cai",
+  "enchantment.neomafishmod.mercy": "mercy",
+  "enchantment.neomafishmod.kill_my_horse": "kill_my_horse",
+  "enchantment.neomafishmod.kill_my_horse_plus": "kill_my_horse_plus",
+  "enchantment.neomafishmod.hot_potato": "hot_potato",
+  "enchantment.neomafishmod.very_easy": "very_easy",
+  "enchantment.neomafishmod.reverse": "reverse",
+  "enchantment.neomafishmod.pay_to_play": "pay_to_play",
+  "enchantment.neomafishmod.fear": "fear",
+  "enchantment.neomafishmod.mute": "mute",
+  "enchantment.neomafishmod.slippery": "slippery",
+  "enchantment.neomafishmod.never_gonna": "never_gonna",
+  "enchantment.neomafishmod.resonance": "resonance",
+  "enchantment.neomafishmod.no_blast_protection": "no_blast_protection",
+  "enchantment.neomafishmod.a_leaf": "a_leaf",
+  "enchantment.neomafishmod.butterfly": "butterfly",
+  "enchantment.neomafishmod.fangsheng": "fangsheng",
+  "enchantment.neomafishmod.never_stop": "never_stop",
+  "enchantment.neomafishmod.bow_left": "bow_left",
+  "enchantment.neomafishmod.super_projectile_protection": "super_projectile_protection",
+  "enchantment.neomafishmod.sticky": "sticky",
+
+
+
+  "key.category.neomafishmod.tutorial": "Mafish Mod",
+  "key.neomafishmod.throw_item": "throw_item",
+
+  "effect.neomafishmod.ironman": "Link Start",
+  "effect.neomafishmod.flower_effect": "flower_effect",
+  "effect.neomafishmod.teleport_effect": "teleport_effect",
+  "effect.neomafishmod.spider_effect": "spider_effect",
+  "effect.neomafishmod.sheep_effect": "sheep_effect",
+  "effect.neomafishmod.antidote_effect": "antidote_effect",
+
+  "item.minecraft.potion.effect.flower_potion": "flower_potion",
+  "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
+  "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion",
+  "item.minecraft.tipped_arrow.effect.flower_potion": "flower_potion",
+
+  "item.minecraft.potion.effect.teleport_potion": "teleport_potion",
+  "item.minecraft.splash_potion.effect.teleport_potion": "Splash teleport_potion",
+  "item.minecraft.lingering_potion.effect.teleport_potion": "Lingering teleport_potion",
+  "item.minecraft.tipped_arrow.effect.teleport_potion": "teleport_potion",
+
+  "item.minecraft.potion.effect.spider_potion": "spider_potion",
+  "item.minecraft.splash_potion.effect.spider_potion": "Splash spider_potion",
+  "item.minecraft.lingering_potion.effect.spider_potion": "Lingering spider_potion",
+  "item.minecraft.tipped_arrow.effect.spider_potion": "spider_potion",
+
+  "item.minecraft.potion.effect.sheep_potion": "sheep_potion",
+  "item.minecraft.splash_potion.effect.sheep_potion": "Splash sheep_potion",
+  "item.minecraft.lingering_potion.effect.sheep_potion": "Lingering sheep_potion",
+  "item.minecraft.tipped_arrow.effect.sheep_potion": "sheep_potion",
+
+  "item.minecraft.potion.effect.antidote_potion": "antidote_potion",
+  "item.minecraft.splash_potion.effect.antidote_potion": "Splash antidote_potion",
+  "item.minecraft.lingering_potion.effect.antidote_potion": "Lingering antidote_potion",
+  "item.minecraft.tipped_arrow.effect.antidote_potion": "antidote_potion"
 
 }
