@@ -60,4 +60,77 @@ public class Config
                 .map(itemName -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemName)))
                 .collect(Collectors.toSet());
     }
+
+
+    /// ***************
+
+    public static boolean isFuThrowable = true;
+    public static boolean isAlwaysEnchantable = true;
+
+    public static boolean isFireworkCanUseOnEntity = true;
+    public static  boolean isFireworkCanHitOnEntity = true;
+    public static boolean isShieldDashable = true;
+
+    public static boolean isFireworkCanUseOnEntity() {
+        return isFireworkCanUseOnEntity;
+    }
+    public static boolean isFireworkCanHitOnEntity() {
+        return isFireworkCanHitOnEntity;
+    }
+
+    public static boolean isShieldDashable() {
+        return isShieldDashable;
+    }
+
+    public static boolean isAlwaysEnchantable() {
+        return isAlwaysEnchantable;
+    }
+
+    public static boolean isLeadCanLinkTogether() {
+        return true;
+    }
+
+    public static Float breakDistance() {
+        return 10f;
+    }
+
+    public static boolean isLeadCanLinkEveryMob() {
+        return true;
+    }
+
+    public static boolean isSpyglassCanPin() {
+        return true;
+    }
+
+    public static boolean isSwimTripwire() {
+        return true;
+    }
+
+    public static boolean isBowDashable() {
+        return true;
+    }
+
+    public static boolean isNestedBoxInfinite() {
+        return true;
+    }
+
+    public static boolean isGoatDashForever() {
+        return true;
+    }
+
+    public static boolean isGoatDashTogether() {
+        return true;
+    }
+
+    public static boolean isLlamaSpitForever() {
+        return true;
+    }
+
+    public static boolean isBeeRideable() {
+        return true;
+    }
+
+    public static boolean isQinNa() {
+        return true;
+    }
 }

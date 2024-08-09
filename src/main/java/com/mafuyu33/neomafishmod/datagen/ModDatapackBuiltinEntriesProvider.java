@@ -17,6 +17,8 @@ public class ModDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesPro
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.ENCHANTMENT, ModEnchantments::bootstrap);
 
+
+
     // 构造函数，初始化ModDatapackBuiltinEntriesProvider实例
     public ModDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(NeoMafishMod.MODID));

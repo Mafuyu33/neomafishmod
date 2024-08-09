@@ -1,0 +1,6 @@
+{
+    "parent": "neomafishmod:item/zhuge",
+    "textures": {
+        "layer0": "neomafishmods:item/zhuge_pulling_1"
+    }
+}

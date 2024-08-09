@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "neomafishmod:block/raw_ruby_block"
+  }
+}

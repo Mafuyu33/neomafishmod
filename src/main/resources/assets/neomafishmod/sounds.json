@@ -1,0 +1,122 @@
+{
+  "metal_detector_found_ore": {
+    "subtitle": "sounds.mafishmod.metal_detector_found_ore",
+    "sounds": [
+      "neomafishmod:metal_detector_found_ore"
+    ]
+  },
+  "sound_block_break": {
+    "subtitle": "mafishmod.sound_block_break",
+    "sounds": [
+      "neomafishmod:sound_block_break"
+    ]
+  },
+  "sound_block_step": {
+    "subtitle": "mafishmod.sound_block_step",
+    "sounds": [
+      "neomafishmod:sound_block_step"
+    ]
+  },
+  "sound_block_place": {
+    "subtitle": "mafishmod.sound_block_place",
+    "sounds": [
+      "neomafishmod:sound_block_place"
+    ]
+  },
+  "sound_block_hit": {
+    "subtitle": "mafishmod.sound_block_hit",
+    "sounds": [
+      "neomafishmod:sound_block_hit"
+    ]
+  },
+  "sound_block_fall": {
+    "subtitle": "mafishmod.sound_block_fall",
+    "sounds": [
+      "neomafishmod:sound_block_fall"
+    ]
+  },
+  "dash_sound": {
+    "subtitle": "sounds.mafishmod.dash_sound",
+    "sounds": [
+      "neomafishmod:dash_sound"
+    ]
+  },
+  "never1": {
+    "subtitle": "sounds.mafishmod.never1",
+    "sounds": [
+      "neomafishmod:never1"
+    ]
+  },
+  "never2": {
+    "subtitle": "sounds.mafishmod.never2",
+    "sounds": [
+      "neomafishmod:never2"
+    ]
+  },
+  "never3": {
+    "subtitle": "sounds.mafishmod.never3",
+    "sounds": [
+      "neomafishmod:never3"
+    ]
+  },
+  "never4": {
+    "subtitle": "sounds.mafishmod.never4",
+    "sounds": [
+      "neomafishmod:never4"
+    ]
+  },
+  "never5": {
+    "subtitle": "sounds.mafishmod.never5",
+    "sounds": [
+      "neomafishmod:never5"
+    ]
+  },
+  "never6": {
+    "subtitle": "sounds.mafishmod.never6",
+    "sounds": [
+      "neomafishmod:never6"
+    ]
+  },
+  "never7": {
+    "subtitle": "sounds.mafishmod.never7",
+    "sounds": [
+      "neomafishmod:never7"
+    ]
+  },
+  "never8": {
+    "subtitle": "sounds.mafishmod.never8",
+    "sounds": [
+      "neomafishmod:never8"
+    ]
+  },
+  "never9": {
+    "subtitle": "sounds.mafishmod.never9",
+    "sounds": [
+      "neomafishmod:never9"
+    ]
+  },
+  "never10": {
+    "subtitle": "sounds.mafishmod.never10",
+    "sounds": [
+      "neomafishmod:never10"
+    ]
+  },
+  "cheese_berger_cat": {
+    "subtitle": "sounds.mafishmod.cheese_berger_cat",
+    "sounds": [
+      "neomafishmod:cheese_berger_cat"
+    ]
+  },
+  "cheese_berger_man": {
+    "subtitle": "sounds.mafishmod.cheese_berger_man",
+    "sounds": [
+      "neomafishmod:cheese_berger_man"
+    ]
+  },
+  "pin": {
+    "subtitle": "sounds.mafishmod.pin",
+    "sounds": [
+      "neomafishmod:pin"
+    ]
+  }
+}

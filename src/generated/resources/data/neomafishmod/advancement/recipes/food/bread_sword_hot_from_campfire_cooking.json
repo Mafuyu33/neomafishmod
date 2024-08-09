@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bread_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "neomafishmod:bread_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "neomafishmod:bread_sword_hot_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bread_sword"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "neomafishmod:bread_sword_hot_from_campfire_cooking"
+    ]
+  }
+}

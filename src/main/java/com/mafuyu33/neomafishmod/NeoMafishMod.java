@@ -1,8 +1,13 @@
 package com.mafuyu33.neomafishmod;
 
-import com.mafuyu33.neomafishmod.component.ModDataComponentTypes;
+import com.mafuyu33.neomafishmod.block.ModBlock;
+import com.mafuyu33.neomafishmod.effect.ModEffects;
+import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.item.ModItems;
-import com.mafuyu33.neomafishmod.item.ModTabs;
+import com.mafuyu33.neomafishmod.item.component.ModDataComponents;
+import com.mafuyu33.neomafishmod.potion.ModPotions;
+import com.mafuyu33.neomafishmod.sound.ModSounds;
+import com.mafuyu33.neomafishmod.ui.ModTabs;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -22,6 +27,12 @@ public class NeoMafishMod
     {
         ModItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
-        ModDataComponentTypes.register(modEventBus);
+        ModBlock.register(modEventBus);
+        ModEntities.register(modEventBus);
+        ModSounds.register(modEventBus);
+        ModDataComponents.register(modEventBus);
+        ModEffects.register(modEventBus);
+        ModPotions.register(modEventBus);
+
     }
 }

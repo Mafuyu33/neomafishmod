@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "neomafishmod:block/potato_tnt",
+    "side": "neomafishmod:block/potato_tnt",
+    "top": "neomafishmod:block/potato_tnt"
+  }
+}
