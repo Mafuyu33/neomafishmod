@@ -1,6 +1,7 @@
 {
   "itemGroup.neomafishmod": "neomafishmod",
   "item.neomafishmod.mafish": "Mafish",
+  "item.neomafishmod.colliableitem": "colliableitem",
 
   "enchantment.neomafishmod.z_adam": "adam",
   "enchantment.neomafishmod.z_one_step_ten_line": "one_step_ten_line"

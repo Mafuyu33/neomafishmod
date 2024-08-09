@@ -1,6 +1,7 @@
 {
   "itemGroup.neomafishmod": "马夫鱼の奇怪mod",
   "item.neomafishmod.mafish": "马夫鱼",
+  "item.neomafishmod.colliableitem": "切换实体碰撞",
 
   "enchantment.neomafishmod.z_adam": "§e亚当",
   "enchantment.neomafishmod.z_one_step_ten_line": "§e一步十行"

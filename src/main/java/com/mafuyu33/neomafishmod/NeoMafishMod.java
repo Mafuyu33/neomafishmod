@@ -1,7 +1,8 @@
 package com.mafuyu33.neomafishmod;
 
+import com.mafuyu33.neomafishmod.component.ModDataComponentTypes;
 import com.mafuyu33.neomafishmod.item.ModItems;
-import com.mafuyu33.neomafishmod.ui.ModTabs;
+import com.mafuyu33.neomafishmod.item.ModTabs;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -21,5 +22,6 @@ public class NeoMafishMod
     {
         ModItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
+        ModDataComponentTypes.register(modEventBus);
     }
 }
