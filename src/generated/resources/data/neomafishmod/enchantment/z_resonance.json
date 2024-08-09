@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.go_to_sky"
+    "translate": "enchantment.neomafishmod.z_resonance"
   },
   "max_cost": {
     "base": 50,
@@ -13,8 +13,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "mainhand"
+    "any"
   ],
-  "supported_items": "#minecraft:enchantable/weapon",
+  "supported_items": "#minecraft:enchantable/durability",
   "weight": 2
 }

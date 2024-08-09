@@ -1,20 +1,20 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.kill_my_horse_plus"
+    "translate": "enchantment.neomafishmod.z_bad_luck_of_sea"
   },
   "max_cost": {
     "base": 50,
     "per_level_above_first": 0
   },
-  "max_level": 1,
+  "max_level": 3,
   "min_cost": {
     "base": 25,
     "per_level_above_first": 0
   },
   "slots": [
-    "any"
+    "feet"
   ],
-  "supported_items": "#minecraft:enchantable/armor",
+  "supported_items": "#minecraft:enchantable/foot_armor",
   "weight": 2
 }

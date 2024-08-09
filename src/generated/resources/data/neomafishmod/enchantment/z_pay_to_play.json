@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.pay_to_play"
+    "translate": "enchantment.neomafishmod.z_pay_to_play"
   },
   "max_cost": {
     "base": 50,

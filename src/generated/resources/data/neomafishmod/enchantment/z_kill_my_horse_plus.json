@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.mute"
+    "translate": "enchantment.neomafishmod.z_kill_my_horse_plus"
   },
   "max_cost": {
     "base": 50,
@@ -13,8 +13,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "head"
+    "any"
   ],
-  "supported_items": "#minecraft:enchantable/head_armor",
+  "supported_items": "#minecraft:enchantable/armor",
   "weight": 2
 }

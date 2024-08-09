@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.hot_potato"
+    "translate": "enchantment.neomafishmod.z_reverse"
   },
   "max_cost": {
     "base": 50,

@@ -20,31 +20,31 @@ public class ModEnchantments {
     public static final ResourceKey<Enchantment> ONE_STEP_TEN_LINE = key("z_one_step_ten_line");
 
     // *********************
-    public static final ResourceKey<Enchantment> BAD_LUCK_OF_SEA = key("bad_luck_of_sea");
-    public static final ResourceKey<Enchantment> EIGHT_GODS_PASS_SEA = key("eight_gods_pass_sea");
-    public static final ResourceKey<Enchantment> KILL_CHICKEN_GET_EGG = key("kill_chicken_get_egg");
-    public static final ResourceKey<Enchantment> GO_TO_SKY = key("go_to_sky");
-    public static final ResourceKey<Enchantment> GONG_XI_FA_CAI = key("gong_xi_fa_cai");
-    public static final ResourceKey<Enchantment> MERCY = key("mercy");
-    public static final ResourceKey<Enchantment> KILL_MY_HORSE = key("kill_my_horse");
-    public static final ResourceKey<Enchantment> KILL_MY_HORSE_PLUS = key("kill_my_horse_plus");
-    public static final ResourceKey<Enchantment> HOT_POTATO = key("hot_potato");
-    public static final ResourceKey<Enchantment> VERY_EASY = key("very_easy");
-    public static final ResourceKey<Enchantment> REVERSE = key("reverse");
-    public static final ResourceKey<Enchantment> PAY_TO_PLAY = key("pay_to_play");
-    public static final ResourceKey<Enchantment> FEAR = key("fear");
-    public static final ResourceKey<Enchantment> MUTE = key("mute");
-    public static final ResourceKey<Enchantment> SLIPPERY = key("slippery");
-    public static final ResourceKey<Enchantment> NEVER_GONNA = key("never_gonna");
-    public static final ResourceKey<Enchantment> RESONANCE = key("resonance");
-    public static final ResourceKey<Enchantment> NO_BLAST_PROTECTION = key("no_blast_protection");
-    public static final ResourceKey<Enchantment> A_LEAF = key("a_leaf");
-    public static final ResourceKey<Enchantment> BUTTERFLY = key("butterfly");
-    public static final ResourceKey<Enchantment> FANGSHENG = key("fangsheng");
-    public static final ResourceKey<Enchantment> NEVER_STOP = key("never_stop");
-    public static final ResourceKey<Enchantment> BOW_LEFT = key("bow_left");
-    public static final ResourceKey<Enchantment> SUPER_PROJECTILE_PROTECTION = key("super_projectile_protection");
-    public static final ResourceKey<Enchantment> STICKY = key("sticky");
+    public static final ResourceKey<Enchantment> BAD_LUCK_OF_SEA = key("z_bad_luck_of_sea");
+    public static final ResourceKey<Enchantment> EIGHT_GODS_PASS_SEA = key("z_eight_gods_pass_sea");
+    public static final ResourceKey<Enchantment> KILL_CHICKEN_GET_EGG = key("z_kill_chicken_get_egg");
+    public static final ResourceKey<Enchantment> GO_TO_SKY = key("z_go_to_sky");
+    public static final ResourceKey<Enchantment> GONG_XI_FA_CAI = key("z_gong_xi_fa_cai");
+    public static final ResourceKey<Enchantment> MERCY = key("z_mercy");
+    public static final ResourceKey<Enchantment> KILL_MY_HORSE = key("z_kill_my_horse");
+    public static final ResourceKey<Enchantment> KILL_MY_HORSE_PLUS = key("z_kill_my_horse_plus");
+    public static final ResourceKey<Enchantment> HOT_POTATO = key("z_hot_potato");
+    public static final ResourceKey<Enchantment> VERY_EASY = key("z_very_easy");
+    public static final ResourceKey<Enchantment> REVERSE = key("z_reverse");
+    public static final ResourceKey<Enchantment> PAY_TO_PLAY = key("z_pay_to_play");
+    public static final ResourceKey<Enchantment> FEAR = key("z_fear");
+    public static final ResourceKey<Enchantment> MUTE = key("z_mute");
+    public static final ResourceKey<Enchantment> SLIPPERY = key("z_slippery");
+    public static final ResourceKey<Enchantment> NEVER_GONNA = key("z_never_gonna");
+    public static final ResourceKey<Enchantment> RESONANCE = key("z_resonance");
+    public static final ResourceKey<Enchantment> NO_BLAST_PROTECTION = key("z_no_blast_protection");
+    public static final ResourceKey<Enchantment> A_LEAF = key("z_a_leaf");
+    public static final ResourceKey<Enchantment> BUTTERFLY = key("z_butterfly");
+    public static final ResourceKey<Enchantment> FANGSHENG = key("z_fangsheng");
+    public static final ResourceKey<Enchantment> NEVER_STOP = key("z_never_stop");
+    public static final ResourceKey<Enchantment> BOW_LEFT = key("z_bow_left");
+    public static final ResourceKey<Enchantment> SUPER_PROJECTILE_PROTECTION = key("z_super_projectile_protection");
+    public static final ResourceKey<Enchantment> STICKY = key("z_sticky");
 
     // *********************
 

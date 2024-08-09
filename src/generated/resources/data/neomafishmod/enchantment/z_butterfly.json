@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.super_projectile_protection"
+    "translate": "enchantment.neomafishmod.z_butterfly"
   },
   "max_cost": {
     "base": 50,
@@ -15,6 +15,6 @@
   "slots": [
     "any"
   ],
-  "supported_items": "#minecraft:enchantable/armor",
+  "supported_items": "#minecraft:enchantable/chest_armor",
   "weight": 2
 }

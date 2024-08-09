@@ -1,20 +1,20 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.eight_gods_pass_sea"
+    "translate": "enchantment.neomafishmod.z_very_easy"
   },
   "max_cost": {
     "base": 50,
     "per_level_above_first": 0
   },
-  "max_level": 1,
+  "max_level": 5,
   "min_cost": {
     "base": 25,
     "per_level_above_first": 0
   },
   "slots": [
-    "feet"
+    "mainhand"
   ],
-  "supported_items": "#minecraft:enchantable/armor",
+  "supported_items": "#minecraft:enchantable/weapon",
   "weight": 2
 }

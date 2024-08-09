@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.fangsheng"
+    "translate": "enchantment.neomafishmod.z_fangsheng"
   },
   "max_cost": {
     "base": 50,

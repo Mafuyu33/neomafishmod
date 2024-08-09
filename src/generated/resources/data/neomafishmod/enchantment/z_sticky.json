@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.never_stop"
+    "translate": "enchantment.neomafishmod.z_sticky"
   },
   "max_cost": {
     "base": 50,
@@ -15,6 +15,6 @@
   "slots": [
     "any"
   ],
-  "supported_items": "#minecraft:enchantable/foot_armor",
+  "supported_items": "#minecraft:enchantable/durability",
   "weight": 2
 }

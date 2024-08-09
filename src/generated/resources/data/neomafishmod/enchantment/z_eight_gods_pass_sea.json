@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.sticky"
+    "translate": "enchantment.neomafishmod.z_eight_gods_pass_sea"
   },
   "max_cost": {
     "base": 50,
@@ -13,8 +13,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "any"
+    "feet"
   ],
-  "supported_items": "#minecraft:enchantable/durability",
+  "supported_items": "#minecraft:enchantable/armor",
   "weight": 2
 }

@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.slippery"
+    "translate": "enchantment.neomafishmod.z_slippery"
   },
   "max_cost": {
     "base": 50,

@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.never_gonna"
+    "translate": "enchantment.neomafishmod.z_no_blast_protection"
   },
   "max_cost": {
     "base": 50,
@@ -15,6 +15,6 @@
   "slots": [
     "any"
   ],
-  "supported_items": "#minecraft:enchantable/mining",
+  "supported_items": "#minecraft:enchantable/armor",
   "weight": 2
 }

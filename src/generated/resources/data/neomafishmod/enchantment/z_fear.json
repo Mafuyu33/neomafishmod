@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.neomafishmod.fear"
+    "translate": "enchantment.neomafishmod.z_fear"
   },
   "max_cost": {
     "base": 50,
