@@ -15,9 +15,17 @@ public class ModEnchantmentTagsProvider extends EnchantmentTagsProvider {
     public ModEnchantmentTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, NeoMafishMod.MODID, existingFileHelper);
     }
-
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+
+        this.tag(EnchantmentTags.TREASURE)
+                .add(ModEnchantments.GO_TO_SKY)
+                .add(ModEnchantments.KILL_MY_HORSE)
+                .add(ModEnchantments.KILL_MY_HORSE_PLUS)
+                .add(ModEnchantments.SLIPPERY)
+                .add(ModEnchantments.RESONANCE)
+                .add(ModEnchantments.BUTTERFLY);
+
         this.tag(EnchantmentTags.CURSE)
                 .add(ModEnchantments.BAD_LUCK_OF_SEA)
                 .add(ModEnchantments.HOT_POTATO)
@@ -30,13 +38,5 @@ public class ModEnchantmentTagsProvider extends EnchantmentTagsProvider {
                 .add(ModEnchantments.A_LEAF)
                 .add(ModEnchantments.NEVER_STOP)
                 .add(ModEnchantments.BOW_LEFT);
-
-        this.tag(EnchantmentTags.TREASURE)
-                .add(ModEnchantments.GO_TO_SKY)
-                .add(ModEnchantments.KILL_MY_HORSE)
-                .add(ModEnchantments.KILL_MY_HORSE_PLUS)
-                .add(ModEnchantments.SLIPPERY)
-                .add(ModEnchantments.RESONANCE)
-                .add(ModEnchantments.BUTTERFLY);
     }
 }

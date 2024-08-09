@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.Block;
 // 自定义附魔类，用于定义和注册新的附魔
 public class ModEnchantments {
     // 自定义附魔资源键
-    public static final ResourceKey<Enchantment> ADAM = key("z_adam");
     public static final ResourceKey<Enchantment> ONE_STEP_TEN_LINE = key("z_one_step_ten_line");
 
     // *********************
@@ -58,21 +57,6 @@ public class ModEnchantments {
         HolderGetter<Block> holdergetter3 = context.lookup(Registries.BLOCK);
 
         // 注册自定义附魔
-        register(//亚当
-                context,
-                ADAM,
-                Enchantment.enchantment(
-                        Enchantment.definition(
-                                holdergetter2.getOrThrow(ItemTags.MACE_ENCHANTABLE),
-                                2,
-                                1,
-                                Enchantment.constantCost(25),
-                                Enchantment.constantCost(50),
-                                8,
-                                EquipmentSlotGroup.MAINHAND
-                        )
-                )
-        );
         register(//一步十行
                 context,
                 ONE_STEP_TEN_LINE,

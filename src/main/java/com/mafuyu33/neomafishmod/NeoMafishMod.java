@@ -2,6 +2,7 @@ package com.mafuyu33.neomafishmod;
 
 import com.mafuyu33.neomafishmod.block.ModBlock;
 import com.mafuyu33.neomafishmod.effect.ModEffects;
+import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.item.ModItems;
 import com.mafuyu33.neomafishmod.item.component.ModDataComponents;
@@ -25,14 +26,13 @@ public class NeoMafishMod
     private static final Logger LOGGER = LogUtils.getLogger();
     public NeoMafishMod(IEventBus modEventBus, ModContainer modContainer)
     {
+        ModDataComponents.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         ModBlock.register(modEventBus);
         ModEntities.register(modEventBus);
         ModSounds.register(modEventBus);
-        ModDataComponents.register(modEventBus);
         ModEffects.register(modEventBus);
         ModPotions.register(modEventBus);
-
     }
 }
