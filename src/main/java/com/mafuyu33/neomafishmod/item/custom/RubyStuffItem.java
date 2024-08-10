@@ -61,14 +61,13 @@ public class RubyStuffItem extends Item {
         ItemStack offHandStack = user.getOffhandItem();
         ItemStack itemStack;
 
-        // TODO FIX BUG
-        int k = mainHandStack.getItem() == this ?
+        int k = mainHandStack.is(this) ?
                 InjectHelper.getEnchantmentLevel(offHandStack, ModEnchantments.GO_TO_SKY) :
-                offHandStack.getItem() == this ?
+                offHandStack.is(this) ?
                         InjectHelper.getEnchantmentLevel(mainHandStack, ModEnchantments.GO_TO_SKY) :
                         0;//检测除了法杖的那只手的附魔
             System.out.println(k);//一直是0
-            if ((offHandStack.getItem().equals(Items.WRITTEN_BOOK)  || mainHandStack.getItem()==Items.WRITTEN_BOOK)) {
+            if ((offHandStack.is(Items.WRITTEN_BOOK)  || mainHandStack.is(Items.WRITTEN_BOOK))) {
 
                 if (k > 0 && checkForSkywardPortal(user).found) {//通天术附魔
                     if (user instanceof ServerPlayer) {

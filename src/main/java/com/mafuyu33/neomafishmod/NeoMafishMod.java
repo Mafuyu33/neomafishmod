@@ -9,6 +9,8 @@ import com.mafuyu33.neomafishmod.item.component.ModDataComponents;
 import com.mafuyu33.neomafishmod.potion.ModPotions;
 import com.mafuyu33.neomafishmod.sound.ModSounds;
 import com.mafuyu33.neomafishmod.ui.ModTabs;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -34,5 +36,7 @@ public class NeoMafishMod
         ModSounds.register(modEventBus);
         ModEffects.register(modEventBus);
         ModPotions.register(modEventBus);
+
+        modContainer.registerConfig(ModConfig.Type.COMMON,Config.SPEC);
     }
 }

@@ -27,7 +27,7 @@ public class AxeItemMixin extends DiggerItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        boolean CFG_isFuThrowable = Config.isFuThrowable;
+        boolean CFG_isFuThrowable = Config.isFuThrowable();
         ItemStack itemStack = player.getItemInHand(usedHand);
 
         if (CFG_isFuThrowable){
