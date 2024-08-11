@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ExampleMixin",
-    "enchantmentitemmixin.quick_windcharge.WindChargeItemMixin",
+    "enchantmentitemmixin.windcharge.WindChargeItemMixin",
     "item.lead.LeashableMixin",
 
     "effectMixin.TeleportEffectMixin",
