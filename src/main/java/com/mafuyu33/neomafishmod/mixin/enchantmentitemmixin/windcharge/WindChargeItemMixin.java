@@ -1,7 +1,7 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin.windcharge;
 
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantmentHelper;
-import com.mafuyu33.neomafishmod.entity.CustomWindChargeEntity;
+import com.mafuyu33.neomafishmod.entity.custom.CustomWindChargeEntity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -56,15 +56,15 @@ public abstract class WindChargeItemMixin {
 			int i = ModEnchantmentHelper.getEnchantmentLevel(Enchantments.MULTISHOT,p_326042_.getItemInHand(p_326470_));
 			if(p_326042_.getItemInHand(p_326470_).is(Items.WIND_CHARGE) && i>0){ //是风弹并且有多重射击
 				for(int k = 0; k < i + 3; k++){//抛出i+3个风弹
-					CustomWindChargeEntity windcharge = new CustomWindChargeEntity(p_326042_, p_326306_, p_326042_.position().x(), p_326042_.getEyePosition().y(), p_326042_.position().z());
-					windcharge.shootFromRotation(p_326042_, p_326042_.getXRot(), p_326042_.getYRot(), 0.0F, 1.5F, 3.0F);
-					p_326306_.addFreshEntity(windcharge);
+					CustomWindChargeEntity customWindCharge = new CustomWindChargeEntity(p_326042_, p_326306_, p_326042_.position().x(), p_326042_.getEyePosition().y(), p_326042_.position().z());
+					customWindCharge.shootFromRotation(p_326042_, p_326042_.getXRot(), p_326042_.getYRot(), 0.0F, 1.5F, 0.0F);
+					p_326306_.addFreshEntity(customWindCharge);
 				}
 				cir.setReturnValue(InteractionResultHolder.sidedSuccess(itemstack, p_326306_.isClientSide()));
 			}else {
-				CustomWindChargeEntity windcharge = new CustomWindChargeEntity(p_326042_, p_326306_, p_326042_.position().x(), p_326042_.getEyePosition().y(), p_326042_.position().z());
-				windcharge.shootFromRotation(p_326042_, p_326042_.getXRot(), p_326042_.getYRot(), 0.0F, 1.5F, 3.0F);
-				p_326306_.addFreshEntity(windcharge);
+				CustomWindChargeEntity customWindCharge = new CustomWindChargeEntity(p_326042_, p_326306_, p_326042_.position().x(), p_326042_.getEyePosition().y(), p_326042_.position().z());
+				customWindCharge.shootFromRotation(p_326042_, p_326042_.getXRot(), p_326042_.getYRot(), 0.0F, 1.5F, 0.0F);
+				p_326306_.addFreshEntity(customWindCharge);
 				cir.setReturnValue(InteractionResultHolder.sidedSuccess(itemstack, p_326306_.isClientSide()));
 			}
 		}

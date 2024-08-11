@@ -1,6 +1,6 @@
 package com.mafuyu33.neomafishmod.mixin.itemmixin;
 
-import com.mafuyu33.neomafishmod.entity.DiamondProjectileEntity;
+import com.mafuyu33.neomafishmod.entity.custom.DiamondProjectileEntity;
 import com.mafuyu33.neomafishmod.event.KeyInputHandler;
 import com.mafuyu33.neomafishmod.network.packet.C2S.ThrowPowerC2SPacket;
 import net.minecraft.sounds.SoundEvents;

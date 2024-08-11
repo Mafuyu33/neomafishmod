@@ -1,4 +1,4 @@
-package com.mafuyu33.neomafishmod.entity;
+package com.mafuyu33.neomafishmod.entity.custom;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;

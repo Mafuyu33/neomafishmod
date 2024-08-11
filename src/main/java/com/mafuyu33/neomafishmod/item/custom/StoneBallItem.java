@@ -1,6 +1,6 @@
 package com.mafuyu33.neomafishmod.item.custom;
 
-import com.mafuyu33.neomafishmod.entity.StoneBallProjectileEntity;
+import com.mafuyu33.neomafishmod.entity.custom.StoneBallProjectileEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;

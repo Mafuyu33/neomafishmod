@@ -1,6 +1,6 @@
 package com.mafuyu33.neomafishmod.item.custom;
 
-import com.mafuyu33.neomafishmod.entity.FuProjectileEntity;
+import com.mafuyu33.neomafishmod.entity.custom.FuProjectileEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -9,7 +9,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 

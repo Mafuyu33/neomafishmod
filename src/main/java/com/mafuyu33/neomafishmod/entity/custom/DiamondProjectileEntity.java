@@ -1,5 +1,6 @@
-package com.mafuyu33.neomafishmod.entity;
+package com.mafuyu33.neomafishmod.entity.custom;
 
+import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

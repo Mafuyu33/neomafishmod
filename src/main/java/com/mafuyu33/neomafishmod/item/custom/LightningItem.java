@@ -1,6 +1,6 @@
 package com.mafuyu33.neomafishmod.item.custom;
 
-import com.mafuyu33.neomafishmod.entity.LightningProjectileEntity;
+import com.mafuyu33.neomafishmod.entity.custom.LightningProjectileEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 
 public class LightningItem extends SwordItem {

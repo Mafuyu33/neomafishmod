@@ -1,13 +1,10 @@
-package com.mafuyu33.neomafishmod.entity;
+package com.mafuyu33.neomafishmod.entity.custom;
 
+import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.item.ModItems;
 import com.mafuyu33.neomafishmod.render.CustomParticleRenderer;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.server.level.ServerEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;

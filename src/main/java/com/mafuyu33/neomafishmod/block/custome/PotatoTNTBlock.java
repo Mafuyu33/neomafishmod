@@ -1,6 +1,6 @@
 package com.mafuyu33.neomafishmod.block.custome;
 
-import com.mafuyu33.neomafishmod.entity.TNTProjectileEntity;
+import com.mafuyu33.neomafishmod.entity.custom.TNTProjectileEntity;
 import com.mafuyu33.neomafishmod.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;

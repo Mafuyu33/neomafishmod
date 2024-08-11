@@ -1,7 +1,7 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin.throwableaxe;
 
 import com.mafuyu33.neomafishmod.Config;
-import com.mafuyu33.neomafishmod.entity.FuProjectileEntity;
+import com.mafuyu33.neomafishmod.entity.custom.FuProjectileEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
