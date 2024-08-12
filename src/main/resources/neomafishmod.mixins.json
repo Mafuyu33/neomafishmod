@@ -4,8 +4,6 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ExampleMixin",
-    "enchantmentitemmixin.windcharge.WindChargeItemMixin",
-
     "effectMixin.TeleportEffectMixin",
     "effectMixin.antidote.LivingEntityMixin",
     "effectMixin.canclimb.LivingEntityMixin",
@@ -76,6 +74,8 @@
     "enchantmentitemmixin.slippery.UnPickUpAbleItemMixin",
     "enchantmentitemmixin.throwableaxe.AxeItemMixin",
     "enchantmentitemmixin.throwableaxe.ItemEntityMixin",
+    "enchantmentitemmixin.windcharge.PlayerMixin",
+    "enchantmentitemmixin.windcharge.WindChargeItemMixin",
     "itemmixin.BowDashMixin",
     "itemmixin.KaoFishMixin",
     "itemmixin.MathModeMixin",
@@ -98,7 +98,6 @@
     "mobmixin.pandaeatswitch.PandaEntityMixin"
   ],
   "client": [
-
     "effectMixin.sheep.PlayerEntityRendererMixin",
     "enchantmentitemmixin.slippery.HandledScreenMixin",
     "enchantmentitemmixin.slippery.InventoryScreenMixin",

@@ -1,4 +1,4 @@
-package com.mafuyu33.neomafishmod.mixin.item.lead;
+package com.mafuyu33.neomafishmod.mixin.itemmixin.lead;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Leashable;

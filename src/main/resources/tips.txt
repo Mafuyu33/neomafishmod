@@ -2,3 +2,11 @@
 
 给玩家发送消息：
 player.sendSystemMessage(Component.literal(  "被"+ player.getName().getString() +"捡起来了!(*/ω＼*)"));
+NeoMafishMod.LOGGER.info("x="+ );
+
+发包
+S2C         PacketDistributor.sendToAllPlayers(new NeverGonnaS2CPacket());
+C2S         PacketDistributor.sendToServer(new BowDashC2SPacket(BowDashCoolDown));
+
+播放声音
+Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, pos, SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.BLOCKS);
