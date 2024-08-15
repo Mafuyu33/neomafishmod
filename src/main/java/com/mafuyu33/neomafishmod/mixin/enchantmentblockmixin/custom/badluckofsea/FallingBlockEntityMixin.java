@@ -35,7 +35,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
         Level level = this.level();
         BlockPos blockPos = this.blockPosition();
         FluidState fluidState = level.getFluidState(blockPos);
-        if (fluidState.is(FluidTags.WATER) && this.fallDamageMax==40){
+        if (fluidState.is(FluidTags.WATER) && this.fallDamageMax==-1){
             BlockPos closestNonLiquidBlockPos = null;
             double closestDistanceSq = Double.MAX_VALUE;
 
@@ -70,7 +70,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"))
     public void init1(CallbackInfo info, @Local BlockPos blockPos){
-        if (this.fallDamageMax == 40){
+        if (this.fallDamageMax == -1){
             ResourceKey<Enchantment> enchantment = ModEnchantments.BAD_LUCK_OF_SEA;
             ListTag enchantmentNbtList = new ListTag();
 
