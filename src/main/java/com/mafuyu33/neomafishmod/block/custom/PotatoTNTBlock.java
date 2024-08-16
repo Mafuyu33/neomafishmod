@@ -1,4 +1,4 @@
-package com.mafuyu33.neomafishmod.block.custome;
+package com.mafuyu33.neomafishmod.block.custom;
 
 import com.mafuyu33.neomafishmod.entity.custom.TNTProjectileEntity;
 import com.mafuyu33.neomafishmod.item.ModItems;

@@ -1,9 +1,9 @@
 package com.mafuyu33.neomafishmod.block;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
-import com.mafuyu33.neomafishmod.block.custome.PotatoTNTBlock;
-import com.mafuyu33.neomafishmod.block.custome.PotatoTNTPrepareBlock;
-import com.mafuyu33.neomafishmod.block.custome.SoundBlock;
+import com.mafuyu33.neomafishmod.block.custom.PotatoTNTBlock;
+import com.mafuyu33.neomafishmod.block.custom.PotatoTNTPrepareBlock;
+import com.mafuyu33.neomafishmod.block.custom.SoundBlock;
 import com.mafuyu33.neomafishmod.item.ModItems;
 import com.mafuyu33.neomafishmod.sound.ModSounds;
 import net.minecraft.world.effect.MobEffects;

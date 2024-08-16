@@ -1,4 +1,4 @@
-package com.mafuyu33.neomafishmod.block.custome;
+package com.mafuyu33.neomafishmod.block.custom;
 
 import com.mafuyu33.neomafishmod.block.ModBlock;
 import net.minecraft.core.BlockPos;
@@ -6,7 +6,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
