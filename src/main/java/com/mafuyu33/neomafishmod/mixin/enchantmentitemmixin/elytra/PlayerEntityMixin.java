@@ -34,7 +34,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		super(entityType, level);
 	}
 
-
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void init(CallbackInfo ci) {
 		ItemStack itemStack = this.getItemBySlot(EquipmentSlot.CHEST);
@@ -77,4 +76,5 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 			}
 		}
 	}
+
 }

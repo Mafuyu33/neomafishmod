@@ -10,3 +10,6 @@ C2S         PacketDistributor.sendToServer(new BowDashC2SPacket(BowDashCoolDown)
 
 播放声音
 Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, pos, SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.BLOCKS);
+
+获得特定位置护甲
+ItemStack itemstack = this.getItemBySlot(EquipmentSlot.CHEST);
