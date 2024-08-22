@@ -3,7 +3,7 @@ package com.mafuyu33.neomafishmod.datagen;
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.datagen.item.tags.ModBlockTagsProvider;
 import com.mafuyu33.neomafishmod.datagen.item.tags.ModEnchantmentTagsProvider;
-import com.mafuyu33.neomafishmod.datagen.item.tags.ModtemTagsProvider;
+import com.mafuyu33.neomafishmod.datagen.item.tags.ModItemTagsProvider;
 import com.mafuyu33.neomafishmod.datagen.recipe.ModRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -35,7 +35,7 @@ public class ModDataGenerator {
         generator.addProvider(event.includeServer(),new ModRecipe(output,lookupProvider));
         TagsProvider<Block> tagsprovider4 = generator.addProvider(event.includeServer(),new ModBlockTagsProvider(output,lookupProvider,NeoMafishMod.MODID,existingFileHelper));
         //
-        generator.addProvider(event.includeServer(),new ModtemTagsProvider(output,lookupProvider,tagsprovider4.contentsGetter(),NeoMafishMod.MODID,existingFileHelper));
+        generator.addProvider(event.includeServer(),new ModItemTagsProvider(output,lookupProvider,tagsprovider4.contentsGetter(),NeoMafishMod.MODID,existingFileHelper));
         generator.addProvider(event.includeServer(),new ModEnchantmentTagsProvider(output,lookupProvider,existingFileHelper));
     }
 }
