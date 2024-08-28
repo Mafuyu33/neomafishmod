@@ -54,7 +54,7 @@ public class ModTabs {
                         output.accept(ModBlock.POTATO_TNT.get());
 
                         output.accept(ModItems.SWITCH.get());
-
+                        output.accept(ModItems.RUYIJINGU.get());
 
 
                     }).build());
