@@ -106,6 +106,7 @@
     "itemmixin.entityitemrenderer.irongolemitemrenderer.ItemRendererMixin",
     "itemmixin.entityitemrenderer.lightningitemrenderer.ItemRendererMixin",
     "itemmixin.entityitemrenderer.llamaitemrenderer.ItemRendererMixin",
+    "itemmixin.entityitemrenderer.ruyijingu.ItemRendererMixin",
     "itemmixin.entityitemrenderer.villageritemrenderer.ItemRendererMixin"
   ],
   "injectors": {

@@ -22,11 +22,25 @@ public class KeyInputHandler {
 
     public static final String KEY_CATEGORY_TUTORIAL = "key.category.mafishmod.tutorial";
     public static final String KEY_THROW_ITEM = "key.mafishmod.throw_item";
+    public static final String KEY_PLUS = "key.mafishmod.plus";
+    public static final String KEY_MINUS = "key.mafishmod.minus";
 
     public static KeyMapping throwingKey = new KeyMapping(KEY_THROW_ITEM,
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_Y,
+            KEY_CATEGORY_TUTORIAL);
+
+    public static KeyMapping plusKey = new KeyMapping(KEY_PLUS,
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_EQUAL,
+            KEY_CATEGORY_TUTORIAL);
+
+    public static KeyMapping minusKey = new KeyMapping(KEY_MINUS,
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_MINUS,
             KEY_CATEGORY_TUTORIAL);
 
     private static float throwPower = 0.0f;
@@ -65,6 +79,13 @@ public class KeyInputHandler {
             isCharging = false;
             chargeStartTime = 0;
             chargeEndTime = 0;
+        }
+
+        if(plusKey.isDown()){
+            client.player.displayClientMessage(Component.literal("变大！"),true);
+        }
+        if(minusKey.isDown()){
+            client.player.displayClientMessage(Component.literal("变小！"),true);
         }
     }
 

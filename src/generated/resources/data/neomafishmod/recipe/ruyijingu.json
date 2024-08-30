@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:blaze_rod"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:breeze_rod"
+    }
+  },
+  "pattern": [
+    "  C",
+    " B ",
+    "A  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "neomafishmod:ruyijingu"
+  }
+}

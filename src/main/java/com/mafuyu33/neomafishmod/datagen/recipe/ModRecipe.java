@@ -20,6 +20,18 @@ public class ModRecipe extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RUYIJINGU.get())
+                .pattern("  C")
+                .pattern(" B ")
+                .pattern("A  ")
+                .define('A', Items.BLAZE_ROD)
+                .define('B', Items.STICK)
+                .define('C', Items.BREEZE_ROD)
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
+                .unlockedBy("has_stick", has(Items.STICK))
+                .unlockedBy("has_breeze_rod", has(Items.BREEZE_ROD))
+                .save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BREAD_SWORD.get())
                 .pattern("B")
                 .pattern("B")
