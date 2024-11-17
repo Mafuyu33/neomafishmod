@@ -101,7 +101,6 @@
   ],
   "client": [
     "effectMixin.sheep.PlayerEntityRendererMixin",
-    "enchantmentitemmixin.one_with_shadows.PlayerRendererMixin",
     "enchantmentitemmixin.slippery.HandledScreenMixin",
     "enchantmentitemmixin.slippery.InventoryScreenMixin",
     "itemmixin.entityitemrenderer.irongolemitemrenderer.ItemRendererMixin",
