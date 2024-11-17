@@ -44,6 +44,7 @@ public class ModEnchantments {
     public static final ResourceKey<Enchantment> BOW_LEFT = key("z_bow_left");
     public static final ResourceKey<Enchantment> SUPER_PROJECTILE_PROTECTION = key("z_super_projectile_protection");
     public static final ResourceKey<Enchantment> STICKY = key("z_sticky");
+    public static final ResourceKey<Enchantment> ONE_WITH_SHADOWS = key("z_one_with_shadows");
 
     // *********************
 
@@ -55,6 +56,23 @@ public class ModEnchantments {
         HolderGetter<Enchantment> holdergetter1 = context.lookup(Registries.ENCHANTMENT);
         HolderGetter<Item> holdergetter2 = context.lookup(Registries.ITEM);
         HolderGetter<Block> holdergetter3 = context.lookup(Registries.BLOCK);
+
+
+        register(
+                context,
+                ONE_WITH_SHADOWS,
+                Enchantment.enchantment(
+                        Enchantment.definition(
+                                holdergetter2.getOrThrow(ItemTags.ARMOR_ENCHANTABLE),
+                                2,
+                                1,
+                                Enchantment.constantCost(25),
+                                Enchantment.constantCost(50),
+                                8,
+                                EquipmentSlotGroup.ANY
+                        )
+                )
+        );
 
         // 注册自定义附魔
         register(//一步十行

@@ -1,5 +1,6 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin;
 
+import com.mafuyu33.neomafishmod.enchantment.ModEnchantmentHelper;
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
 import net.minecraft.client.Minecraft;
