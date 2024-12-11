@@ -45,6 +45,7 @@ public class ModEnchantments {
     public static final ResourceKey<Enchantment> SUPER_PROJECTILE_PROTECTION = key("z_super_projectile_protection");
     public static final ResourceKey<Enchantment> STICKY = key("z_sticky");
     public static final ResourceKey<Enchantment> ONE_WITH_SHADOWS = key("z_one_with_shadows");
+    public static final ResourceKey<Enchantment> MELEE_MAGNETISM = key("z_melee_magnetism");
 
     // *********************
 
@@ -57,7 +58,21 @@ public class ModEnchantments {
         HolderGetter<Item> holdergetter2 = context.lookup(Registries.ITEM);
         HolderGetter<Block> holdergetter3 = context.lookup(Registries.BLOCK);
 
-
+        register(
+                context,
+                MELEE_MAGNETISM,
+                Enchantment.enchantment(
+                        Enchantment.definition(
+                                holdergetter2.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                                2,
+                                5,
+                                Enchantment.constantCost(25),
+                                Enchantment.constantCost(50),
+                                8,
+                                EquipmentSlotGroup.ANY
+                        )
+                )
+        );
         register(
                 context,
                 ONE_WITH_SHADOWS,

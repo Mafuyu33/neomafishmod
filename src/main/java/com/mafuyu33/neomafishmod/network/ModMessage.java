@@ -113,6 +113,13 @@ public class ModMessage {
                         null
                 )
         );
-
+        registrar.playBidirectional(
+                PlayerActionC2SPacket.TYPE,
+                PlayerActionC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        PlayerActionC2SPacket::handle
+                )
+        );
     }
 }

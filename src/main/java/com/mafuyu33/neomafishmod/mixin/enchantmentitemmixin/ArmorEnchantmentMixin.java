@@ -317,6 +317,12 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					}
 				}
 			}
+			if (armorItem.getItem() instanceof ArmorItem) {//随便什么装甲
+				int p = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.ONE_WITH_SHADOWS);//融身入影
+				if (p > 0 && this.getLastDamageSource() != null) {
+					// todo
+				}
+			}
 		}
 	}
 	@Unique
