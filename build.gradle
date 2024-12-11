@@ -165,3 +165,12 @@ idea {
         downloadJavadoc = true
     }
 }
+afterEvaluate {
+    configurations.runtimeClasspath.forEach { file ->
+        if (file.name.startsWith("sponge-mixin")) {
+            tasks.named("runClient", JavaExec) {
+                jvmArgs("-javaagent:${file.absolutePath}")
+            }
+        }
+    }
+}
