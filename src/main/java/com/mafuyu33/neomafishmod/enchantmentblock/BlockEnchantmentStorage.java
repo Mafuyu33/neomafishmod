@@ -24,14 +24,14 @@ public class BlockEnchantmentStorage {
             if (blockEnchantment.blockPos.equals(blockPos)) {
                 // Update the existing enchantments
                 blockEnchantment.enchantments = enchantments;
-                LOGGER.info("Updated enchantments at BlockPos: " + blockPos + " with enchantments: " + enchantments);
+//                LOGGER.info("Updated enchantments at BlockPos: " + blockPos + " with enchantments: " + enchantments);
                 state.setDirty();
                 return;
             }
         }
         // If not found, add a new entry
         state.blockEnchantments.add(new BlockStateSaverAndLoader.BlockEnchantInfo(blockPos, enchantments));
-        LOGGER.info("Added enchantments at BlockPos: " + blockPos + " with enchantments: " + enchantments);
+//        LOGGER.info("Added enchantments at BlockPos: " + blockPos + " with enchantments: " + enchantments);
         state.setDirty();
     }
 
