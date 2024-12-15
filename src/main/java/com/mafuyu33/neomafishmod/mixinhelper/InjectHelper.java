@@ -17,6 +17,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.mafuyu33.neomafishmod.NeoMafishMod.LOGGER;
+
 
 public class InjectHelper {
 
@@ -24,7 +26,6 @@ public class InjectHelper {
     public static void onPlacedInject(Level world, ItemStack itemStack, BlockPos pos) {
         if (!world.isClientSide) {//只在服务端运行
             if (!Objects.equals(itemStack.getEnchantments(), new ListTag())) {//如果方块有附魔
-
 //                ListTag enchantments = itemStack.getEnchantments(); //获取物品栈上的附魔信息列表
 //                BlockEnchantmentStorage.addBlockEnchantment(pos.toImmutable(), enchantments);//储存信息
                 addToList(itemStack,pos.immutable());
@@ -54,6 +55,7 @@ public class InjectHelper {
 
     public static void  addToList(ItemStack itemStack,BlockPos currentPos){
         ListTag listTag = enchantmentsToNbtList(itemStack,currentPos);
+        LOGGER.info("Storing enchantments at position: " + currentPos + " with data: " + listTag);
         BlockEnchantmentStorage.addBlockEnchantment(currentPos, listTag);
     }
 

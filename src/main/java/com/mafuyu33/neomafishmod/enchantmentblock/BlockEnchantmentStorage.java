@@ -10,71 +10,61 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class BlockEnchantmentStorage {
+     private static final Logger LOGGER = Logger.getLogger(BlockEnchantmentStorage.class.getName());
 
     public static void addBlockEnchantment(BlockPos blockPos, ListTag enchantments) {
         MinecraftServer server = ServerManager.getServerInstance();
-        // 创建 StateSaverAndLoader 实例
-        BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
-        // 将方块附魔信息添加到列表中
-        state.blockEnchantments.add(new BlockStateSaverAndLoader.BlockEnchantInfo(blockPos, enchantments));
-    }
-
-
-    public static void removeBlockEnchantment(BlockPos blockPos) {
-        MinecraftServer server = ServerManager.getServerInstance();
-        // 获取 BlockStateSaverAndLoader 实例
         BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
 
-        // 调用 StateSaverAndLoader 类中的方法来移除指定位置的方块附魔信息
-        state.removeBlockEnchantment(blockPos);
-    }
-
-
-
-
-    public static ListTag getEnchantmentsAtPosition(BlockPos blockPos) {
-        MinecraftServer server = ServerManager.getServerInstance();
-        // 获取 BlockStateSaverAndLoader 实例
-        BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
-
-        // 遍历附魔信息列表，找到指定位置的方块附魔信息
+        // Check if the blockPos already exists in the list
         for (BlockStateSaverAndLoader.BlockEnchantInfo blockEnchantment : state.blockEnchantments) {
             if (blockEnchantment.blockPos.equals(blockPos)) {
-                // 返回指定位置的方块附魔名称
-                return blockEnchantment.enchantments;
+                // Update the existing enchantments
+                blockEnchantment.enchantments = enchantments;
+                LOGGER.info("Updated enchantments at BlockPos: " + blockPos + " with enchantments: " + enchantments);
+                state.setDirty();
+                return;
             }
         }
-        // 如果没有找到指定位置的方块附魔信息，则返回空列表
-        return new ListTag();
+        // If not found, add a new entry
+        state.blockEnchantments.add(new BlockStateSaverAndLoader.BlockEnchantInfo(blockPos, enchantments));
+        LOGGER.info("Added enchantments at BlockPos: " + blockPos + " with enchantments: " + enchantments);
+        state.setDirty();
     }
 
-    public static int getLevel(ResourceKey<Enchantment> enchantment, BlockPos blockPos) {
-        MinecraftServer server = ServerManager.getServerInstance();
-        // 获取方块的附魔信息
-        ListTag enchantments = getEnchantmentsAtPosition(blockPos);
-
-        // 遍历附魔信息
-        for (int i = 0; i < enchantments.size(); i++) {
-            // 获取单个附魔信息
-            CompoundTag enchantmentInfo = enchantments.getCompound(i);
-
-            // 提取附魔名称和等级
-            String enchantmentName = enchantmentInfo.getString("id");
-            int level = enchantmentInfo.getInt("lvl");
-
-            // 检查附魔名称是否匹配
-            if (enchantmentName.equals(String.valueOf(enchantment))) {
-                // 返回附魔等级
-                return level;
-            }
+        public static void removeBlockEnchantment(BlockPos blockPos) {
+            MinecraftServer server = ServerManager.getServerInstance();
+            BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
+            state.removeBlockEnchantment(blockPos);
         }
 
-        // 如果没有找到匹配的附魔信息，默认返回0
-        return 0;
-    }
+        public static ListTag getEnchantmentsAtPosition(BlockPos blockPos) {
+            MinecraftServer server = ServerManager.getServerInstance();
+            BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
 
+            for (BlockStateSaverAndLoader.BlockEnchantInfo blockEnchantment : state.blockEnchantments) {
+                if (blockEnchantment.blockPos.equals(blockPos)) {
+                    return blockEnchantment.enchantments;
+                }
+            }
+            return new ListTag();
+        }
 
+        public static int getLevel(ResourceKey<Enchantment> enchantment, BlockPos blockPos) {
+            ListTag enchantments = getEnchantmentsAtPosition(blockPos);
 
+            for (int i = 0; i < enchantments.size(); i++) {
+                CompoundTag enchantmentInfo = enchantments.getCompound(i);
+                String enchantmentName = enchantmentInfo.getString("id");
+                int level = enchantmentInfo.getInt("lvl");
+
+                if (enchantmentName.equals(String.valueOf(enchantment))) {
+                    return level;
+                }
+            }
+            return 0;
+        }
 }

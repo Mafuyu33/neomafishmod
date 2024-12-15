@@ -40,6 +40,14 @@ public class BlockStateSaverAndLoader extends SavedData {
         public int hashCode() {
             return Objects.hash(blockPos, enchantments);
         }
+
+        @Override
+        public String toString() {
+            return "BlockEnchantInfo{" +
+                    "blockPos=" + blockPos +
+                    ", enchantments=" + enchantments +
+                    '}';
+        }
     }
 
 
