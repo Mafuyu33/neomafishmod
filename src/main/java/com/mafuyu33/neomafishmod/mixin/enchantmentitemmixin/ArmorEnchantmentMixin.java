@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin;
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantmentHelper;
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
+import com.mafuyu33.neomafishmod.network.packet.S2C.OneWithShadowS2CPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -317,10 +319,20 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					}
 				}
 			}
-			if (armorItem.getItem() instanceof ArmorItem) {//随便什么装甲
-				int p = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.ONE_WITH_SHADOWS);//融身入影
-				if (p > 0 && this.getLastDamageSource() != null) {
-					// todo
+			//todo
+			//是不是可以专门做一个moving的发包。
+			if (armorItem.getItem() instanceof ArmorItem) {
+				int q = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.ONE_WITH_SHADOWS);//融身入影
+				if (!this.level().isClientSide && q > 0) {
+					Vec3 currentPos = this.position();
+					double distance = currentPos.distanceTo(lastPos); // 计算当前位置和上一个位置之间的距离
+					boolean isMoving = distance > 0.0784000015258790; // 设置一个小于的阈值，比如0.1
+					lastPos = currentPos;
+					if (isMoving) {
+						PacketDistributor.sendToAllPlayers(new OneWithShadowS2CPacket(this.getId(),1));
+					}else {
+						PacketDistributor.sendToAllPlayers(new OneWithShadowS2CPacket(this.getId(),0));
+					}
 				}
 			}
 		}

@@ -2,10 +2,7 @@ package com.mafuyu33.neomafishmod.network;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.network.packet.C2S.*;
-import com.mafuyu33.neomafishmod.network.packet.S2C.BellSoundS2CPacket;
-import com.mafuyu33.neomafishmod.network.packet.S2C.CustomWindChargeS2CPacket;
-import com.mafuyu33.neomafishmod.network.packet.S2C.NeverGonnaS2CPacket;
-import com.mafuyu33.neomafishmod.network.packet.S2C.WindChargeStormS2CPacket;
+import com.mafuyu33.neomafishmod.network.packet.S2C.*;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -119,6 +116,14 @@ public class ModMessage {
                 new DirectionalPayloadHandler<>(
                         null,
                         PlayerActionC2SPacket::handle
+                )
+        );
+        registrar.playBidirectional(
+                OneWithShadowS2CPacket.TYPE,
+                OneWithShadowS2CPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        OneWithShadowS2CPacket::handle,
+                        null
                 )
         );
     }
