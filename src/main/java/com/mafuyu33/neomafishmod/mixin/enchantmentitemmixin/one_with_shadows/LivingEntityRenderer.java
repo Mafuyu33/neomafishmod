@@ -15,9 +15,9 @@ public abstract class LivingEntityRenderer {
     private void init(LivingEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci) {
         //穿着特定附魔盔甲的实体,并且实体在运动的时候
         if(OneWithShadowS2CPacket.getFlagById(entity.getId())==1) {
-            System.out.println("实体在运动");
+//            System.out.println("实体在运动");
         } else if(OneWithShadowS2CPacket.getFlagById(entity.getId())==0) {
-            System.out.println("实体没有在运动");
+//            System.out.println("实体没有在运动");
             //取消渲染
             ci.cancel();
         }
