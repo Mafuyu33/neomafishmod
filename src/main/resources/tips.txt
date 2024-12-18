@@ -13,3 +13,6 @@ Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, pos, Sou
 
 获得特定位置护甲
 ItemStack itemstack = this.getItemBySlot(EquipmentSlot.CHEST);
+
+*玩家添加速度在客户端，其他生物添加速度在服务端，投射物添加速度在客户端*
+*所以玩家,投射物要发S2C,其他生物要发C2S*

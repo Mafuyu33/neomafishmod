@@ -73,6 +73,7 @@
     "enchantmentitemmixin.luoyangshovel.FallingBlockEntityMixin",
     "enchantmentitemmixin.luoyangshovel.ShovelItemMixin",
     "enchantmentitemmixin.multishot_trident.TridentItemMixin",
+    "enchantmentitemmixin.redirect_trident.ThrownTridentMixin",
     "enchantmentitemmixin.slimefeet.BlockMixin",
     "enchantmentitemmixin.slippery.UnPickUpAbleItemMixin",
     "enchantmentitemmixin.throwableaxe.AxeItemMixin",

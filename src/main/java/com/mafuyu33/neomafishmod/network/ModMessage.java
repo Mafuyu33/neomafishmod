@@ -126,5 +126,13 @@ public class ModMessage {
                         null
                 )
         );
+        registrar.playBidirectional(
+                RedirectTridentC2SPacket.TYPE,
+                RedirectTridentC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        RedirectTridentC2SPacket::handle
+                )
+        );
     }
 }
