@@ -40,7 +40,8 @@ public class PlayerActionC2SPacket implements CustomPacketPayload {
             context.player().teleportTo(teleportPos.x, teleportPos.y, teleportPos.z);
 
             // 对最近的实体造成等同于一次攻击的伤害
-            float attackDamage = (float) context.player().getAttribute(Attributes.ATTACK_DAMAGE).getValue();
-            nearestEntity.hurt(context.player().damageSources().playerAttack(context.player()), attackDamage);
+//            float attackDamage = (float) context.player().getAttribute(Attributes.ATTACK_DAMAGE).getValue();
+//            nearestEntity.hurt(context.player().damageSources().playerAttack(context.player()), attackDamage);
+            context.player().attack(nearestEntity);
     }
 }

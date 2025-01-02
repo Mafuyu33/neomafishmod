@@ -35,8 +35,8 @@ public class OnPlayerAttack {
             // 获取玩家的视角方向
             Vec3 lookVec = player.getLookAngle();
             // 圆锥的高度由i决定
-            double coneHeight = i * 5.0;
-            double coneAngle = 45.0;
+            double coneHeight = i * 3.0;
+            double coneAngle = 5.0;
             // 获取玩家的位置
             Vec3 playerPos = player.position();
             // 计算圆锥底面圆的半径
@@ -78,8 +78,11 @@ public class OnPlayerAttack {
 
                 // 检查实体是否在玩家前方并且在圆锥高度内
                 if (distanceAlongLookVec > 0 && distanceAlongLookVec < coneHeight && perpendicularDistance < minPerpendicularDistance) {
-                    minPerpendicularDistance = perpendicularDistance;
-                    nearestEntity = livingEntity;
+                    //实体未死亡
+                    if (!livingEntity.isDeadOrDying()) {
+                        minPerpendicularDistance = perpendicularDistance;
+                        nearestEntity = livingEntity;
+                    }
                 }
             }
 
@@ -108,8 +111,8 @@ public class OnPlayerAttack {
             // 获取玩家的视角方向
             Vec3 lookVec = player.getLookAngle();
             // 圆锥的高度由i决定
-            double coneHeight = i * 5.0;
-            double coneAngle = 45.0;
+            double coneHeight = i * 3.0;
+            double coneAngle = 5.0;
             // 获取玩家的位置
             Vec3 playerPos = player.position();
             // 计算圆锥底面圆的半径
@@ -151,8 +154,11 @@ public class OnPlayerAttack {
 
                 // 检查实体是否在玩家前方并且在圆锥高度内
                 if (distanceAlongLookVec > 0 && distanceAlongLookVec < coneHeight && perpendicularDistance < minPerpendicularDistance) {
-                    minPerpendicularDistance = perpendicularDistance;
-                    nearestEntity = livingEntity;
+                    //实体未死亡
+                    if (!livingEntity.isDeadOrDying()) {
+                        minPerpendicularDistance = perpendicularDistance;
+                        nearestEntity = livingEntity;
+                    }
                 }
             }
 
