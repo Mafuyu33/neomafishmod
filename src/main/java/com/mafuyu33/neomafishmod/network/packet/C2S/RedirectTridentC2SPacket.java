@@ -39,7 +39,11 @@ public class RedirectTridentC2SPacket implements CustomPacketPayload {
             if(data.id!=-1 && context.player().level()!=null) {
                 Entity entity = context.player().level().getEntity(data.id);
                 if(entity!=null) {
-                    entity.setDeltaMovement(data.finalVelocity);
+                    if(!data.finalVelocity.equals(Vec3.ZERO)) {
+                        entity.setDeltaMovement(data.finalVelocity);
+                    }else {
+                        entity.setNoGravity(false);
+                    }
                 }
             }
         });

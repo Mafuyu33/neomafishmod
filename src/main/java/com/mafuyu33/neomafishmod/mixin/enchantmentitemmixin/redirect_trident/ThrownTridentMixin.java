@@ -41,7 +41,7 @@ import java.util.List;
  */
 @Mixin(ThrownTrident.class)
 public abstract class ThrownTridentMixin extends AbstractArrow{
-    //todo:改这个附魔的名字。致密附魔三叉戟，飞行速度变慢，伤害提高。（这个三叉戟好沉阿！）
+    //todo:致密附魔三叉戟，飞行速度变慢，伤害提高。（这个三叉戟好沉阿！）
     @Shadow
     private boolean dealtDamage;
     //重定向的附魔等级
@@ -71,52 +71,42 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
     private void init4(CallbackInfo ci) {
         Entity entity = this.getOwner();
         int k = (Byte)this.entityData.get(ID_REDIRECT);
-        if (k > 0 && (!this.dealtDamage && !this.isNoPhysics()) && entity != null) {
-            // 玩家点击左键
-            if (OnPlayerLeftClick.onPlayerLeftClicked()) {
-                // 获取玩家视角方向的射线检测到的坐标
-                Vec3 lookVec = entity.getLookAngle();
-                Vec3 startVec = entity.getEyePosition();
-                // 射线长度100
-                Vec3 endVec = startVec.add(lookVec.scale(100));
-                HitResult hitResult = entity.level().clip(new ClipContext(startVec, endVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
+        if (k > 0 && entity != null) {
+            if((!this.dealtDamage && !this.isNoPhysics())){
+                // 玩家点击左键
+                if (OnPlayerLeftClick.onPlayerLeftClicked()) {
+                    // 获取玩家视角方向的射线检测到的坐标
+                    Vec3 lookVec = entity.getLookAngle();
+                    Vec3 startVec = entity.getEyePosition();
+                    // 射线长度100
+                    Vec3 endVec = startVec.add(lookVec.scale(100));
+                    HitResult hitResult = entity.level().clip(new ClipContext(startVec, endVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
 
-                Vec3 targetPos = null;
-                if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.ENTITY) {
-                    targetPos = hitResult.getLocation();
-                } else {
-                    // 寻找最近的生物（除了玩家）
-                    List<Entity> entities = entity.level().getEntities(entity, entity.getBoundingBox().inflate(10), e -> e instanceof LivingEntity && e != entity);
-                    Entity nearestEntity = null;
-                    double nearestDistance = Double.MAX_VALUE;
-                    for (Entity e : entities) {
-                        double distance = e.distanceToSqr(entity);
-                        if (distance < nearestDistance) {
-                            nearestEntity = e;
-                            nearestDistance = distance;
-                        }
+                    Vec3 targetPos = null;
+                    if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.ENTITY) {
+                        targetPos = hitResult.getLocation();
+                    } else {
+                        // 设置三叉戟实体的速度朝向玩家视线方向
+                        targetPos = startVec.add(lookVec.scale(10));
                     }
-                    if (nearestEntity != null) {
-                        targetPos = nearestEntity.position();
-                    }
-                }
 
-                if (targetPos != null) {
-                    // 设置三叉戟实体的速度朝向目标坐标
                     Vec3 direction = targetPos.subtract(this.position()).normalize();
-                    Vec3 finalVelocity = direction.scale(1.5);
+                    Vec3 finalVelocity = direction.scale(k);
                     // 设置速度
                     this.setDeltaMovement(finalVelocity);
                     //C2S同步速度到服务端
-                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(),finalVelocity));
+                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity));
 
                     // 播放音效
-                    Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, this.blockPosition(), ModSounds.SOUND_BLOCK_PLACE.value(), SoundSource.PLAYERS, 3.0F, 1.0F);
+//                    Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, this.blockPosition(), SoundEvents.COPPER_BULB_TURN_OFF, SoundSource.PLAYERS, 3.0F, 1.0F);
                     // 生成粒子
-                    //todo:好看的粒子效果
-                    this.level().addParticle(ParticleTypes.DUST_PLUME, this.getX(), this.getY(), this.getZ(), direction.x, direction.y, direction.z);
-
+//                    //todo:好看的粒子效果
+//                    this.level().addParticle(ParticleTypes.DUST_PLUME, this.getX(), this.getY(), this.getZ(), direction.x, direction.y, direction.z);
                 }
+            }else{
+                //重置重力
+                this.setNoGravity(false);
+                PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(),Vec3.ZERO));
             }
         }
     }
