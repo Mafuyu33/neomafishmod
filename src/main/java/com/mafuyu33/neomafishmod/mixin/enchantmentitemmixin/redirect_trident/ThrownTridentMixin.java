@@ -1,8 +1,11 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin.redirect_trident;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantmentHelper;
+import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.event.enchantment.trident_redirect.OnPlayerLeftClick;
 import com.mafuyu33.neomafishmod.network.packet.C2S.RedirectTridentC2SPacket;
+import com.mafuyu33.neomafishmod.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -29,6 +32,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
@@ -63,9 +67,8 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
         builder.define(ID_REDIRECT, (byte)0);
     }
 
-
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/network/syncher/SynchedEntityData;get(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;"), method = "tick")
-    private void init1(CallbackInfo ci) {
+    private void init4(CallbackInfo ci) {
         Entity entity = this.getOwner();
         int k = (Byte)this.entityData.get(ID_REDIRECT);
         if (k > 0 && (!this.dealtDamage && !this.isNoPhysics()) && entity != null) {
@@ -108,10 +111,10 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
                     PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(),finalVelocity));
 
                     // 播放音效
-                    Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, this.blockPosition(), SoundEvents.TRIDENT_RIPTIDE_1.value(), SoundSource.PLAYERS, 3.0F, 1.0F);
+                    Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, this.blockPosition(), ModSounds.SOUND_BLOCK_PLACE.value(), SoundSource.PLAYERS, 3.0F, 1.0F);
                     // 生成粒子
                     //todo:好看的粒子效果
-                    this.level().addParticle(ParticleTypes.END_ROD, this.getX(), this.getY(), this.getZ(), direction.x, direction.y, direction.z);
+                    this.level().addParticle(ParticleTypes.DUST_PLUME, this.getX(), this.getY(), this.getZ(), direction.x, direction.y, direction.z);
 
                 }
             }
@@ -123,7 +126,7 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
         Level var3 = this.level();
         byte var10000;
         if (var3 instanceof ServerLevel) {
-            var10000 = (byte) ModEnchantmentHelper.getEnchantmentLevel(Enchantments.DENSITY, stack);
+            var10000 = (byte) ModEnchantmentHelper.getEnchantmentLevel(ModEnchantments.REDIRECT_PROJECTILE, stack);
         } else {
             var10000 = 0;
         }
