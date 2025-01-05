@@ -29,7 +29,7 @@ public class UseEntityHandler  {
     }
 
     public static void interact(Player player, Level world, InteractionHand hand, Entity entity) {
-        if(Config.isQinNa()) {
+        if(Config.isQinNa() && player.isCrouching()) {
             if (entity instanceof Llama && !world.isClientSide()) {//羊驼
                 world.playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.LLAMA_HURT, SoundSource.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
