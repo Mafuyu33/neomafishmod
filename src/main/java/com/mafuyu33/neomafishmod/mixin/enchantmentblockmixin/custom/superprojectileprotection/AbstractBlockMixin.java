@@ -57,7 +57,7 @@ public abstract class AbstractBlockMixin implements FeatureElement {
                         newProjectile.setDeltaMovement(velocity);
                     }
                     //输出投射物的速度
-                    System.out.println(newProjectile.getDeltaMovement().length());
+//                    System.out.println(newProjectile.getDeltaMovement().length());
                     // 将新的投射物实体添加到世界中
                     level.addFreshEntity(newProjectile);
 
