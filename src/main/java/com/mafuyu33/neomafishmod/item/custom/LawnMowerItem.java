@@ -22,7 +22,6 @@ public class LawnMowerItem extends Item {
         for (int x = -20; x < 20; x++) {
             for (int y = -4; y < 4; y++) {
                 for (int z = -20; z < 20; z++) {
-                    System.out.println("破坏了草");
                     if (context.getLevel().getBlockState(context.getPlayer().blockPosition().offset(x, y, z)).getBlock() == Blocks.SHORT_GRASS
                             || context.getLevel().getBlockState(context.getPlayer().blockPosition().offset(x, y, z)).getBlock() == Blocks.TALL_GRASS
                             || context.getLevel().getBlockState(context.getPlayer().blockPosition().offset(x, y, z)).getBlock() == Blocks.FERN
