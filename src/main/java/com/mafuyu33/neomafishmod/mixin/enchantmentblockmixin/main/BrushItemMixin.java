@@ -48,7 +48,7 @@ public abstract class BrushItemMixin extends Item {
 					ListTag oldEnchantments = BlockEnchantmentStorage.getEnchantmentsAtPosition(context.getClickedPos());
 					BlockEnchantmentStorage.removeBlockEnchantment(context.getClickedPos().immutable());//先删除信息
 //					ListTag enchantments = context.getItemInHand().getEnchantments();//获取刷子上的附魔信息列表
-					ListTag enchantments = InjectHelper.enchantmentsToNbtList(context.getItemInHand(), context.getClickedPos());
+					ListTag enchantments = InjectHelper.enchantmentsToNbtList(context.getItemInHand());
 					ListTag newEnchantments =mergeNbtLists(oldEnchantments, enchantments); // 合并附魔列表
 					BlockEnchantmentStorage.addBlockEnchantment(context.getClickedPos().immutable(), newEnchantments);//储存信息
 				}

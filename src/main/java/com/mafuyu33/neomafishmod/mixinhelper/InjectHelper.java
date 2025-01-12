@@ -33,7 +33,7 @@ public class InjectHelper {
         }
     }
 
-    public static ListTag enchantmentsToNbtList(ItemStack itemStack,BlockPos currentPos){
+    public static ListTag enchantmentsToNbtList(ItemStack itemStack){
         // 在这里对满足条件的方块进行处理
         ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 
@@ -54,7 +54,7 @@ public class InjectHelper {
     }
 
     public static void  addToList(ItemStack itemStack,BlockPos currentPos){
-        ListTag listTag = enchantmentsToNbtList(itemStack,currentPos);
+        ListTag listTag = enchantmentsToNbtList(itemStack);
         LOGGER.info("Storing enchantments at position: " + currentPos + " with data: " + listTag);
         BlockEnchantmentStorage.addBlockEnchantment(currentPos, listTag);
     }
