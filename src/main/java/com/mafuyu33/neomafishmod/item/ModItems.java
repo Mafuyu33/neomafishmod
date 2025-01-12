@@ -52,6 +52,8 @@ public class ModItems {
             ()-> new TimeStopItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> FU = registerItem("fu",FuItem::new);
     public static final DeferredItem<Item> RUYIJINGU = registerItem("ruyijingu", RuyijinguItem::new);
+    public static final DeferredItem<Item> LawnMowerItem = registerItem("lawn_mower", LawnMowerItem::new);
+
     public static DeferredItem<Item> registerItem(String name, Supplier<Item> itemSupplier){
         return ITEMS.register(name,itemSupplier);
     }

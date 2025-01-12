@@ -55,6 +55,7 @@ public class ModTabs {
 
                         output.accept(ModItems.SWITCH.get());
                         output.accept(ModItems.RUYIJINGU.get());
+                        output.accept(ModItems.LawnMowerItem.get());
 
 
                     }).build());
