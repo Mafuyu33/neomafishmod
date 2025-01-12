@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.component;
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -11,7 +12,7 @@ import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            DeferredRegister.createDataComponents(NeoMafishMod.MODID);
+            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE,NeoMafishMod.MODID);
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> COORDINATES = register("coordinates",
             builder -> builder.persistent(BlockPos.CODEC));

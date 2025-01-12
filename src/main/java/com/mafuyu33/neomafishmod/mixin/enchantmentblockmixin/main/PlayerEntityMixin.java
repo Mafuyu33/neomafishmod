@@ -34,8 +34,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	private void init(CallbackInfo info) {
 		if (this.level().isClientSide && this.isHolding(Items.BRUSH)) {
 			neomafishmod$tickCounter++;
-			if (neomafishmod$tickCounter % 20 == 0) {
-				// 每20个tick更新一次附魔方块位置
+			if (neomafishmod$tickCounter % 5 == 0) {
+				// 每5个tick更新一次附魔方块位置
 				updateEnchantedBlocks();
 			}
 
