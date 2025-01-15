@@ -21,33 +21,21 @@ import java.util.Set;
 
 @Mixin(Player.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-	@Unique
-	private int neomafishmod$tickCounter = 0;
-	@Unique
-	private final Set<BlockPos> neomafishmod$enchantedBlocks = new HashSet<>();
 
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
 	}
 
-	@Inject(at = @At("HEAD"), method = "tick")
+	@Inject(at = @At("TAIL"), method = "tick")
 	private void init(CallbackInfo info) {
 		if (this.level().isClientSide && this.isHolding(Items.BRUSH)) {
-			neomafishmod$tickCounter++;
-			if (neomafishmod$tickCounter % 5 == 0) {
-				// 每5个tick更新一次附魔方块位置
 				updateEnchantedBlocks();
-			}
-
 			// 每个tick在附魔方块位置生成粒子
-			for (BlockPos blockPos : neomafishmod$enchantedBlocks) {
-				addParticles(blockPos);
-			}
+			updateEnchantedBlocks();
 		}
 	}
 
 	private void updateEnchantedBlocks() {
-		neomafishmod$enchantedBlocks.clear();
 		BlockPos playerPos = this.blockPosition();
 
 		// 遍历玩家周围 8 格范围内的方块
@@ -58,7 +46,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 					// 检查方块是否有附魔
 					if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(blockPos), new ListTag())) {
-						neomafishmod$enchantedBlocks.add(blockPos);
+						addParticles(blockPos);
 					}
 				}
 			}

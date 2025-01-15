@@ -23,11 +23,7 @@ public class AttackBlockHandler {
         Level level = event.getLevel();
         Player player = event.getEntity();
         BlockPos pos = event.getPos();
-        interact(player,level,pos);
-    }
-
-    public static void interact(Player player, Level world, BlockPos pos) {
-        if(!world.isClientSide) {
+        if(!level.isClientSide) {
             Iterable<ItemStack> handItemStacks = player.getHandSlots();
             for (ItemStack itemstack : handItemStacks) {
                 if (itemstack.is(Items.BRUSH)) {
@@ -36,17 +32,18 @@ public class AttackBlockHandler {
                         if (startPos == null) {
                             startPos = pos;
                         } else {
-                            brushAllBlocks(world, pos, itemstack);
+                            brushAllBlocks(level, pos, itemstack);
                             startPos = null;
                         }
                     } else {//没附魔，清除附魔方块
                         if (startPos == null) {
                             startPos = pos;
                         } else {
-                            clearAllBlocks(world, pos);
+                            clearAllBlocks(level, pos);
                             startPos = null;
                         }
                     }
+                    event.setCanceled(true);
                 }
             }
         }
