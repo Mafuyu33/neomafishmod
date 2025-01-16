@@ -92,6 +92,7 @@
     "itemmixin.lead.LeadItemMixin",
     "itemmixin.lead.MobEntityMixin",
     "itemmixin.lightningrod.LightningRodMixin",
+    "itemmixin.linear_algebra.BlockBehaviourMixin",
     "itemmixin.spyglass.SpyglassMixin",
     "itemmixin.swimmingtripwire.PlayerEntityMixin",
     "itemmixin.swimmingtripwire.TripwireBlockMixin",
@@ -109,8 +110,9 @@
     "itemmixin.entityitemrenderer.irongolemitemrenderer.ItemRendererMixin",
     "itemmixin.entityitemrenderer.lightningitemrenderer.ItemRendererMixin",
     "itemmixin.entityitemrenderer.llamaitemrenderer.ItemRendererMixin",
-    "itemmixin.entityitemrenderer.ruyijingu.ItemRendererMixin",
-    "itemmixin.entityitemrenderer.villageritemrenderer.ItemRendererMixin"
+    "itemmixin.entityitemrenderer.villageritemrenderer.ItemRendererMixin",
+    "itemmixin.linear_algebra.GameRendererMixin",
+    "itemmixin.ruyijingu.ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

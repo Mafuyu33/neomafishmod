@@ -1,4 +1,4 @@
-package com.mafuyu33.neomafishmod.mixin.itemmixin.entityitemrenderer.ruyijingu;
+package com.mafuyu33.neomafishmod.mixin.itemmixin.ruyijingu;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.event.KeyInputHandler;
