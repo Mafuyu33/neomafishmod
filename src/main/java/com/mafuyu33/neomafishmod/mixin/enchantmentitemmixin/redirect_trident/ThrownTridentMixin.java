@@ -82,8 +82,13 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
                     Vec3 endVec = startVec.add(lookVec.scale(100));
                     HitResult hitResult = entity.level().clip(new ClipContext(startVec, endVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
 
+
                     Vec3 targetPos = null;
-                    if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.ENTITY) {
+
+//                    //优化手感，直接设置三叉戟实体的速度朝向玩家视线方向
+//                    targetPos = startVec.add(lookVec.scale(10));
+
+                    if (hitResult.getType() == HitResult.Type.ENTITY) {
                         targetPos = hitResult.getLocation();
                     } else {
                         // 设置三叉戟实体的速度朝向玩家视线方向
