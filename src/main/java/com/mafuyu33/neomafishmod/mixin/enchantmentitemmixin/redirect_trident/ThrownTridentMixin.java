@@ -72,6 +72,41 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
         Entity entity = this.getOwner();
         int k = (Byte)this.entityData.get(ID_REDIRECT);
         if (k > 0 && entity != null) {
+            this.dealtDamage=false;
+            if(this.inGround) {
+                // 玩家点击左键
+                if (OnPlayerLeftClick.onPlayerLeftClicked()) {
+                    // 获取玩家视角方向的射线检测到的坐标
+                    Vec3 lookVec = entity.getLookAngle();
+                    Vec3 startVec = entity.getEyePosition();
+                    // 射线长度100
+                    Vec3 endVec = startVec.add(lookVec.scale(15));
+                    HitResult hitResult = entity.level().clip(new ClipContext(startVec, endVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
+
+                    Vec3 targetPos = null;
+                    //判断是否是方块，并且距离小于15
+                    if (hitResult.getType() == HitResult.Type.BLOCK) {
+                        targetPos = hitResult.getLocation();
+                    } else {
+                        // 设置三叉戟实体的速度朝向玩家视线方向
+                        targetPos = startVec.add(lookVec.scale(15));
+                    }
+
+                    Vec3 direction = targetPos.subtract(this.position()).normalize();
+                    Vec3 finalVelocity = direction.scale(k);
+
+
+                    //实体朝着targetPos方向 TP0.5格
+                    Vec3 teleportPos = this.position().add(direction.scale(0.5));
+                    this.setPos(teleportPos.x, teleportPos.y, teleportPos.z);
+
+
+                    // 设置速度
+                    this.setDeltaMovement(finalVelocity);
+                    //C2S同步速度到服务端
+                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity));
+                }
+            }
             if((!this.dealtDamage && !this.isNoPhysics())){
                 // 玩家点击左键
                 if (OnPlayerLeftClick.onPlayerLeftClicked()) {
@@ -79,20 +114,16 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
                     Vec3 lookVec = entity.getLookAngle();
                     Vec3 startVec = entity.getEyePosition();
                     // 射线长度100
-                    Vec3 endVec = startVec.add(lookVec.scale(100));
+                    Vec3 endVec = startVec.add(lookVec.scale(15));
                     HitResult hitResult = entity.level().clip(new ClipContext(startVec, endVec, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
-
 
                     Vec3 targetPos = null;
 
-//                    //优化手感，直接设置三叉戟实体的速度朝向玩家视线方向
-//                    targetPos = startVec.add(lookVec.scale(10));
-
-                    if (hitResult.getType() == HitResult.Type.ENTITY) {
+                    if (hitResult.getType() == HitResult.Type.BLOCK) {
                         targetPos = hitResult.getLocation();
                     } else {
                         // 设置三叉戟实体的速度朝向玩家视线方向
-                        targetPos = startVec.add(lookVec.scale(10));
+                        targetPos = startVec.add(lookVec.scale(15));
                     }
 
                     Vec3 direction = targetPos.subtract(this.position()).normalize();
@@ -100,13 +131,7 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
                     // 设置速度
                     this.setDeltaMovement(finalVelocity);
                     //C2S同步速度到服务端
-                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity));
-
-                    // 播放音效
-//                    Minecraft.getInstance().level.playSound(Minecraft.getInstance().player, this.blockPosition(), SoundEvents.COPPER_BULB_TURN_OFF, SoundSource.PLAYERS, 3.0F, 1.0F);
-                    // 生成粒子
-//                    //todo:好看的粒子效果
-//                    this.level().addParticle(ParticleTypes.DUST_PLUME, this.getX(), this.getY(), this.getZ(), direction.x, direction.y, direction.z);
+                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity));;
                 }
             }else{
                 //重置重力
