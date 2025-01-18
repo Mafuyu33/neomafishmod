@@ -42,6 +42,8 @@ public class Config {
 
     public static ModConfigSpec.BooleanValue isLlamaSpitForever = BUILDER.define("isLlamaSpitForever", true);
 
+    public static ModConfigSpec.BooleanValue isTridentPiercing = BUILDER.define("isTridentPiercing", true);
+
 //    public static ModConfigSpec.ConfigValue<Float> breakDistance = BUILDER.comment("How far can you break").define("breakDistance", 10f);
 
 
@@ -112,6 +114,10 @@ public class Config {
 
     public static boolean isQinNa() {
         return isQinNa.get();
+    }
+
+    public static boolean isTridentPiercing() {
+        return isTridentPiercing.get();
     }
 
     static final ModConfigSpec SPEC = BUILDER.build();
