@@ -11,10 +11,8 @@ public class Config {
     public static ModConfigSpec.BooleanValue isFuThrowable = BUILDER.define("isFuThrowable", true);
 
     public static ModConfigSpec.BooleanValue isAlwaysEnchantable = BUILDER.define("isAlwaysEnchantable", true);
-    ;
 
     public static ModConfigSpec.BooleanValue isFireworkCanUseOnEntity = BUILDER.define("isFireworkCanUseOnEntity", true);
-
 
     public static ModConfigSpec.BooleanValue isFireworkCanHitOnEntity = BUILDER.define("isFireworkCanHitOnEntity", true);
 
@@ -43,6 +41,8 @@ public class Config {
     public static ModConfigSpec.BooleanValue isLlamaSpitForever = BUILDER.define("isLlamaSpitForever", true);
 
     public static ModConfigSpec.BooleanValue isTridentPiercing = BUILDER.define("isTridentPiercing", true);
+
+    public static ModConfigSpec.BooleanValue isHurtCoolDownCanceled = BUILDER.define("isHurtCoolDownCanceled", true);
 
 //    public static ModConfigSpec.ConfigValue<Float> breakDistance = BUILDER.comment("How far can you break").define("breakDistance", 10f);
 
@@ -118,6 +118,10 @@ public class Config {
 
     public static boolean isTridentPiercing() {
         return isTridentPiercing.get();
+    }
+
+    public static boolean isHurtCoolDownCanceled() {
+        return isHurtCoolDownCanceled.get();
     }
 
     static final ModConfigSpec SPEC = BUILDER.build();

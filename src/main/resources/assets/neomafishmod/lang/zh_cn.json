@@ -8,6 +8,7 @@
 
   "text.autoconfig.neomafishmod.title": "风灵月影，启动!",
 
+  "neomafishmod.configuration.isHurtCoolDownCanceled": "取消受击冷却",
   "neomafishmod.configuration.isTridentPiercing": "三叉戟可穿透",
   "neomafishmod.configuration.isQinNa": "习得擒拿术",
   "neomafishmod.configuration.isLlamaSpitForever": "羊驼攻击无cd",

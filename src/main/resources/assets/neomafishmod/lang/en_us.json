@@ -5,6 +5,7 @@
 
   "text.autoconfig.neomafishmod.title": "Link Start!",
 
+  "neomafishmod.configuration.isHurtCoolDownCanceled": "isHurtCoolDownCanceled",
   "neomafishmod.configuration.isTridentPiercing": "isTridentPiercing",
   "neomafishmod.configuration.isQinNa": "isQinNa",
   "neomafishmod.configuration.isLlamaSpitForever": "isLlamaSpitForever",

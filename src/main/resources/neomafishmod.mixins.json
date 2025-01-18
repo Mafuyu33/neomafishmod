@@ -99,6 +99,7 @@
     "itemmixin.swimmingtripwire.TripwireBlockMixin",
     "mobmixin.BeeRideableMixin",
     "mobmixin.goatdashforever.GoatBrainMixin",
+    "mobmixin.hurtcooldowncancel.LivingEntityMixin",
     "mobmixin.llamaspitforever.LlamaEntity_SpitRevengeGoalMixin",
     "mobmixin.llamaspitforever.LlamaEntityMixin",
     "mobmixin.pandaeatswitch.PandaEntityMixin"
