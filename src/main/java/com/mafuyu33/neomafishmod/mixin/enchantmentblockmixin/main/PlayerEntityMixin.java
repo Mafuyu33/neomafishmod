@@ -29,26 +29,23 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	@Inject(at = @At("TAIL"), method = "tick")
 	private void init(CallbackInfo info) {
 		if (this.level().isClientSide && this.isHolding(Items.BRUSH)) {
-				updateEnchantedBlocks();
-			// 每个tick在附魔方块位置生成粒子
-			updateEnchantedBlocks();
+			renderEnchantedBlockParticles();
 		}
 	}
 
-	private void updateEnchantedBlocks() {
-		BlockPos playerPos = this.blockPosition();
 
-		// 遍历玩家周围 8 格范围内的方块
-		for (int x = -8; x <= 8; x++) {
-			for (int y = -8; y <= 8; y++) {
-				for (int z = -8; z <= 8; z++) {
-					BlockPos blockPos = playerPos.offset(x, y, z);
+	private void renderEnchantedBlockParticles() {
+		// 从存储中获取所有附魔方块
+		Set<BlockPos> enchantedBlocks = BlockEnchantmentStorage.getAllEnchantedBlocks();
 
-					// 检查方块是否有附魔
-					if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(blockPos), new ListTag())) {
-						addParticles(blockPos);
-					}
-				}
+		// 为每个附魔方块生成粒子效果
+		for (BlockPos blockPos : enchantedBlocks) {
+			// 检查方块是否仍然存在（可能已被破坏）
+			if (this.level().getBlockState(blockPos).isAir()) {
+				// 从存储中移除不存在的方块
+				BlockEnchantmentStorage.removeBlockEnchantment(blockPos);
+			} else {
+				addParticles(blockPos);
 			}
 		}
 	}

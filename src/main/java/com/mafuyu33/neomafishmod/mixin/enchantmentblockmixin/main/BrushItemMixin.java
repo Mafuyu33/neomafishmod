@@ -33,27 +33,35 @@ public abstract class BrushItemMixin extends Item {
 
 	@Inject(at = @At("HEAD"), method = "useOn")
 	private void init(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
-		if (!context.getLevel().isClientSide) {//只在服务端运行
-			if (!Objects.equals(context.getItemInHand().getEnchantments(), new ListTag())) {//如果刷子有附魔
-				if(Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(context.getClickedPos()), new ListTag())){//如果Pos位置方块没有附魔
+		//只在服务端运行
+		if (!context.getLevel().isClientSide) {
+			//如果刷子有附魔
+			if (context.getItemInHand().isEnchanted()) {
+				//如果Pos位置方块没有附魔
+				if(Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(context.getClickedPos()), new ListTag())){
 //				ListTag enchantments = context.getItemInHand().getEnchantments();//获取刷子上的附魔信息列表
-					InjectHelper.addToList(context.getItemInHand(), context.getClickedPos());
+				InjectHelper.addToList(context.getItemInHand(), context.getClickedPos());
 //				BlockEnchantmentStorage.addBlockEnchantment(context.getClickedPos().immutable(), enchantments);//储存信息
 				EquipmentSlot equipmentSlot = context.getItemInHand().equals(context.getPlayer().getItemBySlot(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
 //				context.getItemInHand().hurtAndBreak(1, context.getPlayer(), (userx) -> {
 //					userx.broadcastBreakEvent(equipmentSlot);
 //				});
 					context.getItemInHand().hurtAndBreak(1,context.getPlayer(),equipmentSlot);
-				}else {//位置方块有附魔
+					//位置方块有附魔
+				}else {
 					ListTag oldEnchantments = BlockEnchantmentStorage.getEnchantmentsAtPosition(context.getClickedPos());
-					BlockEnchantmentStorage.removeBlockEnchantment(context.getClickedPos().immutable());//先删除信息
+					//先删除信息
+					BlockEnchantmentStorage.removeBlockEnchantment(context.getClickedPos().immutable());
 //					ListTag enchantments = context.getItemInHand().getEnchantments();//获取刷子上的附魔信息列表
 					ListTag enchantments = InjectHelper.enchantmentsToNbtList(context.getItemInHand());
-					ListTag newEnchantments =mergeNbtLists(oldEnchantments, enchantments); // 合并附魔列表
-					BlockEnchantmentStorage.addBlockEnchantment(context.getClickedPos().immutable(), newEnchantments);//储存信息
+					// 合并附魔列表
+					ListTag newEnchantments =mergeNbtLists(oldEnchantments, enchantments);
+					//储存信息
+					BlockEnchantmentStorage.addBlockEnchantment(context.getClickedPos().immutable(), newEnchantments);
 				}
 			}else {//如果刷子没有附魔
-				BlockEnchantmentStorage.removeBlockEnchantment(context.getClickedPos().immutable());//删除信息
+				//删除信息
+				BlockEnchantmentStorage.removeBlockEnchantment(context.getClickedPos().immutable());
 			}
 		}
 	}

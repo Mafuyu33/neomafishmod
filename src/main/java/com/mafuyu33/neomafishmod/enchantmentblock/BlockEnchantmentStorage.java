@@ -9,7 +9,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.enchantment.Enchantment;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class BlockEnchantmentStorage {
@@ -67,4 +69,15 @@ public class BlockEnchantmentStorage {
             }
             return 0;
         }
+    // 获取所有附魔方块的位置
+    public static Set<BlockPos> getAllEnchantedBlocks() {
+        MinecraftServer server = ServerManager.getServerInstance();
+        BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
+
+        Set<BlockPos> enchantedBlocks = new HashSet<>();
+        for (BlockStateSaverAndLoader.BlockEnchantInfo blockEnchantment : state.blockEnchantments) {
+            enchantedBlocks.add(blockEnchantment.blockPos);
+        }
+        return enchantedBlocks;
+    }
 }
