@@ -45,7 +45,7 @@ public abstract class ThrownTridentMixin extends AbstractArrow {
 	private boolean dealtDamage;
 
 	@Inject(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/ThrownTrident;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V"),cancellable = true)
-	private void init(EntityHitResult result, CallbackInfo ci, @Local(ordinal = 0) Entity entity , @Local(ordinal = 0) DamageSource damageSource) {
+	private void init(EntityHitResult result, CallbackInfo ci) {
 		//懒得写附魔了
 		if(Config.isTridentPiercing()) {
 			this.dealtDamage = false;
