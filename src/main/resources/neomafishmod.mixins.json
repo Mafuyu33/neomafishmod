@@ -6,6 +6,7 @@
     "ExampleMixin",
     "effectMixin.TeleportEffectMixin",
     "effectMixin.antidote.LivingEntityMixin",
+    "effectMixin.bad_luck_of_sea.LivingEntityMixin",
     "effectMixin.canclimb.LivingEntityMixin",
     "effectMixin.canclimb.MobEntityMixin",
     "effectMixin.emergency_teleport.EmergencyTeleportEffectMixin",

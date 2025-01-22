@@ -142,6 +142,7 @@
   "effect.neomafishmod.sheep_effect": "变羊",
   "effect.neomafishmod.antidote_effect": "百毒不侵",
   "effect.neomafishmod.emergency_teleport_effect": "应激传送",
+  "effect.neomafishmod.bad_luck_of_sea_effect": "海之嫌弃",
 
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
@@ -168,8 +169,13 @@
   "item.minecraft.lingering_potion.effect.antidote_potion": "酸奶（滞留）",
   "item.minecraft.tipped_arrow.effect.antidote_potion": "酸奶箭",
 
-  "item.minecraft.potion.effect.emergency_teleport_effect": "应激传送",
-  "item.minecraft.splash_potion.effect.emergency_teleport_effect": "应激传送（喷溅）",
-  "item.minecraft.lingering_potion.effect.emergency_teleport_effect": "应激传送（喷溅）",
-  "item.minecraft.tipped_arrow.effect.emergency_teleport_effect": "应激传送箭"
+  "item.minecraft.potion.effect.emergency_teleport_potion": "应激传送",
+  "item.minecraft.splash_potion.effect.emergency_teleport_potion": "应激传送（喷溅）",
+  "item.minecraft.lingering_potion.effect.emergency_teleport_potion": "应激传送（喷溅）",
+  "item.minecraft.tipped_arrow.effect.emergency_teleport_potion": "应激传送箭",
+
+  "item.minecraft.potion.effect.bad_luck_of_sea_potion": "海之嫌弃",
+  "item.minecraft.splash_potion.effect.bad_luck_of_sea_potion": "海之嫌弃（喷溅）",
+  "item.minecraft.lingering_potion.effect.bad_luck_of_sea_potion": "海之嫌弃（喷溅）",
+  "item.minecraft.tipped_arrow.effect.bad_luck_of_sea_potion": "海之嫌弃箭"
 }
