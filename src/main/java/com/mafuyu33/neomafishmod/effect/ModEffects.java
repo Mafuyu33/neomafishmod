@@ -21,6 +21,7 @@ public class ModEffects {
     public static final DeferredHolder<MobEffect,MobEffect>  SPIDER_EFFECT = registerDeferredHolder("spider_effect",()->new NormalEffect(MobEffectCategory.BENEFICIAL,0x800000));
     public static final DeferredHolder<MobEffect,MobEffect>  SHEEP_EFFECT = registerDeferredHolder("sheep_effect",()->new NormalEffect(MobEffectCategory.BENEFICIAL,0x80F18BEB));
     public static final DeferredHolder<MobEffect,MobEffect>  ANTIDOTE_EFFECT =registerDeferredHolder("antidote_effect",()->new NormalEffect(MobEffectCategory.BENEFICIAL,0x80FFFFFF));
+    public static final DeferredHolder<MobEffect,MobEffect>  EMERGENCY_TELEPORT_EFFECT =registerDeferredHolder("emergency_teleport_effect",()->new NormalEffect(MobEffectCategory.BENEFICIAL,0xD8BFD8));
 
 
     public static DeferredHolder<MobEffect,MobEffect> registerDeferredHolder(String name, Supplier<MobEffect> supplier){

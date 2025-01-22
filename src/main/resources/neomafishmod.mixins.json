@@ -8,6 +8,7 @@
     "effectMixin.antidote.LivingEntityMixin",
     "effectMixin.canclimb.LivingEntityMixin",
     "effectMixin.canclimb.MobEntityMixin",
+    "effectMixin.emergency_teleport.EmergencyTeleportEffectMixin",
     "effectMixin.sheep.LimbAnimatorAccessor",
     "effectMixin.sheep.LivingEntityMixin",
     "effectMixin.sheep.PlayerEntityMixin",

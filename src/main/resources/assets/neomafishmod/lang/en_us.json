@@ -150,6 +150,7 @@
   "effect.neomafishmod.spider_effect": "spider_effect",
   "effect.neomafishmod.sheep_effect": "sheep_effect",
   "effect.neomafishmod.antidote_effect": "antidote_effect",
+  "effect.neomafishmod.emergency_teleport_effect": "emergency_teleport_effect",
 
   "item.minecraft.potion.effect.flower_potion": "flower_potion",
   "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
@@ -174,6 +175,10 @@
   "item.minecraft.potion.effect.antidote_potion": "antidote_potion",
   "item.minecraft.splash_potion.effect.antidote_potion": "Splash antidote_potion",
   "item.minecraft.lingering_potion.effect.antidote_potion": "Lingering antidote_potion",
-  "item.minecraft.tipped_arrow.effect.antidote_potion": "antidote_potion"
+  "item.minecraft.tipped_arrow.effect.antidote_potion": "antidote_potion",
 
+  "item.minecraft.potion.effect.emergency_teleport_effect": "emergency_teleport_potion",
+  "item.minecraft.splash_potion.effect.emergency_teleport_effect": "Splash emergency_teleport_potion",
+  "item.minecraft.lingering_potion.effect.emergency_teleport_effect": "Lingering emergency_teleport_potion",
+  "item.minecraft.tipped_arrow.effect.emergency_teleport_effect": "emergency_teleport_potion"
 }
