@@ -19,3 +19,7 @@ ItemStack itemstack = this.getItemBySlot(EquipmentSlot.CHEST);
 
 捕获mixin中的变量（加在变量栏）
 @Local(ordinal = 0) int i
+
+生物实体持久数据：
+entity.getPersistentData().get("AAA");
+entity.getPersistentData().putInt("AAA",66666666);
