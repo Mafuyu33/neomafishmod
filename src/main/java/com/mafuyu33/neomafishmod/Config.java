@@ -42,7 +42,7 @@ public class Config {
 
     public static ModConfigSpec.BooleanValue isTridentPiercing = BUILDER.define("isTridentPiercing", true);
 
-    public static ModConfigSpec.BooleanValue isHurtCoolDownCanceled = BUILDER.define("isHurtCoolDownCanceled", true);
+    public static ModConfigSpec.BooleanValue isHurtCoolDownCanceled = BUILDER.define("isHurtCoolDownCanceled", false);
 
 //    public static ModConfigSpec.ConfigValue<Float> breakDistance = BUILDER.comment("How far can you break").define("breakDistance", 10f);
 
