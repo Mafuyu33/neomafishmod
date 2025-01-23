@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
 
       - name: 使用 Gradle 构建
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           arguments: build
 
