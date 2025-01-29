@@ -1,6 +1,7 @@
 {
+    "syfb_desc": "是故意的还是不小心，layer0的命名空间都写错了",
     "parent": "neomafishmod:item/zhuge",
     "textures": {
-        "layer0": "neomafishmods:item/zhuge_pulling_1"
+        "layer0": "neomafishmod:item/zhuge_pulling_1"
     }
 }
