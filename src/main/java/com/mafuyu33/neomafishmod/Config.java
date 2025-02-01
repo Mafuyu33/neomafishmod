@@ -8,39 +8,39 @@ public class Config {
 
     /// ***************
 
-    public static ModConfigSpec.BooleanValue isFuThrowable = BUILDER.define("isFuThrowable", true);
+    public static ModConfigSpec.BooleanValue isFuThrowable = BUILDER.define("isFuThrowable", false);
 
-    public static ModConfigSpec.BooleanValue isAlwaysEnchantable = BUILDER.define("isAlwaysEnchantable", true);
+    public static ModConfigSpec.BooleanValue isAlwaysEnchantable = BUILDER.define("isAlwaysEnchantable", false);
 
-    public static ModConfigSpec.BooleanValue isFireworkCanUseOnEntity = BUILDER.define("isFireworkCanUseOnEntity", true);
+    public static ModConfigSpec.BooleanValue isFireworkCanUseOnEntity = BUILDER.define("isFireworkCanUseOnEntity", false);
 
-    public static ModConfigSpec.BooleanValue isFireworkCanHitOnEntity = BUILDER.define("isFireworkCanHitOnEntity", true);
+    public static ModConfigSpec.BooleanValue isFireworkCanHitOnEntity = BUILDER.define("isFireworkCanHitOnEntity", false);
 
-    public static ModConfigSpec.BooleanValue isShieldDashable = BUILDER.define("isShieldDashable", true);
+    public static ModConfigSpec.BooleanValue isShieldDashable = BUILDER.define("isShieldDashable", false);
 
-    public static ModConfigSpec.BooleanValue isLeadCanLinkTogether = BUILDER.define("isLeadCanLinkTogether", true);
+    public static ModConfigSpec.BooleanValue isLeadCanLinkTogether = BUILDER.define("isLeadCanLinkTogether", false);
 
-    public static ModConfigSpec.BooleanValue isLeadCanLinkEveryMob = BUILDER.define("isLeadCanLinkEveryMob", true);
+    public static ModConfigSpec.BooleanValue isLeadCanLinkEveryMob = BUILDER.define("isLeadCanLinkEveryMob", false);
 
-    public static ModConfigSpec.BooleanValue isSpyglassCanPin = BUILDER.define("isSpyglassCanPin", true);
+    public static ModConfigSpec.BooleanValue isSpyglassCanPin = BUILDER.define("isSpyglassCanPin", false);
 
-    public static ModConfigSpec.BooleanValue isSwimTripwire = BUILDER.define("isSwimTripwire", true);
+    public static ModConfigSpec.BooleanValue isSwimTripwire = BUILDER.define("isSwimTripwire", false);
 
-    public static ModConfigSpec.BooleanValue isBowDashable = BUILDER.define("isBowDashable", true);
+    public static ModConfigSpec.BooleanValue isBowDashable = BUILDER.define("isBowDashable", false);
 
-    public static ModConfigSpec.BooleanValue isNestedBoxInfinite = BUILDER.define("isNestedBoxInfinite", true);
+    public static ModConfigSpec.BooleanValue isNestedBoxInfinite = BUILDER.define("isNestedBoxInfinite", false);
 
-    public static ModConfigSpec.BooleanValue isGoatDashForever = BUILDER.define("isGoatDashForever", true);
+    public static ModConfigSpec.BooleanValue isGoatDashForever = BUILDER.define("isGoatDashForever", false);
 
-    public static ModConfigSpec.BooleanValue isGoatDashTogether = BUILDER.define("isGoatDashTogether", true);
+    public static ModConfigSpec.BooleanValue isGoatDashTogether = BUILDER.define("isGoatDashTogether", false);
 
-    public static ModConfigSpec.BooleanValue isBeeRideable = BUILDER.define("isBeeRideable", true);
+    public static ModConfigSpec.BooleanValue isBeeRideable = BUILDER.define("isBeeRideable", false);
 
-    public static ModConfigSpec.BooleanValue isQinNa = BUILDER.define("isQinNa", true);
+    public static ModConfigSpec.BooleanValue isQinNa = BUILDER.define("isQinNa", false);
 
-    public static ModConfigSpec.BooleanValue isLlamaSpitForever = BUILDER.define("isLlamaSpitForever", true);
+    public static ModConfigSpec.BooleanValue isLlamaSpitForever = BUILDER.define("isLlamaSpitForever", false);
 
-    public static ModConfigSpec.BooleanValue isTridentPiercing = BUILDER.define("isTridentPiercing", true);
+    public static ModConfigSpec.BooleanValue isTridentPiercing = BUILDER.define("isTridentPiercing", false);
 
     public static ModConfigSpec.BooleanValue isHurtCoolDownCanceled = BUILDER.define("isHurtCoolDownCanceled", false);
 
