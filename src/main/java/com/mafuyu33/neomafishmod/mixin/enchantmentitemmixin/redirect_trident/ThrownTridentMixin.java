@@ -12,6 +12,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -99,12 +100,13 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
                     //实体朝着targetPos方向 TP0.5格
                     Vec3 teleportPos = this.position().add(direction.scale(0.5));
                     this.setPos(teleportPos.x, teleportPos.y, teleportPos.z);
-
+                    //同步位置到服务端
+                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), teleportPos,2));
 
                     // 设置速度
                     this.setDeltaMovement(finalVelocity);
                     //C2S同步速度到服务端
-                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity));
+                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity,1));
                 }
             }
             if((!this.dealtDamage && !this.isNoPhysics())){
@@ -131,12 +133,12 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
                     // 设置速度
                     this.setDeltaMovement(finalVelocity);
                     //C2S同步速度到服务端
-                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity));;
+                    PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(), finalVelocity,1));;
                 }
             }else{
                 //重置重力
                 this.setNoGravity(false);
-                PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(),Vec3.ZERO));
+                PacketDistributor.sendToServer(new RedirectTridentC2SPacket(this.getId(),Vec3.ZERO,1));
             }
         }
     }
