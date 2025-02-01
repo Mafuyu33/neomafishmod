@@ -46,6 +46,5 @@ public class NeoMafishMod
         ModPotions.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON,Config.SPEC);
-        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 }
