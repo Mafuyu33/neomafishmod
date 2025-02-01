@@ -94,14 +94,14 @@ public class PlayerServerEvent {
         InteractionHand hand = player.getUsedItemHand();
         ItemStack itemStack = player.getItemInHand(hand);
         int i = getEnchantmentLevel(itemStack, ModEnchantments.NEVER_GONNA);//如果手上的物品有被附魔 “你被骗了”
-
-        if(i>0 && (state.is(BlockTags.DIAMOND_ORES)) && !player.level().isClientSide){
-//            PacketByteBuf buf = PacketByteBufs.create();//传输到client端
-//            ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.NEVER_GONNA_ID, buf);
-            PacketDistributor.sendToAllPlayers(new NeverGonnaS2CPacket());
-//            //检测pos边上是不是有钻石掉落物，有的话替换成煤炭
-            startDelayedOperation(player.level(),player,useBlock);
-        }
+//删除，服务器不能用
+//        if(i>0 && (state.is(BlockTags.DIAMOND_ORES)) && !player.level().isClientSide){
+////            PacketByteBuf buf = PacketByteBufs.create();//传输到client端
+////            ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.NEVER_GONNA_ID, buf);
+//            PacketDistributor.sendToAllPlayers(new NeverGonnaS2CPacket());
+////            //检测pos边上是不是有钻石掉落物，有的话替换成煤炭
+//            startDelayedOperation(player.level(),player,useBlock);
+//        }
 
     }
 

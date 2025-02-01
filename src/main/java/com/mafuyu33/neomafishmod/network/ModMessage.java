@@ -61,9 +61,6 @@ public class ModMessage {
                         ShieldDashC2SPacket::handle
                 )
         );
-
-
-
         registrar.playBidirectional(
                 BowDashC2SPacket.TYPE,
                 BowDashC2SPacket.STREAM_CODEC,
@@ -72,7 +69,22 @@ public class ModMessage {
                         BowDashC2SPacket::receive
                 )
         );
-
+        registrar.playBidirectional(
+                RedirectTridentC2SPacket.TYPE,
+                RedirectTridentC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        RedirectTridentC2SPacket::handle
+                )
+        );
+        registrar.playBidirectional(
+                PlayerActionC2SPacket.TYPE,
+                PlayerActionC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        PlayerActionC2SPacket::handle
+                )
+        );
 
         // server to client
 
@@ -85,14 +97,14 @@ public class ModMessage {
                 )
         );
 
-        registrar.playBidirectional(
-                NeverGonnaS2CPacket.TYPE,
-                NeverGonnaS2CPacket.STREAM_CODEC,
-                new DirectionalPayloadHandler<>(
-                        NeverGonnaS2CPacket::handle,
-                        null
-                )
-        );
+//        registrar.playBidirectional(
+//                NeverGonnaS2CPacket.TYPE,
+//                NeverGonnaS2CPacket.STREAM_CODEC,
+//                new DirectionalPayloadHandler<>(
+//                        NeverGonnaS2CPacket::handle,
+//                        null
+//                )
+//        );
 
         registrar.playBidirectional(
                 CustomWindChargeS2CPacket.TYPE,
@@ -111,14 +123,6 @@ public class ModMessage {
                 )
         );
         registrar.playBidirectional(
-                PlayerActionC2SPacket.TYPE,
-                PlayerActionC2SPacket.STREAM_CODEC,
-                new DirectionalPayloadHandler<>(
-                        null,
-                        PlayerActionC2SPacket::handle
-                )
-        );
-        registrar.playBidirectional(
                 OneWithShadowS2CPacket.TYPE,
                 OneWithShadowS2CPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
@@ -126,12 +130,13 @@ public class ModMessage {
                         null
                 )
         );
+
         registrar.playBidirectional(
-                RedirectTridentC2SPacket.TYPE,
-                RedirectTridentC2SPacket.STREAM_CODEC,
+                AddEnchantedBlockParticleS2CPacket.TYPE,
+                AddEnchantedBlockParticleS2CPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        null,
-                        RedirectTridentC2SPacket::handle
+                        AddEnchantedBlockParticleS2CPacket::handle,
+                        null
                 )
         );
     }

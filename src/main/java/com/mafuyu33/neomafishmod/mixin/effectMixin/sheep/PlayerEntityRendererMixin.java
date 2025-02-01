@@ -10,12 +10,20 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.event.RenderPlayerEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
@@ -29,14 +37,13 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
 //        return null;
 //    }
 
-    @Redirect(
-            method = "render*" ,
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/player/PlayerRenderer;render(Lnet/minecraft/client/player/AbstractClientPlayer;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"))
-    private void redirectRender(PlayerRenderer renderer,AbstractClientPlayer entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-
-        LivingEntity sheep = new Sheep(EntityType.SHEEP, Minecraft.getInstance().level);
-
-        if(entity.hasEffect(ModEffects.SHEEP_EFFECT)) {
+    @Inject(
+            method = "render(Lnet/minecraft/client/player/AbstractClientPlayer;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+            at = @At(value = "HEAD"),cancellable = true)
+    private void init(AbstractClientPlayer entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci) {
+        if (entity.hasEffect(ModEffects.SHEEP_EFFECT)) {
+            // 渲染羊的逻辑
+            LivingEntity sheep = new Sheep(EntityType.SHEEP, Minecraft.getInstance().level);
             EntityRenderer sheepRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(sheep);
 
             LimbAnimatorAccessor target = (LimbAnimatorAccessor) sheep.walkAnimation;
@@ -58,16 +65,20 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
             sheep.setDeltaMovement(entity.getDeltaMovement());
 
             sheep.setPose(entity.getPose());
-            // 将俯仰角度设置为玩家的俯仰角度
-            // 将前一帧俯仰角度设置为玩家的前一帧俯仰角度
+
+            // 确保玩家的蹲下状态同步到羊的渲染
+            if (entity.isCrouching()) {
+                sheep.setPose(Pose.CROUCHING);
+            }
+
             sheep.setXRot(entity.getXRot());
             sheep.xRotO = entity.xRotO;
 
-            sheepRenderer.render(sheep,entityYaw, partialTicks, poseStack, buffer, packedLight);
-        } else {
-            super.render((AbstractClientPlayer) entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+            sheepRenderer.render(sheep, entityYaw, partialTicks, poseStack, buffer, packedLight);
+            ci.cancel();
         }
     }
+
 
 
 }

@@ -13,6 +13,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
@@ -46,7 +48,10 @@ public class CustomWindChargeS2CPacket implements CustomPacketPayload {
         pBuffer.writeInt(this.radius);
     }
     public static void handle(CustomWindChargeS2CPacket data, IPayloadContext context){
-
+        runEnqueue(data, context);
+    }
+    @OnlyIn(Dist.CLIENT)
+    private static void runEnqueue(CustomWindChargeS2CPacket data, IPayloadContext context) {
         context.enqueueWork(()->{
             CustomWindChargeData.set(data.uuid, data.radius);
             if(Minecraft.getInstance().level!=null && Minecraft.getInstance().player!=null) {
@@ -54,6 +59,7 @@ public class CustomWindChargeS2CPacket implements CustomPacketPayload {
             }
         });
     }
+
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;

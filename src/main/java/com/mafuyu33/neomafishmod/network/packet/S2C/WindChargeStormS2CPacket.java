@@ -10,6 +10,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
@@ -41,7 +43,11 @@ public class WindChargeStormS2CPacket implements CustomPacketPayload {
         pBuffer.writeVec3(this.finalVelocity);
     }
     public static void handle(WindChargeStormS2CPacket data, IPayloadContext context){
+        runEnqueue(data, context);
+    }
 
+
+    private static void runEnqueue(WindChargeStormS2CPacket data, IPayloadContext context) {
         context.enqueueWork(()->{
             if(data.id!=-1 && Minecraft.getInstance().level!=null) {
                 Entity entity = Minecraft.getInstance().level.getEntity(data.id);
@@ -51,6 +57,7 @@ public class WindChargeStormS2CPacket implements CustomPacketPayload {
             }
         });
     }
+
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
