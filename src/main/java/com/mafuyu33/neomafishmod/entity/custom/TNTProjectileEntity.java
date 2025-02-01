@@ -32,7 +32,6 @@ public class TNTProjectileEntity extends ThrowableItemProjectile {
         if(!this.level().isClientSide()) {
 //            this.level().sendEntityStatus(this, (byte)3);
             explode();
-            CustomParticleRenderer.spawnFlameParticles(result.getLocation());
         }
 
         this.discard();

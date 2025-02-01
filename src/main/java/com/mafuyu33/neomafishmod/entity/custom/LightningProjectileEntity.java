@@ -44,7 +44,6 @@ public class LightningProjectileEntity extends ThrowableItemProjectile {
         if (!this.level().isClientSide){
             this.level().broadcastEntityEvent(this,(byte)3);
             lightning(result.getBlockPos());
-            CustomParticleRenderer.spawnFlameParticles(result.getLocation());
         }
         this.discard();
         super.onHitBlock(result);
@@ -54,7 +53,6 @@ public class LightningProjectileEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         if (!this.level().isClientSide){
             lightning(result.getEntity().blockPosition());
-            CustomParticleRenderer.spawnFlameParticles(result.getLocation());
         }
         this.discard();
         super.onHitEntity(result);
