@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PlayerActionC2SPacket implements CustomPacketPayload {
@@ -33,6 +35,11 @@ public class PlayerActionC2SPacket implements CustomPacketPayload {
         pBuffer.writeInt(aimedEntityId);
     }
     public static void handle(final PlayerActionC2SPacket data, final IPayloadContext context){
+        movePlayerDir(context);
+    }
+    @OnlyIn(Dist.CLIENT)
+    private static void movePlayerDir(IPayloadContext context) {
+        context.enqueueWork(()-> {
             Entity nearestEntity = context.player().level().getEntity(aimedEntityId);
             // 将玩家瞬移到最近实体的附近
             Vec3 directionToEntity = nearestEntity.position().subtract(context.player().position()).normalize();
@@ -43,5 +50,6 @@ public class PlayerActionC2SPacket implements CustomPacketPayload {
 //            float attackDamage = (float) context.player().getAttribute(Attributes.ATTACK_DAMAGE).getValue();
 //            nearestEntity.hurt(context.player().damageSources().playerAttack(context.player()), attackDamage);
             context.player().attack(nearestEntity);
+        });
     }
 }

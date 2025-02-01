@@ -11,6 +11,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Random;
@@ -34,10 +36,12 @@ public class NeverGonnaS2CPacket implements CustomPacketPayload {
     public void write(FriendlyByteBuf pBuffer) {
     }
     public static void handle(NeverGonnaS2CPacket data, IPayloadContext context){
-
+        runEnqueue(context);
+    }
+    @OnlyIn(Dist.CLIENT)
+    private static void runEnqueue(IPayloadContext context) {
         context.enqueueWork(()->{
             playRandomSound(Minecraft.getInstance().level,Minecraft.getInstance().player);
-
         });
     }
 

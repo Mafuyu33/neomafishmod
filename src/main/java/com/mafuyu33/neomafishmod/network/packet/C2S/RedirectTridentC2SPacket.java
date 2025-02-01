@@ -8,6 +8,8 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class RedirectTridentC2SPacket implements CustomPacketPayload {
@@ -35,6 +37,10 @@ public class RedirectTridentC2SPacket implements CustomPacketPayload {
         pBuffer.writeVec3(this.finalVelocity);
     }
     public static void handle(final RedirectTridentC2SPacket data, final IPayloadContext context){
+        runEnqueue(data, context);
+    }
+
+    private static void runEnqueue(RedirectTridentC2SPacket data, IPayloadContext context) {
         context.enqueueWork(()->{
             if(data.id!=-1 && context.player().level()!=null) {
                 Entity entity = context.player().level().getEntity(data.id);

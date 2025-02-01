@@ -4,8 +4,6 @@ import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.network.packet.C2S.*;
 import com.mafuyu33.neomafishmod.network.packet.S2C.*;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -77,15 +75,16 @@ public class ModMessage {
 
 
         // server to client
-//        registrar.playBidirectional(
-//                BellSoundS2CPacket.TYPE,
-//                BellSoundS2CPacket.STREAM_CODEC,
-//                new DirectionalPayloadHandler<>(
-//                        BellSoundS2CPacket::handle,
-//                        null
-//                )
-//        );
-//
+
+        registrar.playBidirectional(
+                BellSoundS2CPacket.TYPE,
+                BellSoundS2CPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        BellSoundS2CPacket::handle,
+                        null
+                )
+        );
+
 //        registrar.playBidirectional(
 //                NeverGonnaS2CPacket.TYPE,
 //                NeverGonnaS2CPacket.STREAM_CODEC,
@@ -94,46 +93,46 @@ public class ModMessage {
 //                        null
 //                )
 //        );
-//
-//        registrar.playBidirectional(
-//                CustomWindChargeS2CPacket.TYPE,
-//                CustomWindChargeS2CPacket.STREAM_CODEC,
-//                new DirectionalPayloadHandler<>(
-//                        CustomWindChargeS2CPacket::handle,
-//                        null
-//                )
-//        );
-//        registrar.playBidirectional(
-//                WindChargeStormS2CPacket.TYPE,
-//                WindChargeStormS2CPacket.STREAM_CODEC,
-//                new DirectionalPayloadHandler<>(
-//                        WindChargeStormS2CPacket::handle,
-//                        null
-//                )
-//        );
-//        registrar.playBidirectional(
-//                PlayerActionC2SPacket.TYPE,
-//                PlayerActionC2SPacket.STREAM_CODEC,
-//                new DirectionalPayloadHandler<>(
-//                        null,
-//                        PlayerActionC2SPacket::handle
-//                )
-//        );
-//        registrar.playBidirectional(
-//                OneWithShadowS2CPacket.TYPE,
-//                OneWithShadowS2CPacket.STREAM_CODEC,
-//                new DirectionalPayloadHandler<>(
-//                        OneWithShadowS2CPacket::handle,
-//                        null
-//                )
-//        );
-//        registrar.playBidirectional(
-//                RedirectTridentC2SPacket.TYPE,
-//                RedirectTridentC2SPacket.STREAM_CODEC,
-//                new DirectionalPayloadHandler<>(
-//                        null,
-//                        RedirectTridentC2SPacket::handle
-//                )
-//        );
+
+        registrar.playBidirectional(
+                CustomWindChargeS2CPacket.TYPE,
+                CustomWindChargeS2CPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        CustomWindChargeS2CPacket::handle,
+                        null
+                )
+        );
+        registrar.playBidirectional(
+                WindChargeStormS2CPacket.TYPE,
+                WindChargeStormS2CPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        WindChargeStormS2CPacket::handle,
+                        null
+                )
+        );
+        registrar.playBidirectional(
+                PlayerActionC2SPacket.TYPE,
+                PlayerActionC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        PlayerActionC2SPacket::handle
+                )
+        );
+        registrar.playBidirectional(
+                OneWithShadowS2CPacket.TYPE,
+                OneWithShadowS2CPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        OneWithShadowS2CPacket::handle,
+                        null
+                )
+        );
+        registrar.playBidirectional(
+                RedirectTridentC2SPacket.TYPE,
+                RedirectTridentC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        RedirectTridentC2SPacket::handle
+                )
+        );
     }
 }

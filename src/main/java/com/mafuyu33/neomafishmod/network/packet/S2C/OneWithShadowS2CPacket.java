@@ -42,7 +42,9 @@ public class OneWithShadowS2CPacket implements CustomPacketPayload {
         pBuffer.writeInt(flag);
     }
     public static void handle(OneWithShadowS2CPacket data, IPayloadContext context){
-        ID_FLAG_MAP.put(id, flag);
+        context.enqueueWork(()-> {
+            ID_FLAG_MAP.put(id, flag);
+        });
     }
 
     public static int getFlagById(int id) {

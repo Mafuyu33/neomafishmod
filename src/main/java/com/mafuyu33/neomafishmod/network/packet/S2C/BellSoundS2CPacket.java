@@ -9,6 +9,8 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.checkerframework.checker.units.qual.C;
@@ -40,7 +42,10 @@ public class BellSoundS2CPacket implements CustomPacketPayload {
         pBuffer.writeInt(this.flag);
     }
     public static void handle(BellSoundS2CPacket data, IPayloadContext context){
-
+        playSound(data, context);
+    }
+    @OnlyIn(Dist.CLIENT)
+    private static void playSound(BellSoundS2CPacket data, IPayloadContext context) {
         context.enqueueWork(()->{
            int i  = data.flag;
            BlockPos pos = data.blockPos;
