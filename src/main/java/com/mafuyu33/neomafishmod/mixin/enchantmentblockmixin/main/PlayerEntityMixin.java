@@ -1,22 +1,21 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentblockmixin.main;
 
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
+import com.mafuyu33.neomafishmod.network.packet.S2C.AddEnchantedBlockParticleS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Mixin(Player.class)
@@ -28,13 +27,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Inject(at = @At("TAIL"), method = "tick")
 	private void init(CallbackInfo info) {
-		if (this.level().isClientSide && this.isHolding(Items.BRUSH)) {
-			renderEnchantedBlockParticles();
+		if (!this.level().isClientSide && this.isHolding(Items.BRUSH)) {
+			neomafishmod$renderEnchantedBlockParticles();
 		}
 	}
 
 
-	private void renderEnchantedBlockParticles() {
+	@Unique
+	private void neomafishmod$renderEnchantedBlockParticles() {
 		// 从存储中获取所有附魔方块
 		Set<BlockPos> enchantedBlocks = BlockEnchantmentStorage.getAllEnchantedBlocks();
 
@@ -45,52 +45,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 				// 从存储中移除不存在的方块
 				BlockEnchantmentStorage.removeBlockEnchantment(blockPos);
 			} else {
-				addParticles(blockPos);
+				//S2C，在客户端生成粒子
+				PacketDistributor.sendToAllPlayers(new AddEnchantedBlockParticleS2CPacket(blockPos));
 			}
 		}
-	}
-
-	private void addParticles(BlockPos blockPos) {
-		// 在方块顶部创建粒子效果
-		this.level().addParticle(ParticleTypes.COMPOSTER,
-				blockPos.getX() + 0.5,
-				blockPos.getY() + 1.1,
-				blockPos.getZ() + 0.5,
-				0.0, 0.0, 0.0);
-
-		// 在方块底部创建粒子效果
-		this.level().addParticle(ParticleTypes.COMPOSTER,
-				blockPos.getX() + 0.5,
-				blockPos.getY() - 0.1,
-				blockPos.getZ() + 0.5,
-				0.0, 0.0, 0.0);
-
-		// 在方块北侧创建粒子效果
-		this.level().addParticle(ParticleTypes.COMPOSTER,
-				blockPos.getX() + 0.5,
-				blockPos.getY() + 0.5,
-				blockPos.getZ() - 0.1,
-				0.0, 0.0, 0.0);
-
-		// 在方块南侧创建粒子效果
-		this.level().addParticle(ParticleTypes.COMPOSTER,
-				blockPos.getX() + 0.5,
-				blockPos.getY() + 0.5,
-				blockPos.getZ() + 1.1,
-				0.0, 0.0, 0.0);
-
-		// 在方块西侧创建粒子效果
-		this.level().addParticle(ParticleTypes.COMPOSTER,
-				blockPos.getX() - 0.1,
-				blockPos.getY() + 0.5,
-				blockPos.getZ() + 0.5,
-				0.0, 0.0, 0.0);
-
-		// 在方块东侧创建粒子效果
-		this.level().addParticle(ParticleTypes.COMPOSTER,
-				blockPos.getX() + 1.1,
-				blockPos.getY() + 0.5,
-				blockPos.getZ() + 0.5,
-				0.0, 0.0, 0.0);
 	}
 }
