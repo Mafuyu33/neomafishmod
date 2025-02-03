@@ -1,5 +1,4 @@
-## Please dont send any issues and pull requests at mafishmod repo! Send it at there!
-# Mafish-learning （But Neoforge)
+# Neo-Mafish-learning （Mafishmod in Neoforge)
 [ZH](README.md) | EN
 
 There also is Mafishmod ,but it ported to Neoforge  
