@@ -1,25 +1,7 @@
+## !!!!!请勿在mafishmod下提交Issue和Pull Request，将不会被审理，请在这里提交!!!!!
+# Mafish-learning （马夫鱼学习模组，But Neoforge)
+ZH | [EN](README.EN.md)
 
-Installation information
-=======
-
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
-
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
-
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+这里仍然是马夫鱼在学习Mod开发时做出的模组，但是现在移植到了Neoforge  
+具体增加了什么东西，见Wiki  
+哔哩哔哩：[马夫鱼33](https://space.bilibili.com/5616993) | [SystemFileB (维护)](https://space.bilibili.com/1376977060)
