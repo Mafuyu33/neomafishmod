@@ -13,7 +13,7 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(NeoMafishMod.MODID);
 
     public static final DeferredItem<Item> MAFISH = ITEMS.register("mafish",()->
-            new Item(new Item.Properties().stacksTo(1).fireResistant().food(ModFoods.Mafish)));
+            new Item(new Item.Properties().fireResistant().food(ModFoods.Mafish)));
 
 
 
