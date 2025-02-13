@@ -104,47 +104,46 @@
   "enchantment.neomafishmod.z_bad_luck_of_sea.desc": "让方块和实体跳出水面",
 
   "enchantment.neomafishmod.z_eight_gods_pass_sea": "§e八仙过海",
-  "enchantment.neomafishmod.z_eight_gods_pass_sea.desc": "让你踩不到水 (将周围的水替换为空气)",
+  "enchantment.neomafishmod.z_eight_gods_pass_sea.desc": "让你踩不到水 (将周围的水替换为结构空位)",
 
   "enchantment.neomafishmod.z_kill_chicken_get_egg": "§e杀鸡取卵",
-  "enchantment.neomafishmod.z_kill_chicken_get_egg.desc": "杀死鸡掉落一种特殊的蛋§0(指龙蛋)§r",
+  "enchantment.neomafishmod.z_kill_chicken_get_egg.desc": "攻击生物获得各种蛋",
 
   "enchantment.neomafishmod.z_go_to_sky": "§e通天术",
-  "enchantment.neomafishmod.z_go_to_sky.desc": "点哪飞哪 (注意你的安全)",
+  "enchantment.neomafishmod.z_go_to_sky.desc": "附在成书并把它放在副手，右键红宝石魔杖，\n上方有空间将允许你开旁观飞起来",
 
   "enchantment.neomafishmod.z_gong_xi_fa_cai": "§e恭喜发财",
-  "enchantment.neomafishmod.z_gong_xi_fa_cai.desc": "你砍一下村民试试",
+  "enchantment.neomafishmod.z_gong_xi_fa_cai.desc": "《掠夺者速成指南》\n(打村民掉绿宝石，等级越高掉得越多)",
 
   "enchantment.neomafishmod.z_mercy": "§e仁慈",
   "enchantment.neomafishmod.z_mercy.desc": "剑，但是好钝呀 (搭配恭喜发财效果更佳)",
 
   "enchantment.neomafishmod.z_kill_my_horse": "§e敢杀我的马!",
-  "enchantment.neomafishmod.z_kill_my_horse.desc": "给杀死马的人一点《小》惩罚",
+  "enchantment.neomafishmod.z_kill_my_horse.desc": "给杀死马的人一点《小》惩罚 (掠夺者)",
 
   "enchantment.neomafishmod.z_kill_my_horse_plus": "§e敢杀我的马!!!!!!!!!!!!!!!!!!!!!!!!!",
-  "enchantment.neomafishmod.z_kill_my_horse_plus.desc": "给杀死马的人亿点《小》惩罚",
+  "enchantment.neomafishmod.z_kill_my_horse_plus.desc": "给杀死马的人亿点《小》惩罚 (所有敌对生物)",
 
   "enchantment.neomafishmod.z_hot_potato": "§c烫手山芋",
-  "enchantment.neomafishmod.z_hot_potato.desc": "互换被攻击对象的武器",
+  "enchantment.neomafishmod.z_hot_potato.desc": "互换被攻击对象的物品",
 
   "enchantment.neomafishmod.z_very_easy": "§c非常简单(给奥数圣剑增加难度)",
-  "enchantment.neomafishmod.z_very_easy.desc": "",
+  "enchantment.neomafishmod.z_very_easy.desc": "给奥数圣剑增加难度",
 
   "enchantment.neomafishmod.z_reverse": "§e反转了",
-  "enchantment.neomafishmod.z_reverse.desc": "",
+  "enchantment.neomafishmod.z_reverse.desc": "Dinnerbone加强版 (误)",
 
   "enchantment.neomafishmod.z_pay_to_play": "§e镀金",
   "enchantment.neomafishmod.z_pay_to_play.desc": "消耗金锭换取伤害",
 
   "enchantment.neomafishmod.z_fear": "§e恐惧",
-  "enchantment.neomafishmod.z_fear.desc": "",
+  "enchantment.neomafishmod.z_fear.desc": "≈卫道士看到嘎枝怪",
 
   "enchantment.neomafishmod.z_mute": "§c静音",
   "enchantment.neomafishmod.z_mute.desc": "我声音呢？？？§0(可以防住附了锋利的钟)§r",
 
   "enchantment.neomafishmod.z_slippery": "§c肥皂",
   "enchantment.neomafishmod.z_slippery.desc": "§0让你拿不起物品§r",
-
 
   "enchantment.neomafishmod.z_never_gonna": "§c你被骗了！",
   "enchantment.neomafishmod.z_never_gonna.desc": "真 暴露原形 (钻石)",
@@ -153,22 +152,22 @@
   "enchantment.neomafishmod.z_resonance.desc": "敲响附近的钟",
 
   "enchantment.neomafishmod.z_no_blast_protection": "§c爆炸不保护",
-  "enchantment.neomafishmod.z_no_blast_protection.desc": "",
+  "enchantment.neomafishmod.z_no_blast_protection.desc": "让任何东西都惧怕爆炸",
 
   "enchantment.neomafishmod.z_a_leaf": "§c一叶障目",
-  "enchantment.neomafishmod.z_a_leaf.desc": "",
+  "enchantment.neomafishmod.z_a_leaf.desc": "✌️",
 
   "enchantment.neomafishmod.z_butterfly": "§e大扑棱蛾子",
   "enchantment.neomafishmod.z_butterfly.desc": "空格：你不要过来啊！！！(让鞘翅可以通过空格来飞)",
 
   "enchantment.neomafishmod.z_fangsheng": "§e放生",
-  "enchantment.neomafishmod.z_fangsheng.desc": "",
+  "enchantment.neomafishmod.z_fangsheng.desc": "解决了镐子成为掉落物后不会挖矿的问题",
 
   "enchantment.neomafishmod.z_never_stop": "§c不要停下来啊",
   "enchantment.neomafishmod.z_never_stop.desc": "小心你松开的W! ",
 
   "enchantment.neomafishmod.z_bow_left": "§c弹道偏左",
-  "enchantment.neomafishmod.z_bow_left.desc": "往右边瞄",
+  "enchantment.neomafishmod.z_bow_left.desc": "不是，弓也会弹道偏左？",
 
   "enchantment.neomafishmod.z_super_projectile_protection": "§e反弹！",
   "enchantment.neomafishmod.z_super_projectile_protection.desc": "对于护甲    对面：自己打自己\n对于粘液块  打水漂，兼java版三叉戟搅拌机",
@@ -177,10 +176,10 @@
   "enchantment.neomafishmod.z_sticky.desc": "自带粘液块的靴子",
 
   "enchantment.neomafishmod.z_one_step_ten_line": "§e一步十行",
-  "enchantment.neomafishmod.z_one_step_ten_line.desc": "",
+  "enchantment.neomafishmod.z_one_step_ten_line.desc": "走上更高的台阶",
 
   "enchantment.neomafishmod.z_one_with_shadows": "§e融身入影",
-  "enchantment.neomafishmod.z_one_with_shadows.desc": "",
+  "enchantment.neomafishmod.z_one_with_shadows.desc": "站着不动可以隐身",
 
   "enchantment.neomafishmod.z_melee_magnetism": "§e近战吸附",
   "enchantment.neomafishmod.z_melee_magnetism.desc": "攻击的同时把你吸附到左键点击的生物，吸附范围取决于附魔等级",
