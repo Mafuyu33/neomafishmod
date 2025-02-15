@@ -5,6 +5,7 @@ import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import com.mafuyu33.neomafishmod.network.packet.S2C.EntityVelocityUpdateS2CPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceKey;
@@ -87,26 +88,9 @@ public abstract class FallingBlockEntityMixin extends Entity {
             ResourceKey<Enchantment> enchantment = ModEnchantments.BAD_LUCK_OF_SEA;
             ListTag enchantmentNbtList = new ListTag();
 
-            // Add all original enchantments here
-            ListTag originalEnchantments = BlockEnchantmentStorage.getEnchantmentsAtPosition(blockPos);
-            for (int i = 0; i < originalEnchantments.size(); i++) {
-                CompoundTag originalEnchantment = originalEnchantments.getCompound(i);
-                enchantmentNbtList.add(originalEnchantment.copy());
-            }
-
-            // Add the new enchantment
             CompoundTag enchantmentNbt = new CompoundTag();
-            enchantmentNbt.putString("id",String.valueOf(enchantment));
-
-            // Retrieve the original level, if it exists, otherwise set a default level
-            int originalLevel = originalEnchantments.stream()
-                    // Cast each tag to CompoundTag
-                    .map(tag -> (CompoundTag)tag)
-                    .mapToInt(tag -> tag.getInt("lvl"))
-                    .max()
-                    .orElse(1);
-
-            enchantmentNbt.putInt("lvl", originalLevel);
+            enchantmentNbt.putString("id",enchantment.location().toString());
+            enchantmentNbt.putInt("lvl",3);
 
             enchantmentNbtList.add(enchantmentNbt);
             BlockEnchantmentStorage.addBlockEnchantment(blockPos.immutable(),enchantmentNbtList);

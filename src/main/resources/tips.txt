@@ -23,3 +23,7 @@ ItemStack itemstack = this.getItemBySlot(EquipmentSlot.CHEST);
 生物实体持久数据：
 entity.getPersistentData().get("AAA");
 entity.getPersistentData().putInt("AAA",66666666);
+
+附魔Key转换成String
+ResourceKey<Enchantment> enchantment = ModEnchantments.BAD_LUCK_OF_SEA;//这是现在版本的key
+enchantment.location().toString();//这样才是String
