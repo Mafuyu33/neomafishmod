@@ -6,34 +6,29 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class WindChargeStormS2CPacket implements CustomPacketPayload {
-    public static Type<WindChargeStormS2CPacket> TYPE =
-            new Type<WindChargeStormS2CPacket>(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"wind_charge_storm"));
+public class EntityVelocityUpdateS2CPacket implements CustomPacketPayload {
+    public static Type<EntityVelocityUpdateS2CPacket> TYPE =
+            new Type<EntityVelocityUpdateS2CPacket>(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"entity_velocity_update_s2c"));
 
     // stream codec
-    public static final StreamCodec<FriendlyByteBuf, WindChargeStormS2CPacket> STREAM_CODEC =
-            CustomPacketPayload.codec(WindChargeStormS2CPacket::write, WindChargeStormS2CPacket::new);
+    public static final StreamCodec<FriendlyByteBuf, EntityVelocityUpdateS2CPacket> STREAM_CODEC =
+            CustomPacketPayload.codec(EntityVelocityUpdateS2CPacket::write, EntityVelocityUpdateS2CPacket::new);
     public Vec3 finalVelocity;
     public int id;
 
-    public WindChargeStormS2CPacket(int id,Vec3 finalVelocity){
+    public EntityVelocityUpdateS2CPacket(int id, Vec3 finalVelocity){
         this.id=id;
         this.finalVelocity=finalVelocity;
     }
 
-    public WindChargeStormS2CPacket(FriendlyByteBuf buf){
+    public EntityVelocityUpdateS2CPacket(FriendlyByteBuf buf){
         this.id=buf.readInt();
         this.finalVelocity=buf.readVec3();
     }
@@ -42,12 +37,12 @@ public class WindChargeStormS2CPacket implements CustomPacketPayload {
         pBuffer.writeInt(this.id);
         pBuffer.writeVec3(this.finalVelocity);
     }
-    public static void handle(WindChargeStormS2CPacket data, IPayloadContext context){
+    public static void handle(EntityVelocityUpdateS2CPacket data, IPayloadContext context){
         runEnqueue(data, context);
     }
 
 
-    private static void runEnqueue(WindChargeStormS2CPacket data, IPayloadContext context) {
+    private static void runEnqueue(EntityVelocityUpdateS2CPacket data, IPayloadContext context) {
         context.enqueueWork(()->{
             if(data.id!=-1 && Minecraft.getInstance().level!=null) {
                 Entity entity = Minecraft.getInstance().level.getEntity(data.id);

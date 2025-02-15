@@ -3,13 +3,11 @@ package com.mafuyu33.neomafishmod.network;
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.network.packet.C2S.*;
 import com.mafuyu33.neomafishmod.network.packet.S2C.*;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import org.checkerframework.checker.units.qual.N;
 
 @EventBusSubscriber(modid = NeoMafishMod.MODID,bus = EventBusSubscriber.Bus.MOD)
 public class ModMessage {
@@ -85,6 +83,14 @@ public class ModMessage {
                         PlayerActionC2SPacket::handle
                 )
         );
+        registrar.playBidirectional(
+                EntityVelocityUpdateC2SPacket.TYPE,
+                EntityVelocityUpdateC2SPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        null,
+                        EntityVelocityUpdateC2SPacket::handle
+                )
+        );
 
         // server to client
 
@@ -115,10 +121,10 @@ public class ModMessage {
                 )
         );
         registrar.playBidirectional(
-                WindChargeStormS2CPacket.TYPE,
-                WindChargeStormS2CPacket.STREAM_CODEC,
+                EntityVelocityUpdateS2CPacket.TYPE,
+                EntityVelocityUpdateS2CPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        WindChargeStormS2CPacket::handle,
+                        EntityVelocityUpdateS2CPacket::handle,
                         null
                 )
         );
