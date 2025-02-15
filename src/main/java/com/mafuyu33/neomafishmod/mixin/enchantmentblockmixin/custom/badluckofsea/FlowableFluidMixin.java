@@ -27,6 +27,7 @@ public abstract class FlowableFluidMixin {
 
     @Inject(at = @At("HEAD"), method = "canPassThroughWall", cancellable = true)
     private void init1(Direction face, BlockGetter world, BlockPos pos, BlockState state, BlockPos fromPos, BlockState fromState, CallbackInfoReturnable<Boolean> cir) {
+
         int k = BlockEnchantmentStorage.getLevel(ModEnchantments.BAD_LUCK_OF_SEA,pos);
         if(k>0){
             System.out.println("receivesFlow");
@@ -37,6 +38,7 @@ public abstract class FlowableFluidMixin {
             }
             cir.setReturnValue(true);
         }
+
     }
 
 
@@ -47,7 +49,8 @@ public abstract class FlowableFluidMixin {
             BlockEntity blockEntity = world.getBlockEntity(targetPos);
 
             if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(targetPos), new ListTag())) {
-                BlockEnchantmentStorage.removeBlockEnchantment(targetPos.immutable());//删除信息
+                //删除信息
+                BlockEnchantmentStorage.removeBlockEnchantment(targetPos.immutable());
             }
 
             FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK, world);
@@ -62,6 +65,7 @@ public abstract class FlowableFluidMixin {
             fallingBlockEntity.yOld = targetPos.getY();
             fallingBlockEntity.zOld = targetPos.getZ() + 0.5;
             fallingBlockEntity.setStartPos(targetPos);
+            fallingBlockEntity.hasImpulse = true;
             //设置附魔
             //设置伤害
             fallingBlockEntity.setHurtsEntities(0, -1);

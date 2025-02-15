@@ -75,7 +75,7 @@ public class AttackBlockHandler {
                     // 在这里对满足条件的方块进行处理
                     ListTag enchantments = InjectHelper.enchantmentsToNbtList(itemStack);
                     BlockEnchantmentStorage.addBlockEnchantment(currentPos, enchantments);
-                    NeoMafishMod.LOGGER.info("Found block: " + blockState.getBlock() + " at " + currentPos);
+//                    NeoMafishMod.LOGGER.info("Found block: " + blockState.getBlock() + " at " + currentPos);
                 }
             }
         }
@@ -95,10 +95,15 @@ public class AttackBlockHandler {
                 for (int z = minZ; z <= maxZ; z++) {
                     BlockPos currentPos = new BlockPos(x, y, z);
                     BlockState blockState = world.getBlockState(currentPos);
-
+                    // 排除空气、水、岩浆等特定方块
+                    if (blockState.is(Blocks.AIR) ||
+                            blockState.is(Blocks.WATER) ||
+                            blockState.is(Blocks.LAVA)) {
+                        continue;
+                    }
                     // 在这里对满足条件的方块进行处理
                     BlockEnchantmentStorage.removeBlockEnchantment(currentPos);
-                    NeoMafishMod.LOGGER.info("Found block: " + blockState.getBlock() + " at " + currentPos);
+//                    NeoMafishMod.LOGGER.info("Found block: " + blockState.getBlock() + " at " + currentPos);
                 }
             }
         }

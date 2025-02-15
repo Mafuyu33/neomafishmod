@@ -3,7 +3,7 @@ package com.mafuyu33.neomafishmod.entity.custom;
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.network.packet.S2C.CustomWindChargeS2CPacket;
-import com.mafuyu33.neomafishmod.network.packet.S2C.WindChargeStormS2CPacket;
+import com.mafuyu33.neomafishmod.network.packet.S2C.EntityVelocityUpdateS2CPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
@@ -123,7 +123,7 @@ public class CustomWindChargeEntity extends AbstractWindCharge {
                 entity.setDeltaMovement(finalVelocity);
 
                 //S2C发包！同步客户端的运动矢量
-                PacketDistributor.sendToAllPlayers(new WindChargeStormS2CPacket(entity.getId(),finalVelocity));
+                PacketDistributor.sendToAllPlayers(new EntityVelocityUpdateS2CPacket(entity.getId(),finalVelocity));
             }
         }
     }

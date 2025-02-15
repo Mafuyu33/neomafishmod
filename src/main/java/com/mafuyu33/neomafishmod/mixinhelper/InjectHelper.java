@@ -20,14 +20,20 @@ import java.util.Set;
 import static com.mafuyu33.neomafishmod.NeoMafishMod.LOGGER;
 
 
+/**
+ * @author Mafuyu33
+ */
 public class InjectHelper {
 
 
     public static void onPlacedInject(Level world, ItemStack itemStack, BlockPos pos) {
-        if (!world.isClientSide) {//只在服务端运行
-            if (!Objects.equals(itemStack.getEnchantments(), new ListTag())) {//如果方块有附魔
-//                ListTag enchantments = itemStack.getEnchantments(); //获取物品栈上的附魔信息列表
-//                BlockEnchantmentStorage.addBlockEnchantment(pos.toImmutable(), enchantments);//储存信息
+        //只在服务端运行
+        if (!world.isClientSide) {
+            // 获取物品栈上的附魔信息
+            ItemEnchantments enchantments = itemStack.getTagEnchantments();
+            // 如果附魔信息不为空
+            if (!enchantments.isEmpty()) {
+                // 获取物品栈上的附魔信息列表,储存信息
                 addToList(itemStack,pos.immutable());
             }
         }
@@ -45,7 +51,7 @@ public class InjectHelper {
 
 
             CompoundTag enchantmentNbt = new CompoundTag();
-            enchantmentNbt.putString("id",String.valueOf(key.getKey()));
+            enchantmentNbt.putString("id",key.getKey().location().toString());
             enchantmentNbt.putInt("lvl",intValue);
             enchantmentNbtList.add(enchantmentNbt);
 
@@ -53,7 +59,7 @@ public class InjectHelper {
         return enchantmentNbtList;
     }
 
-    public static void  addToList(ItemStack itemStack,BlockPos currentPos){
+    public static void addToList(ItemStack itemStack,BlockPos currentPos){
         ListTag listTag = enchantmentsToNbtList(itemStack);
         LOGGER.info("Storing enchantments at position: " + currentPos + " with data: " + listTag);
         BlockEnchantmentStorage.addBlockEnchantment(currentPos, listTag);

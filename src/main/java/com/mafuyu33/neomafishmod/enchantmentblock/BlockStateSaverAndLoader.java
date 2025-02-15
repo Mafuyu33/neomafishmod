@@ -12,54 +12,24 @@ import net.minecraft.world.level.storage.DimensionDataStorage;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author Mafuyu33
+ */
 public class BlockStateSaverAndLoader extends SavedData {
-    public static List<BlockEnchantInfo> blockEnchantments = new CopyOnWriteArrayList<>();
-
-
-    public static class BlockEnchantInfo {
-        public BlockPos blockPos;
-        public ListTag enchantments;
-
-        public BlockEnchantInfo(BlockPos blockPos, ListTag enchantments) {
-            this.blockPos = blockPos;
-            this.enchantments = enchantments;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            BlockEnchantInfo that = (BlockEnchantInfo) o;
-            return Objects.equals(blockPos, that.blockPos) &&
-                    Objects.equals(enchantments, that.enchantments);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(blockPos, enchantments);
-        }
-
-        @Override
-        public String toString() {
-            return "BlockEnchantInfo{" +
-                    "blockPos=" + blockPos +
-                    ", enchantments=" + enchantments +
-                    '}';
-        }
-    }
-
+    public final ConcurrentHashMap<BlockPos, ListTag> blockEnchantments = new ConcurrentHashMap<>();
 
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag blockEnchantmentsList = new ListTag();
-        for (BlockEnchantInfo blockEnchantment : blockEnchantments) {
+        blockEnchantments.forEach((pos, enchantments) -> {
             CompoundTag blockEnchantmentNbt = new CompoundTag();
-            blockEnchantmentNbt.putIntArray("BlockPos", new int[]{blockEnchantment.blockPos.getX(), blockEnchantment.blockPos.getY(), blockEnchantment.blockPos.getZ()});
-            blockEnchantmentNbt.put("Enchantments", blockEnchantment.enchantments);
+            blockEnchantmentNbt.putIntArray("BlockPos", new int[]{pos.getX(), pos.getY(), pos.getZ()});
+            blockEnchantmentNbt.put("Enchantments", enchantments);
             blockEnchantmentsList.add(blockEnchantmentNbt);
-        }
+        });
         tag.put("BlockEnchantments", blockEnchantmentsList);
         return tag;
     }
@@ -67,19 +37,19 @@ public class BlockStateSaverAndLoader extends SavedData {
 
     public static BlockStateSaverAndLoader createFromNbt(CompoundTag nbt, HolderLookup.Provider lookup) {
         BlockStateSaverAndLoader state = new BlockStateSaverAndLoader();
-
-        // 读取方块附魔信息
-        ListTag blockEnchantmentsList = nbt.getList("BlockEnchantments", 10); // NBT的Compound标签类型为10
+        ListTag blockEnchantmentsList = nbt.getList("BlockEnchantments", 10);
         for (int i = 0; i < blockEnchantmentsList.size(); i++) {
             CompoundTag blockEnchantmentNbt = blockEnchantmentsList.getCompound(i);
             int[] posArray = blockEnchantmentNbt.getIntArray("BlockPos");
-            BlockPos blockPos = new BlockPos(posArray[0], posArray[1], posArray[2]);
+            BlockPos pos = new BlockPos(posArray[0], posArray[1], posArray[2]);
             ListTag enchantments = blockEnchantmentNbt.getList("Enchantments", 10);
-            // 将读取的方块附魔信息添加到列表中
-            state.blockEnchantments.add(new BlockEnchantInfo(blockPos, enchantments));
+            state.blockEnchantments.put(pos, enchantments);
         }
-
         return state;
+    }
+
+    public void removeBlockEnchantment(BlockPos targetBlockPos) {
+        blockEnchantments.remove(targetBlockPos);
     }
 
     private static Factory<BlockStateSaverAndLoader> type = new Factory<>(
@@ -105,10 +75,5 @@ public class BlockStateSaverAndLoader extends SavedData {
             return state;
         }
         return null;
-    }
-
-    public void removeBlockEnchantment(BlockPos targetBlockPos) {
-        // 移除这个元素
-        blockEnchantments.removeIf(blockEnchantment -> blockEnchantment.blockPos.equals(targetBlockPos));
     }
 }

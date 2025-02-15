@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.mixin.enchantmentblockmixin.custom.badluckofse
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
+import com.mafuyu33.neomafishmod.network.packet.S2C.EntityVelocityUpdateS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -15,12 +16,16 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * @author Mafuyu33
+ */
 @Mixin(FallingBlockEntity.class)
 public abstract class FallingBlockEntityMixin extends Entity {
 
@@ -59,11 +64,19 @@ public abstract class FallingBlockEntityMixin extends Entity {
                 double speed = 0.15;
 
                 Vec3 velocity = direction.scale(speed);
-                this.addDeltaMovement(new Vec3(0,0.3,0));
-                this.addDeltaMovement(velocity);
-
+                    // 使用叠加后的总速度直接设置
+                    Vec3 finalMotion = this.getDeltaMovement()
+                            .add(0, 0.3, 0)
+                            .add(velocity);
+                    this.setDeltaMovement(finalMotion);
+                    //发包到客户端
+                PacketDistributor.sendToAllPlayers(new EntityVelocityUpdateS2CPacket(this.getId(),finalMotion));
             }else{
-                this.addDeltaMovement(new Vec3(0,0.3,0));
+                    Vec3 finalMotion = this.getDeltaMovement()
+                            .add(0, 0.3, 0);
+                    this.setDeltaMovement(finalMotion);
+                    //发包到客户端
+                PacketDistributor.sendToAllPlayers(new EntityVelocityUpdateS2CPacket(this.getId(),finalMotion));
             }
         }
     }
@@ -74,9 +87,26 @@ public abstract class FallingBlockEntityMixin extends Entity {
             ResourceKey<Enchantment> enchantment = ModEnchantments.BAD_LUCK_OF_SEA;
             ListTag enchantmentNbtList = new ListTag();
 
+            // Add all original enchantments here
+            ListTag originalEnchantments = BlockEnchantmentStorage.getEnchantmentsAtPosition(blockPos);
+            for (int i = 0; i < originalEnchantments.size(); i++) {
+                CompoundTag originalEnchantment = originalEnchantments.getCompound(i);
+                enchantmentNbtList.add(originalEnchantment.copy());
+            }
+
+            // Add the new enchantment
             CompoundTag enchantmentNbt = new CompoundTag();
             enchantmentNbt.putString("id",String.valueOf(enchantment));
-            enchantmentNbt.putInt("lvl",3);
+
+            // Retrieve the original level, if it exists, otherwise set a default level
+            int originalLevel = originalEnchantments.stream()
+                    // Cast each tag to CompoundTag
+                    .map(tag -> (CompoundTag)tag)
+                    .mapToInt(tag -> tag.getInt("lvl"))
+                    .max()
+                    .orElse(1);
+
+            enchantmentNbt.putInt("lvl", originalLevel);
 
             enchantmentNbtList.add(enchantmentNbt);
             BlockEnchantmentStorage.addBlockEnchantment(blockPos.immutable(),enchantmentNbtList);
