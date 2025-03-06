@@ -51,6 +51,8 @@
     "enchantmentblockmixin.main.sigleinject.StructureBlockMixin",
     "enchantmentblockmixin.main.sigleinject.TallPlantBlockMixin",
     "enchantmentblockmixin.main.sigleinject.TripwireHookBlockMixin",
+    "enchantmententitymixin.custom.minecart.AbstractMinecartMixin",
+    "enchantmententitymixin.custom.minecart.MinecartItemMixin",
     "enchantmentitemmixin.AlwaysEnchantableMixin",
     "enchantmentitemmixin.ArmorEnchantmentMixin",
     "enchantmentitemmixin.BadLuckOfSeaItemEntityMixin",
