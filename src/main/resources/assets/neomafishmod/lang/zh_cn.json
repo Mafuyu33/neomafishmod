@@ -202,6 +202,7 @@
   "effect.neomafishmod.antidote_effect": "百毒不侵",
   "effect.neomafishmod.emergency_teleport_effect": "应激传送",
   "effect.neomafishmod.bad_luck_of_sea_effect": "海之嫌弃",
+  "effect.neomafishmod.rotate_screen_180_effect": "反转了！",
 
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
@@ -235,6 +236,16 @@
 
   "item.minecraft.potion.effect.bad_luck_of_sea_potion": "海之嫌弃",
   "item.minecraft.splash_potion.effect.bad_luck_of_sea_potion": "海之嫌弃（喷溅）",
-  "item.minecraft.lingering_potion.effect.bad_luck_of_sea_potion": "海之嫌弃（喷溅）",
-  "item.minecraft.tipped_arrow.effect.bad_luck_of_sea_potion": "海之嫌弃箭"
+  "item.minecraft.lingering_potion.effect.bad_luck_of_sea_potion": "海之嫌弃（滞留）",
+  "item.minecraft.tipped_arrow.effect.bad_luck_of_sea_potion": "海之嫌弃箭",
+
+  "item.minecraft.potion.effect.rotate_screen_180_potion": "反转魔药",
+  "item.minecraft.splash_potion.effect.rotate_screen_180_potion": "反转魔药（喷溅）",
+  "item.minecraft.lingering_potion.effect.rotate_screen_180_potion": "反转魔药（滞留）",
+  "item.minecraft.tipped_arrow.effect.rotate_screen_180_potion": "反转之箭",
+
+  "item.minecraft.potion.effect.strong_rotate_screen_180_potion": "反转魔药",
+  "item.minecraft.splash_potion.effect.strong_rotate_screen_180_potion": "反转魔药（喷溅）",
+  "item.minecraft.lingering_potion.effect.strong_rotate_screen_180_potion": "反转魔药（滞留）",
+  "item.minecraft.tipped_arrow.effect.strong_rotate_screen_180_potion": "反转之箭"
 }

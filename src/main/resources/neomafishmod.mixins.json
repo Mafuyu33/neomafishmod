@@ -10,6 +10,7 @@
     "effectMixin.canclimb.LivingEntityMixin",
     "effectMixin.canclimb.MobEntityMixin",
     "effectMixin.emergency_teleport.EmergencyTeleportEffectMixin",
+    "effectMixin.invert_screen.LivingEntityMixin",
     "effectMixin.sheep.LimbAnimatorAccessor",
     "effectMixin.sheep.LivingEntityMixin",
     "enchantmentblockmixin.custom.badluckofsea.FallingBlockEntityMixin",

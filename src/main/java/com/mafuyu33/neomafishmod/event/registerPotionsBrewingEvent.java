@@ -35,5 +35,11 @@ public class registerPotionsBrewingEvent {
         //海之嫌弃
         builder.addMix(Potions.AWKWARD,
                 ModItems.MAFISH.get(), ModPotions.BAD_LUCK_OF_SEA_POTION);
+        //反转了！
+        builder.addMix(Potions.AWKWARD,
+                Items.CRIMSON_FUNGUS, ModPotions.ROTATE_SCREEN_180_POTION);
+        //反转了！增强
+        builder.addMix(ModPotions.ROTATE_SCREEN_180_POTION,
+                Items.GLOWSTONE_DUST, ModPotions.STRONG_ROTATE_SCREEN_180_POTION);
     }
 }

@@ -11,6 +11,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+/**
+ * @author Mafuyu33
+ */
 public class ModPotions {
     public static DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, NeoMafishMod.MODID);
 
@@ -21,6 +24,8 @@ public class ModPotions {
     public static Holder<Potion>  ANTIDOTE_POTION = registerPotion("antidote_potion",2000,0,ModEffects.ANTIDOTE_EFFECT);
     public static Holder<Potion>  EMERGENCY_TELEPORT_POTION = registerPotion("emergency_teleport_potion",3600,0,ModEffects.EMERGENCY_TELEPORT_EFFECT);
     public static Holder<Potion>  BAD_LUCK_OF_SEA_POTION = registerPotion("bad_luck_of_sea_potion",3600,0,ModEffects.BAD_LUCK_OF_SEA_EFFECT);
+    public static Holder<Potion>  ROTATE_SCREEN_180_POTION = registerPotion("rotate_screen_180_potion",2000,0,ModEffects.ROTATE_SCREEN_180_EFFECT);
+    public static Holder<Potion>  STRONG_ROTATE_SCREEN_180_POTION = registerPotion("strong_rotate_screen_180_potion",2000,1,ModEffects.ROTATE_SCREEN_180_EFFECT);
 
     public static void register(IEventBus eventBus){
         POTIONS.register(eventBus);

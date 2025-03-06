@@ -152,6 +152,7 @@
   "effect.neomafishmod.antidote_effect": "antidote_effect",
   "effect.neomafishmod.emergency_teleport_effect": "emergency_teleport_effect",
   "effect.neomafishmod.bad_luck_of_sea_effect": "bad_luck_of_sea_effect",
+  "effect.neomafishmod.rotate_screen_180_effect": "rotate_screen_180_effect",
 
   "item.minecraft.potion.effect.flower_potion": "flower_potion",
   "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
@@ -186,5 +187,15 @@
   "item.minecraft.potion.effect.bad_luck_of_sea_potion": "bad_luck_of_sea_potion",
   "item.minecraft.splash_potion.effect.bad_luck_of_sea_potion": "Splash bad_luck_of_sea_potion",
   "item.minecraft.lingering_potion.effect.bad_luck_of_sea_potion": "Lingering bad_luck_of_sea_potion",
-  "item.minecraft.tipped_arrow.effect.bad_luck_of_sea_potion": "bad_luck_of_sea_potion"
+  "item.minecraft.tipped_arrow.effect.bad_luck_of_sea_potion": "bad_luck_of_sea_potion",
+
+  "item.minecraft.potion.effect.rotate_screen_180_potion": "rotate_screen_180_potion",
+  "item.minecraft.splash_potion.effect.rotate_screen_180_potion": "Splash rotate_screen_180_potion",
+  "item.minecraft.lingering_potion.effect.rotate_screen_180_potion": "Lingering rotate_screen_180_potion",
+  "item.minecraft.tipped_arrow.effect.rotate_screen_180_potion": "rotate_screen_180_potion",
+
+  "item.minecraft.potion.effect.strong_rotate_screen_180_potion": "strong_rotate_screen_180_potion",
+  "item.minecraft.splash_potion.effect.strong_rotate_screen_180_potion": "Splash strong_rotate_screen_180_potion",
+  "item.minecraft.lingering_potion.effect.strong_rotate_screen_180_potion": "Lingering strong_rotate_screen_180_potion",
+  "item.minecraft.tipped_arrow.effect.strong_rotate_screen_180_potion": "strong_rotate_screen_180_potion"
 }
