@@ -10,6 +10,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 
+/**
+ * @author Mafuyu33
+ */
 @EventBusSubscriber(modid = NeoMafishMod.MODID)
 public class registerPotionsBrewingEvent {
 
@@ -41,5 +44,8 @@ public class registerPotionsBrewingEvent {
         //反转了！增强
         builder.addMix(ModPotions.ROTATE_SCREEN_180_POTION,
                 Items.GLOWSTONE_DUST, ModPotions.STRONG_ROTATE_SCREEN_180_POTION);
+        //全属性提升
+        builder.addMix(Potions.AWKWARD,
+                Items.NETHER_STAR, ModPotions.ALL_ATTRIBUTES_UP_POTION);
     }
 }

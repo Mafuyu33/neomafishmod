@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractHorse.class)
-public abstract class HorseSaddleEnchantmentMixin extends Animal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, PlayerRideableJumping, Saddleable {
+public abstract class HorseSaddleEnchantmentMixin extends Animal implements ContainerListener, HasCustomInventoryScreen, OwnableEntity, PlayerRideableJumping{
     @Shadow
     protected SimpleContainer inventory;
 
@@ -40,15 +40,15 @@ public abstract class HorseSaddleEnchantmentMixin extends Animal implements Cont
         if(k>0 && controllingPassenger!=null) {//火焰附加的鞍
             controllingPassenger.igniteForSeconds(1);
         }
-        if(j>0 && controllingPassenger!=null){//引雷的鞍
-            BlockPos blockPos = controllingPassenger.blockPosition();
-            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
-            if (lightningEntity != null) {
-                lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
-                this.level().addFreshEntity(lightningEntity);
-                SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
-                this.playSound(soundEvent, 5, 1.0F);
-            }
-        }
+//        if(j>0 && controllingPassenger!=null){//引雷的鞍
+//            BlockPos blockPos = controllingPassenger.blockPosition();
+//            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
+//            if (lightningEntity != null) {
+//                lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
+//                this.level().addFreshEntity(lightningEntity);
+//                SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
+//                this.playSound(soundEvent, 5, 1.0F);
+//            }
+//        }
     }
 }

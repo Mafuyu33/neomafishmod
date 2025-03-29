@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ThrowableDiamondMixin {
 
     @Inject(at=@At("HEAD"),method = "use")
-    public void init(Level level, Player player, InteractionHand usedHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir){
+    public void init(Level level, Player player, InteractionHand usedHand, CallbackInfoReturnable<InteractionResult> cir){
         ItemStack itemStack = player.getItemInHand(usedHand);
         if (itemStack.getItem() == Items.DIAMOND){
 

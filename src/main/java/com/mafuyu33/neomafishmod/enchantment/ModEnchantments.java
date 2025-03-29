@@ -51,7 +51,7 @@ public class ModEnchantments {
     // *********************
 
     // 引导方法，用于初始化附魔注册
-    public static <DamageType> void bootstrap(BootstrapContext<Enchantment> context)
+    public static void bootstrap(BootstrapContext<Enchantment> context)
     {
         // 获取各种注册表的持有者获取器
         HolderGetter<net.minecraft.world.damagesource.DamageType> holdergetter = context.lookup(Registries.DAMAGE_TYPE);

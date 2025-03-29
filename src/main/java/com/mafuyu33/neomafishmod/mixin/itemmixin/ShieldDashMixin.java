@@ -34,11 +34,6 @@ public abstract class ShieldDashMixin extends Entity implements Attackable {
         super(entityType, level);
     }
 
-    @Shadow
-    public abstract Iterable<ItemStack> getArmorSlots();
-
-    @Shadow public abstract boolean hurt(DamageSource source, float amount);
-
     @Shadow public abstract boolean isBlocking();
 
     @Shadow public abstract boolean isAlive();

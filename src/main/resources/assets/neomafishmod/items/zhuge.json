@@ -1,0 +1,34 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:damage",
+    "scale": 1.0,
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "neomafishmod:item/zhuge"
+    },
+    "entries": [
+      {
+        "threshold": 0.75,
+        "model": {
+          "type": "minecraft:model",
+          "model": "neomafishmod:item/zhuge_damaged_1"
+        }
+      },
+      {
+        "threshold": 0.5,
+        "model": {
+          "type": "minecraft:model",
+          "model": "neomafishmod:item/zhuge_damaged_2"
+        }
+      },
+      {
+        "threshold": 0.25,
+        "model": {
+          "type": "minecraft:model",
+          "model": "neomafishmod:item/zhuge_damaged_3"
+        }
+      }
+    ]
+  }
+}

@@ -49,7 +49,7 @@ public abstract class BeeRideableMixin extends Animal {
             player.setXRot(entity.getXRot());
             player.startRiding(entity);
          }
-         return InteractionResult.sidedSuccess(isServerSide);
+         return InteractionResult.SUCCESS;
       }else {
          return InteractionResult.PASS;
       }

@@ -1,19 +1,14 @@
 package com.mafuyu33.neomafishmod.item.custom;
 
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 public class LawnMowerItem extends Item {
 
-    public LawnMowerItem() {
-        super(new Item.Properties().stacksTo(1));
+    public LawnMowerItem(Properties lawnMower) {
+        super(lawnMower);
     }
 
     @Override

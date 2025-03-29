@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,10 +24,6 @@ import net.minecraft.world.phys.Vec3;
 public class LightningProjectileEntity extends ThrowableItemProjectile {
     public LightningProjectileEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
         super(entityType, level);
-    }
-
-    public LightningProjectileEntity(LivingEntity livingEntity, Level level) {
-        super(ModEntities.LIGHTNING_PROJECTILE.get(), livingEntity, level);
     }
 
     @Override
@@ -59,13 +56,12 @@ public class LightningProjectileEntity extends ThrowableItemProjectile {
     }
 
     private void lightning(BlockPos blockPos) {
-        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(this.level());
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(this.level(), EntitySpawnReason.COMMAND);
         if (lightningBolt!=null){
-            lightningBolt.moveTo(Vec3.atBottomCenterOf(blockPos));
+            lightningBolt.snapTo(Vec3.atBottomCenterOf(blockPos));
             this.level().addFreshEntity(lightningBolt);
             Holder<SoundEvent> tridentThunder = SoundEvents.TRIDENT_THUNDER;
             this.playSound(tridentThunder.value());
         }
-
     }
 }

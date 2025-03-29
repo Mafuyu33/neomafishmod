@@ -22,15 +22,15 @@ public class PotatoTNTBlock extends SlabBlock {
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         super.stepOn(level, pos, state, entity);
         if (entity instanceof LivingEntity){
-            TNTProjectileEntity tntProjectileEntity = new TNTProjectileEntity(((LivingEntity) entity), level);
+            TNTProjectileEntity tntProjectileEntity = new TNTProjectileEntity(entity.getType(), level);
             tntProjectileEntity.setItem(ModItems.TNT_BALL.get().getDefaultInstance());
             tntProjectileEntity.shootFromRotation(entity,90,entity.getYRot(), 0.0f, 5f, 0f);
             level.addFreshEntity(tntProjectileEntity);
         }
     }
 
-    @Override
-    protected void onExplosionHit(BlockState state, Level level, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> dropConsumer) {
-        super.onExplosionHit(state, level, pos, explosion, dropConsumer);
-    }
+//    @Override
+//    protected void onExplosionHit(BlockState state, Level level, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> dropConsumer) {
+//        super.onExplosionHit(state, level, pos, explosion, dropConsumer);
+//    }
 }

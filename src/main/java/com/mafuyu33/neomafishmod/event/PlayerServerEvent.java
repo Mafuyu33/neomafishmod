@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.animal.Chicken;
@@ -54,9 +55,9 @@ public class PlayerServerEvent {
         Level world = player.level();
         if(player.isHolding(ModItems.LIGHTNING_ITEM.get()) && !world.isClientSide){
             BlockPos blockPos = target.blockPosition();
-            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(target.level());
+            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(target.level(), EntitySpawnReason.COMMAND);
             if (lightningEntity != null) {
-                lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
+                lightningEntity.snapTo(Vec3.atBottomCenterOf(blockPos));
                 lightningEntity.setCause(player instanceof ServerPlayer ? (ServerPlayer) player : null );
                 target.level().addFreshEntity(lightningEntity);
                 SoundEvent soundEvent = SoundEvents.LIGHTNING_BOLT_IMPACT;
@@ -65,7 +66,7 @@ public class PlayerServerEvent {
         }
 
         if (target instanceof Chicken && !world.isClientSide){
-            player.sendSystemMessage(Component.literal("哎呦你干嘛"));
+            player.displayClientMessage(Component.literal("哎呦你干嘛"),true);
         }
 
         //TODO VR
@@ -154,14 +155,13 @@ public class PlayerServerEvent {
         InteractionHand hand = event.getHand();
         BlockPos pos = event.getPos();
         if(!world.isClientSide) {
-            Iterable<ItemStack> handItemStacks = player.getAllSlots();
-            for (ItemStack itemstack : handItemStacks) {
-                if (itemstack.is(Items.BRUSH)) {
-                    if (itemstack.isEnchanted()) {//有附魔，全图获取
+            ItemStack handItemStacks = player.getItemInHand(InteractionHand.MAIN_HAND);
+                if (handItemStacks.is(Items.BRUSH)) {
+                    if (handItemStacks.isEnchanted()) {//有附魔，全图获取
                         if (startPos == null) {
                             startPos = pos ;
                         } else {
-                            brushAllBlocks(world,startPos, pos, itemstack);
+                            brushAllBlocks(world,startPos, pos, handItemStacks);
                             startPos = null;
                         }
                     } else {//没附魔，清除附魔方块
@@ -174,7 +174,6 @@ public class PlayerServerEvent {
                     }
 //                    return InteractionResult.SUCCESS;
                 }
-            }
         }
 //        return ActionResult.PASS;
     }

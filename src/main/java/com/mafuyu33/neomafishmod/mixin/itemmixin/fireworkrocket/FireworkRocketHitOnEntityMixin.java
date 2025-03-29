@@ -2,7 +2,9 @@ package com.mafuyu33.neomafishmod.mixin.itemmixin.fireworkrocket;
 
 import com.mafuyu33.neomafishmod.Config;
 import com.mafuyu33.neomafishmod.mixinhelper.FireworkRocketEntityMixinHelper;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Attackable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -26,8 +28,6 @@ public abstract class FireworkRocketHitOnEntityMixin extends Entity implements A
     @Shadow
     @Nullable
     private LivingEntity lastHurtMob;
-
-    @Shadow public abstract void kill();
 
     @Shadow public abstract void stopSleeping();
 
@@ -112,11 +112,11 @@ public abstract class FireworkRocketHitOnEntityMixin extends Entity implements A
                 ParticleLifes--;
             }
 
-            if (this.delayCounter > 0 && entity != null) {
+            if (this.delayCounter > 0 && entity != null ) {
                 this.delayCounter--;
                 if (this.delayCounter == 0) {
-                    if (entity instanceof Player) {
-                        entity.kill();
+                    if (entity instanceof Player && !level().isClientSide()) {
+                        entity.kill(((ServerLevel) level()));
                         explode();
                     } else {
                         ((LivingEntity) entity).remove(RemovalReason.KILLED);

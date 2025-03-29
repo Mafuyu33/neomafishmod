@@ -1,8 +1,6 @@
 package com.mafuyu33.neomafishmod.entity.custom;
 
-import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.item.ModItems;
-import com.mafuyu33.neomafishmod.render.CustomParticleRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -12,12 +10,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 public class TNTProjectileEntity extends ThrowableItemProjectile {
-    public TNTProjectileEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
-        super(entityType, level);
-    }
 
-    public TNTProjectileEntity(LivingEntity livingEntity, Level world){
-        super(ModEntities.TNT_PROJECTILE.get(),livingEntity,world);
+
+    public TNTProjectileEntity(EntityType entityType, Level level) {
+        super(entityType, level);
     }
 
     @Override

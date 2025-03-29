@@ -1,31 +1,31 @@
 package com.mafuyu33.neomafishmod.item.custom;
 
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
-import com.mafuyu33.neomafishmod.item.ModFoods;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 
-public class RuyijinguItem extends SwordItem {
+public class RuyijinguItem extends Item {
 
-    public RuyijinguItem() {
-        super(Tiers.NETHERITE, new Properties());
+    public RuyijinguItem(Properties properties) {
+        super(properties);
     }
-    //物品对方块使用
+
+    // 如果你需要默认构造器，可以这样使用默认的 Properties，
+    // 但建议在注册时配置武器属性，例如调用 properties.sword(…)
+    public RuyijinguItem() {
+        super(new Properties());
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        //返回对应方块的附魔
+        // 返回对应方块的附魔信息
         ListTag listTag = BlockEnchantmentStorage.getEnchantmentsAtPosition(context.getClickedPos());
-        context.getPlayer().sendSystemMessage(Component.literal(listTag.toString()));
+        if (context.getPlayer() != null) {
+            context.getPlayer().displayClientMessage(Component.literal(listTag.toString()), true);
+        }
         return InteractionResult.SUCCESS;
     }
 }

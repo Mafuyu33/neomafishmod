@@ -14,7 +14,7 @@ public class ItemEntityPickup {
     public static void ItemEntityPickupEvent(ItemEntityPickupEvent.Pre event) {//去Event类，按ctrl+h，展开看所有events
         if (!event.getItemEntity().hasPickUpDelay() && event.getItemEntity().getItem().is(ModItems.MAFISH) && !event.getPlayer().level().isClientSide) {
             if (event.getPlayer() instanceof Player player) {
-                player.sendSystemMessage(Component.literal(  "被"+ player.getName().getString() +"捡起来了!(*/ω＼*)"));
+                player.displayClientMessage(Component.literal(  "被"+ player.getName().getString() +"捡起来了!(*/ω＼*)"),true);
             }
         }
     }

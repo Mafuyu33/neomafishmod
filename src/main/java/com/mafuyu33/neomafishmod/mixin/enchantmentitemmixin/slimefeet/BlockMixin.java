@@ -4,8 +4,8 @@ import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -20,39 +20,37 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
-	@Inject(at = @At("HEAD"), method = "fallOn",cancellable = true)
-	private void init(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
-		if (entity instanceof LivingEntity livingEntity) {
-			Iterable<ItemStack> armorSlots = livingEntity.getArmorSlots();
+	@Inject(at = @At("HEAD"), method = "fallOn", cancellable = true)
+	private void init(Level p_152426_, BlockState p_152427_, BlockPos p_152428_, Entity p_152429_, double p_397222_, CallbackInfo ci) {
+		if (p_152429_ instanceof LivingEntity livingEntity) {
+			// 直接检查靴子装备槽位
+			ItemStack bootsItem = livingEntity.getItemBySlot(EquipmentSlot.FEET);
 
-			for (ItemStack armorItem : armorSlots) {
-				if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.BOOTS) {
-					int k = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.STICKY);//击退
-					if (k > 0) {
-						ci.cancel();
-						break;
-					}
+			if (!bootsItem.isEmpty()) {
+				int k = InjectHelper.getEnchantmentLevel(bootsItem, ModEnchantments.STICKY);
+				if (k > 0) {
+					ci.cancel();
 				}
 			}
 		}
 	}
-	@Inject(at = @At("HEAD"), method = "updateEntityAfterFallOn", cancellable = true)
+
+	@Inject(at = @At("HEAD"), method = "updateEntityMovementAfterFallOn", cancellable = true)
 	private void init1(BlockGetter level, Entity entity, CallbackInfo ci) {
-		if(entity instanceof  LivingEntity livingEntity){
+		if (entity instanceof LivingEntity livingEntity) {
+			// 直接检查靴子装备槽位
+			ItemStack bootsItem = livingEntity.getItemBySlot(EquipmentSlot.FEET);
 
-			Iterable<ItemStack> armorItems = livingEntity.getArmorSlots();
-			for (ItemStack armorItem : armorItems) {
-				if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.BOOTS) {
-					int k = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.STICKY);//击退
-					if (k > 0) {
-						mafishmod$bounce(entity);
-						ci.cancel();
-						break;
-					}
+			if (!bootsItem.isEmpty()) {
+				int k = InjectHelper.getEnchantmentLevel(bootsItem, ModEnchantments.STICKY);
+				if (k > 0) {
+					mafishmod$bounce(entity);
+					ci.cancel();
 				}
 			}
 		}
 	}
+
 	@Unique
 	private void mafishmod$bounce(Entity entity) {
 		Vec3 vec3d = entity.getDeltaMovement();

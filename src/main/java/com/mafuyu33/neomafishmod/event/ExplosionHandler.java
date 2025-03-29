@@ -2,10 +2,12 @@ package com.mafuyu33.neomafishmod.event;
 
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,9 +24,11 @@ public class ExplosionHandler {
 
     @SubscribeEvent
     public static void onExplosionEventPre(ExplosionEvent.Start event){
-        Explosion explosion = event.getExplosion();
+        ServerExplosion explosion = event.getExplosion();
         Level level = event.getLevel();
-        onExplosionPre(level,explosion);
+        if(!level.isClientSide()){
+            onExplosionPre((ServerLevel) level, explosion);
+        }
     }
 
     @SubscribeEvent
@@ -35,15 +39,16 @@ public class ExplosionHandler {
     }
 
     // 爆炸发生前的处理
-    private static void onExplosionPre(Level world, Explosion explosion) {
-        // 调用collectBlocksAndDamageEntities方法填充受影响方块列表
-        explosion.explode();
-        // 获取即将受到影响的方块坐标
-        List<BlockPos> affectedBlocks = explosion.getToBlow();
+    private static void onExplosionPre(ServerLevel world, ServerExplosion explosion) {
+        // 注意：不再有 explode() 方法
+        // 获取即将受到影响的方块坐标需要使用不同的方法
+        List<BlockPos> affectedBlocks = explosion.calculateExplodedPositions();
+
         // 遍历受影响的方块
         for (BlockPos pos : affectedBlocks) {
             // 获取方块的附魔信息
-            int blastProtectionLevel = BlockEnchantmentStorage.getLevel(Enchantments.BLAST_PROTECTION,pos);
+            int blastProtectionLevel = BlockEnchantmentStorage.getLevel(Enchantments.BLAST_PROTECTION, pos);
+
             // 检查是否存在爆炸保护附魔
             if (blastProtectionLevel > 0) {
                 // 存在爆炸保护附魔，阻止该方块被摧毁

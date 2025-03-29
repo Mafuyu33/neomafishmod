@@ -26,7 +26,7 @@ public class ZhuGeItem extends CrossbowItem {
     );
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         if ( !isCharged(stack) && tryLoadProjectiles(entityLiving, stack)) {
             ChargingSounds crossbowitem$chargingsounds = this.getChargingSounds(stack);
             crossbowitem$chargingsounds.end()
@@ -43,6 +43,7 @@ public class ZhuGeItem extends CrossbowItem {
                             )
                     );
         }
+        return false;
     }
 
     private static boolean tryLoadProjectiles(LivingEntity shooter, ItemStack crossbowStack) {

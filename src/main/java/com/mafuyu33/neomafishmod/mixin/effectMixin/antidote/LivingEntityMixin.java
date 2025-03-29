@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> effect);
 
-    @Shadow protected abstract void onEffectRemoved(MobEffectInstance effectInstance);
+    @Shadow public abstract boolean removeEffect(Holder<MobEffect> effect);
 
     @Inject(at=@At("HEAD"),method = "tick")
     private void init(CallbackInfo ci){
@@ -43,7 +43,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
                 for(b1 = false;iterator.hasNext();b1=true){
                     MobEffectInstance next = iterator.next();
                     if(mafishmod$isNegativeEffect(next)){
-                        this.onEffectRemoved(next); // 调用onStatusEffectRemoved方法处理当前状态效果
+                        this.removeEffect((Holder<MobEffect>) next); // 调用onStatusEffectRemoved方法处理当前状态效果
                         iterator.remove(); // 从活跃状态效果列表中移除当前状态效果
                     }
                 }

@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,14 +34,6 @@ public class EnderPearlEntityMixin extends ThrowableItemProjectile {
 		super(entityType, level);
 	}
 
-	public EnderPearlEntityMixin(EntityType<? extends ThrowableItemProjectile> entityType, double x, double y, double z, Level level) {
-		super(entityType, x, y, z, level);
-	}
-
-	public EnderPearlEntityMixin(EntityType<? extends ThrowableItemProjectile> entityType, LivingEntity shooter, Level level) {
-		super(entityType, shooter, level);
-	}
-
 	@Override
 	public Item getDefaultItem() {
 		return Items.ENDER_PEARL;
@@ -57,9 +50,9 @@ public class EnderPearlEntityMixin extends ThrowableItemProjectile {
 					int k = InjectHelper.getEnchantmentLevel(itemStack, Enchantments.CHANNELING);
 					if (k > 0) {
 						BlockPos blockPos = this.blockPosition();
-						LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
+						LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level(), EntitySpawnReason.COMMAND);
 						if (lightningEntity != null) {
-							lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
+							lightningEntity.snapTo(Vec3.atBottomCenterOf(blockPos));
 							lightningEntity.setCause(playerEntity instanceof ServerPlayer ? (ServerPlayer) playerEntity : null);
 							this.level().addFreshEntity(lightningEntity);
 							Holder<SoundEvent> tridentThunder = SoundEvents.TRIDENT_THUNDER;

@@ -27,7 +27,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class CustomWindChargeEntity extends AbstractWindCharge {
-    private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR;
+//    private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR;
     public int radius = 1;
 
     public CustomWindChargeEntity(EntityType<? extends AbstractWindCharge> entityType, Level level) {
@@ -162,6 +162,6 @@ public class CustomWindChargeEntity extends AbstractWindCharge {
     }
 
     static {
-        EXPLOSION_DAMAGE_CALCULATOR = new SimpleExplosionDamageCalculator(true, false, Optional.of(1.22F), BuiltInRegistries.BLOCK.getTag(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity()));
+//        EXPLOSION_DAMAGE_CALCULATOR = new SimpleExplosionDamageCalculator(true, false, Optional.of(1.22F), BuiltInRegistries.BLOCK.getTagOrEmpty(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity()));
     }
 }

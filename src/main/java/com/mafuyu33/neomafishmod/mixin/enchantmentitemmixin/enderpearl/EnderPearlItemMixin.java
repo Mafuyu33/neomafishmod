@@ -5,7 +5,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.EnderpearlItem;
@@ -30,7 +31,7 @@ public class EnderPearlItemMixin extends Item {
 	 * 重写
 	 */
 	@Overwrite
-	public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
+	public InteractionResult use(Level level, Player user, InteractionHand hand) {
 		ItemStack itemStack = user.getItemInHand(hand);
 		level.playSound((Player)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENDER_PEARL_THROW,
 				SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
@@ -38,11 +39,11 @@ public class EnderPearlItemMixin extends Item {
 		//快速装填
 		int k = InjectHelper.getEnchantmentLevel(itemStack, Enchantments.QUICK_CHARGE);
 		if (k <= 0) {
-			user.getCooldowns().addCooldown(this, 20);
+			user.getCooldowns().addCooldown(itemStack, 20);
 		}
 
 		if (!level.isClientSide) {
-			ThrownEnderpearl enderPearlEntity = new ThrownEnderpearl(level, user);
+			ThrownEnderpearl enderPearlEntity = new ThrownEnderpearl(EntityType.ENDER_PEARL,level);
 			enderPearlEntity.setItem(itemStack);
 			int n = InjectHelper.getEnchantmentLevel(itemStack, Enchantments.VANISHING_CURSE);
 //			int m = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
@@ -81,7 +82,7 @@ public class EnderPearlItemMixin extends Item {
 			itemStack.shrink(1);
 		}
 
-		return  InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+		return  InteractionResult.SUCCESS;
 	}
 
 }

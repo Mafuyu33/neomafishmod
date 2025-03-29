@@ -4,6 +4,7 @@ import com.mafuyu33.neomafishmod.Config;
 import com.mafuyu33.neomafishmod.mixinhelper.TripwireBlockMixinHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +24,7 @@ public abstract class TripwireBlockMixin extends Block {
 	}
 
 	@Inject(at = @At("HEAD"), method = "entityInside")
-	private void init(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
+	private void init(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier p_405466_, CallbackInfo ci) {
 		boolean isSwimTripwire = Config.isSwimTripwire();
 		if (isSwimTripwire){
 			if (!level.isClientSide && entity.getPose() != Pose.DYING && !entity.isAlwaysTicking()) {//绊倒生物

@@ -24,18 +24,19 @@ public class StargazyPieItem extends Item {
     }
 
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.addEffect(new MobEffectInstance(MobEffects.POISON,200,0));
-        return super.hurtEnemy(stack, target, attacker);
-    }
+//    @Override
+//    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+//        target.addEffect(new MobEffectInstance(MobEffects.POISON,200,0));
+//        return super.hurtEnemy(stack, target, attacker);
+//    }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
         super.releaseUsing(stack, level, livingEntity, timeCharged);
         if (level instanceof ServerLevel serverLevel){
             serverLevel.setDayTime(18000);
         }
+        return false;
     }
 
 }

@@ -46,9 +46,4 @@ public class FireworkArrowEntity extends AbstractArrow {
         float f = 4.0f;
         this.level().explode(this,this.getX(),this.getY(0.0625),this.getZ(),f,Level.ExplosionInteraction.TNT);
     }
-
-    @Override
-    public boolean alwaysAccepts() {
-        return super.alwaysAccepts();
-    }
 }

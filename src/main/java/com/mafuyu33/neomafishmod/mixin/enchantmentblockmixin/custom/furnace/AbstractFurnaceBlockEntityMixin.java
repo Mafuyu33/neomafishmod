@@ -9,12 +9,15 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,7 +30,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BaseContainerBlock
 		super(blockEntityType, blockPos, blockState);
 	}
 	@Inject(at = @At("HEAD"), method = "getBurnDuration",cancellable = true)
-	private void init1(ItemStack fuel, CallbackInfoReturnable<Integer> cir) {
+	private void init1(FuelValues p_363501_, ItemStack p_58343_, CallbackInfoReturnable<Integer> cir) {
 		int k = BlockEnchantmentStorage.getLevel(Enchantments.FIRE_ASPECT,getBlockPos());
 		if(k>0){//火焰附加
 			BlockPos firePos =getBlockPos();
@@ -42,7 +45,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BaseContainerBlock
 
 
 	@Inject(method = "burn",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;grow(I)V"))//时运烧矿
-	private static void init2(RegistryAccess registryAccess, RecipeHolder<?> recipe, NonNullList<ItemStack> inventory, int maxStackSize, AbstractFurnaceBlockEntity furnace, CallbackInfoReturnable<Boolean> cir) {
+	private static void init2(RegistryAccess p_266740_, RecipeHolder<? extends AbstractCookingRecipe> p_300910_, SingleRecipeInput p_380269_, NonNullList<ItemStack> inventory, int p_267157_, CallbackInfoReturnable<Boolean> cir) {
 		ItemStack itemStack = (ItemStack)inventory.get(0);
 		int k = InjectHelper.getEnchantmentLevel(itemStack,Enchantments.FORTUNE);
 		if (k > 0) {
@@ -51,7 +54,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends BaseContainerBlock
 		}
 	}
 	@Inject(method = "burn",at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/core/NonNullList;set(ILjava/lang/Object;)Ljava/lang/Object;",ordinal = 0))
-	private static void init3(RegistryAccess registryAccess, RecipeHolder<?> recipe, NonNullList<ItemStack> inventory, int maxStackSize, AbstractFurnaceBlockEntity furnace, CallbackInfoReturnable<Boolean> cir) {
+	private static void init3(RegistryAccess p_266740_, RecipeHolder<? extends AbstractCookingRecipe> p_300910_, SingleRecipeInput p_380269_, NonNullList<ItemStack> inventory, int p_267157_, CallbackInfoReturnable<Boolean> cir) {
 		ItemStack itemStack = (ItemStack)inventory.get(0);
 		int k = InjectHelper.getEnchantmentLevel(itemStack, Enchantments.FORTUNE);
 		if (k > 0) {

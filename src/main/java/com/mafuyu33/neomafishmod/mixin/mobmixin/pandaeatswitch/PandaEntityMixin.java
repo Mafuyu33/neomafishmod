@@ -29,11 +29,11 @@ public abstract class PandaEntityMixin extends Animal {
 		if(this.isEating() && this.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.SWITCH)){
 			this.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));         // 中毒
 			this.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));       // 虚弱
-			this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));       // 缓慢
-			this.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 0)); // 挖掘疲劳
+//			this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));       // 缓慢
+//			this.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 0)); // 挖掘疲劳
 			this.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100, 0));      // 失明
 			this.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, 0));         // 饥饿
-			this.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));         // 反胃
+//			this.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));         // 反胃
 			this.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0));         // 凋零
 			this.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 100, 0));     // 漂浮
 			this.addEffect(new MobEffectInstance(MobEffects.UNLUCK, 100, 0));         // 不幸

@@ -3,11 +3,13 @@ package com.mafuyu33.neomafishmod.entity.custom;
 import com.mafuyu33.neomafishmod.entity.ModEntities;
 import com.mafuyu33.neomafishmod.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,10 +21,6 @@ import net.minecraft.world.phys.EntityHitResult;
 public class FuProjectileEntity extends ThrowableItemProjectile {
     public FuProjectileEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
         super(entityType, level);
-    }
-
-    public FuProjectileEntity(LivingEntity livingEntity,Level world){
-        super(ModEntities.STONE_PROJECTILE.get(),livingEntity,world);
     }
 
     @Override
@@ -37,11 +35,11 @@ public class FuProjectileEntity extends ThrowableItemProjectile {
         BlockState blockState = level.getBlockState(blockPos);
         boolean isWoodenBlock  = blockState.is(BlockTags.LOGS);
 
-        if(!this.level().isClientSide){
+        if(!this.level().isClientSide && getOwner() instanceof Player player){
             level.broadcastEntityEvent(this,(byte)3);
             if(isWoodenBlock){
                 level.removeBlock(blockPos,false);
-                spawnAtLocation(blockState.getBlock());
+                spawnAtLocation((ServerLevel) level, blockState.getCloneItemStack(blockPos,level,true, player));
             }
             ItemStack itemStack = this.getItem();
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), itemStack);

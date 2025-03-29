@@ -21,12 +21,6 @@ public abstract class ReverseMixin extends Entity implements Attackable {
     public ReverseMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
-
-    @Shadow
-    public abstract Iterable<ItemStack> getArmorSlots();
-
-    @Shadow public abstract boolean hurt(DamageSource source, float amount);
-
     @Shadow public abstract boolean isAlive();
 
     @Override

@@ -22,7 +22,7 @@ public abstract class AbstractSkeletonEntityMixin extends Monster implements Ran
 		super(entityType, level);
 	}
 
-	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"), method = "performRangedAttack")
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/Projectile;spawnProjectileUsingShoot(Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;DDDFF)Lnet/minecraft/world/entity/projectile/Projectile;"), method = "performRangedAttack")
 	private void init(LivingEntity target, float pullProgress, CallbackInfo ci, @Local(ordinal = 0) double d , @Local(ordinal = 1) double e
 			, @Local(ordinal = 2) double f , @Local(ordinal = 3) double g, @Local(ordinal = 0) AbstractArrow persistentProjectileEntity) {
 		ItemStack bow = this.getItemInHand(this.getUsedItemHand());

@@ -29,7 +29,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
             if (this.hasEffect(ModEffects.SHEEP_EFFECT)) {//变羊药水
                 if (!this.isAlwaysTicking()) {//如果不是玩家的话
                     Vec3 pos = this.position();
-                        EntityType.SHEEP.spawn(((ServerLevel) this.level()), BlockPos.containing(pos), MobSpawnType.TRIGGERED);
+                        EntityType.SHEEP.spawn(((ServerLevel) this.level()), BlockPos.containing(pos), EntitySpawnReason.TRIGGERED);
                     this.remove(RemovalReason.KILLED);
                 }
             }

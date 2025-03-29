@@ -11,9 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -30,19 +28,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(ShovelItem.class)
-public abstract class ShovelItemMixin extends DiggerItem {
+@Mixin(Item.class) // 更改为混入Item类
+public abstract class ShovelItemMixin {
 
-	public ShovelItemMixin(Tier tier, TagKey<Block> blocks, Properties properties) {
-		super(tier, blocks, properties);
-	}
-
-	@Inject(at = @At("HEAD"), method = "useOn",cancellable = true)
+	@Inject(at = @At("HEAD"), method = "useOn", cancellable = true)
 	private void init(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
-		int k = InjectHelper.getEnchantmentLevel(context.getItemInHand(), Enchantments.POWER);
-		if (k > 0) {
-			mafishmod$generateFallingBlock(context.getClickedPos(),context.getLevel().getBlockState(context.getClickedPos()), context.getLevel(),k,context.getPlayer());
-			cir.setReturnValue(InteractionResult.sidedSuccess(context.getLevel().isClientSide));
+		// 检查是否是铲子
+		if (context.getItemInHand().getItem().toString().contains("shovel")) {
+			int k = InjectHelper.getEnchantmentLevel(context.getItemInHand(), Enchantments.POWER);
+			if (k > 0) {
+				mafishmod$generateFallingBlock(context.getClickedPos(), context.getLevel().getBlockState(context.getClickedPos()), context.getLevel(), k, context.getPlayer());
+				cir.setReturnValue(context.getLevel().isClientSide ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
+			}
 		}
 	}
 

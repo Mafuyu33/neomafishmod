@@ -60,7 +60,7 @@ public abstract class TeleportEffectMixin extends Entity implements Attackable {
         if (!world.isClientSide) {
             for(int i = 0; i < 16; ++i) {
                 double d = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
-                double e = Math.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)world.getMinBuildHeight(), (double)(world.getMinBuildHeight() + ((ServerLevel)world).getLogicalHeight() - 1));
+                double e = Math.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)world.getMinY(), (double)(world.getMinY() + ((ServerLevel)world).getLogicalHeight() - 1));
                 double f = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
                 if (user.isPassenger()) {
                     user.stopRiding();

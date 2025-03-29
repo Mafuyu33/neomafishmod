@@ -12,11 +12,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(TridentItem.class)
 public abstract class TridentItemMixin {
 	@Inject(method = "releaseUsing",at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hasInfiniteMaterials()Z", ordinal = 0))
-	private void init(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci, @Local ThrownTrident throwntrident) {
+	private void init(ItemStack stack, Level p_43395_, LivingEntity entityLiving, int p_43397_, CallbackInfoReturnable<Boolean> cir, @Local ThrownTrident throwntrident) {
 		//如果三叉戟上有重定向附魔
 		if(ModEnchantmentHelper.getEnchantmentLevel(ModEnchantments.REDIRECT_PROJECTILE, stack) > 0) {
 			throwntrident.setDeltaMovement(0,0,0);

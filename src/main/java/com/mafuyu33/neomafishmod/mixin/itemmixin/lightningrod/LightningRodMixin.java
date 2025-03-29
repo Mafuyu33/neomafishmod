@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
@@ -27,9 +28,9 @@ public abstract class LightningRodMixin {
         Player user = level.getNearestPlayer(pos.getX(),pos.getY(),pos.getZ(),10f,true);
         int k = BlockEnchantmentStorage.getLevel(Enchantments.CHANNELING, pos);
         if (k > 0) {
-            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(level);
+            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.COMMAND);
             if (lightningEntity != null) {
-                lightningEntity.moveTo(Vec3.atBottomCenterOf(pos));
+                lightningEntity.snapTo(Vec3.atBottomCenterOf(pos));
                 lightningEntity.setCause(user instanceof ServerPlayer ? (ServerPlayer) user : null);
                 level.addFreshEntity(lightningEntity);
                 SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();

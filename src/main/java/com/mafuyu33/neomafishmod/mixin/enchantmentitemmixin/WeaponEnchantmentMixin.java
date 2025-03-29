@@ -5,8 +5,10 @@ import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.mixinhelper.FearMixinHelper;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
 import com.mafuyu33.neomafishmod.mixinhelper.WeaponEnchantmentMixinHelper;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -91,7 +93,7 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
 
         if(q > 0 && this.isAlwaysTicking() &&
                 target instanceof LivingEntity livingEntity && livingEntity.isAlive() && !level().isClientSide){//镀金
-            Iterable<ItemStack> inventory = ((Player) (Object) this).getInventory().items;
+            Iterable<ItemStack> inventory = ((Player) (Object) this).getInventory().getNonEquipmentItems();
 
             // 遍历背包中的物品栏
             boolean foundGoldenIngot = false;
@@ -125,26 +127,26 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
             }
         }
 
-        if (o>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive()){//烫手山芋
+        if (o>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive() && !level().isClientSide){//烫手山芋
 //            ItemStack targetItemStack = ((LivingEntity) target).getStackInHand(targetHand);
 //            itemStack.damage(1,random, Objects.requireNonNull(getServer()).getCommandSource().getPlayer());
             InteractionHand targetHand = ((LivingEntity) target).getUsedItemHand();
             if (!livingEntity.getMainHandItem().isEmpty()) {
-                spawnAtLocation(livingEntity.getMainHandItem());
+                spawnAtLocation(((ServerLevel) level()),livingEntity.getMainHandItem());
             }
             livingEntity.setItemInHand(targetHand, itemStack.copy());
             this.setItemInHand(hand, ItemStack.EMPTY);
         }
         
-        if (k > 0 && target instanceof Chicken) {//杀鸡取卵
-            target.spawnAtLocation(Items.EGG);
+        if (k > 0 && target instanceof Chicken && !level().isClientSide) {//杀鸡取卵
+            target.spawnAtLocation(((ServerLevel) level()),Items.EGG);
         }
-        if(k > 0 && j>0 && target instanceof Chicken){
-            target.spawnAtLocation(Items.EGG);
-            target.spawnAtLocation(Items.DRAGON_EGG);
-            target.spawnAtLocation(Items.TURTLE_EGG);
-            target.spawnAtLocation(Items.SNIFFER_EGG);
-            target.spawnAtLocation(Items.FROGSPAWN);
+        if(k > 0 && j>0 && target instanceof Chicken && !level().isClientSide){
+            target.spawnAtLocation(((ServerLevel) level()),Items.EGG);
+            target.spawnAtLocation(((ServerLevel) level()),Items.DRAGON_EGG);
+            target.spawnAtLocation(((ServerLevel) level()),Items.TURTLE_EGG);
+            target.spawnAtLocation(((ServerLevel) level()),Items.SNIFFER_EGG);
+            target.spawnAtLocation(((ServerLevel) level()),Items.FROGSPAWN);
         }
 
 
@@ -158,7 +160,7 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
             ((LivingEntity) target).addEffect(
                     new MobEffectInstance(MobEffects.HEALTH_BOOST,900,(int) (Times-1F)));
             ((LivingEntity) target).addEffect(
-                    new MobEffectInstance(MobEffects.HEAL,900,(int) (Times-1F)));
+                    new MobEffectInstance(MobEffects.INSTANT_HEALTH,900,(int) (Times-1F)));
         }
     }
     @Unique
@@ -168,8 +170,8 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
         InteractionHand hand = this.getUsedItemHand();
         ItemStack itemStack = this.getItemInHand(hand);
         int o = InjectHelper.getEnchantmentLevel(itemStack, ModEnchantments.HOT_POTATO);
-        if(o>0 && this.isDeadOrDying() && !isDrop){
-            spawnAtLocation(itemStack);
+        if(o>0 && this.isDeadOrDying() && !isDrop && !level().isClientSide){
+            spawnAtLocation(((ServerLevel) level()),itemStack);
             isDrop=true;
         }
     }

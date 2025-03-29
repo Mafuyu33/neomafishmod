@@ -26,7 +26,7 @@ import java.util.Objects;
 public abstract class FlowableFluidMixin {
 
     @Inject(at = @At("HEAD"), method = "canPassThroughWall", cancellable = true)
-    private void init1(Direction face, BlockGetter world, BlockPos pos, BlockState state, BlockPos fromPos, BlockState fromState, CallbackInfoReturnable<Boolean> cir) {
+    private static void init1(Direction face, BlockGetter world, BlockPos pos, BlockState state, BlockPos fromPos, BlockState fromState, CallbackInfoReturnable<Boolean> cir) {
 
         int k = BlockEnchantmentStorage.getLevel(ModEnchantments.BAD_LUCK_OF_SEA,pos);
         if(k>0){
@@ -44,7 +44,7 @@ public abstract class FlowableFluidMixin {
 
 
     @Unique
-    private void mafishmod$generateFallingBlock(BlockPos targetPos , BlockState blockState, Level world) {
+    private static void mafishmod$generateFallingBlock(BlockPos targetPos, BlockState blockState, Level world) {
         if(!world.isClientSide()) {
             BlockEntity blockEntity = world.getBlockEntity(targetPos);
 

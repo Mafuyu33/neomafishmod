@@ -11,7 +11,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -70,7 +69,7 @@ public abstract class ItemEntityMixin extends Entity implements TraceableEntity 
 	private void init(Entity thrower, CallbackInfo ci) {
 		int i = InjectHelper.getEnchantmentLevel(this.getItem(), ModEnchantments.FANGSHENG);
 		ItemStack itemStack = this.getItem();
-		if(itemStack.getItem() instanceof PickaxeItem && i>0) {
+		if(i>0) {
 			this.setPickUpDelay(200);
 		}
 		cd = 0;
@@ -81,7 +80,7 @@ public abstract class ItemEntityMixin extends Entity implements TraceableEntity 
 		int i = InjectHelper.getEnchantmentLevel(this.getItem(), ModEnchantments.FANGSHENG);
 		ItemStack itemStack = this.getItem();
 
-		if(itemStack.getItem() instanceof PickaxeItem && i>0) {
+		if(i>0) {
 
 			if(this.onGround()) {//如果在地上
 				// 随机一个方向

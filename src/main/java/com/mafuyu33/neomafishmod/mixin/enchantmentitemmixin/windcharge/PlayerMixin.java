@@ -42,7 +42,7 @@ public abstract class PlayerMixin extends LivingEntity {
                 double offsetY = lookVec.y * distance;
                 double offsetZ = lookVec.z * distance;
                 Vec3 explorePos = new Vec3(this.getX() + offsetX, this.getY() + offsetY + 1.625, this.getZ() + offsetZ);
-                level().addParticle(ParticleTypes.COMPOSTER,true,explorePos.x,explorePos.y,explorePos.z,0,0,0);
+                level().addParticle(ParticleTypes.COMPOSTER,explorePos.x,explorePos.y,explorePos.z,0,0,0);
 
                 this.neomafishmod$particleCooldown = 4;
             }

@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.mixin.enchantmentblockmixin.custom.knockback;
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -23,7 +24,7 @@ public abstract class NetherPortalBlockMixin extends Block {
     }
 
     @Inject(at = @At("HEAD"), method = "entityInside")
-    private void init3(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
+    private void init3(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier p_405383_, CallbackInfo ci) {
         int knockbackLevel = BlockEnchantmentStorage.getLevel(Enchantments.KNOCKBACK, pos);
         if (knockbackLevel > 0) {
             Vec3 entityPos = entity.position();

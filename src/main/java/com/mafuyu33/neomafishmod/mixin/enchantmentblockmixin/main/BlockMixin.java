@@ -4,6 +4,7 @@ import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -48,7 +49,7 @@ public abstract class BlockMixin extends BlockBehaviour implements ItemLike,  ne
         }
     }
     @Inject(at = @At("TAIL"), method = "wasExploded")//删除方块的附魔
-    private void init4(Level level, BlockPos pos, Explosion explosion, CallbackInfo ci){
+    private void init4(ServerLevel level, BlockPos pos, Explosion p_49846_, CallbackInfo ci){
         if (!level.isClientSide) {
             if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(pos), new ListTag())) {
                 BlockEnchantmentStorage.removeBlockEnchantment(pos.immutable());//删除信息

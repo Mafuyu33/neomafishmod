@@ -1,7 +1,9 @@
 package com.mafuyu33.neomafishmod.mixin.itemmixin;
 
 import com.mafuyu33.neomafishmod.item.ModItems;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -35,11 +37,11 @@ public abstract class KaoFishMixin extends Entity implements TraceableEntity {
         var world = this.level();
         BlockPos blockPos = this.blockPosition();
         FluidState fluidState = world.getFluidState(blockPos);
-        if (this.getItem().is(ModItems.RUBY)  && fluidState.is(FluidTags.LAVA)) {
+        if (this.getItem().is(ModItems.RUBY)  && fluidState.is(FluidTags.LAVA) && !world.isClientSide()) {
             counter++;
             if(counter>=20) {
                 System.out.println(123);
-                spawnAtLocation(ModItems.RAW_RUBY);
+                spawnAtLocation(((ServerLevel)world), ModItems.RAW_RUBY);
                 this.discard();
                 counter=0;
             }

@@ -2,6 +2,7 @@ package com.mafuyu33.neomafishmod.event;
 
 import com.mafuyu33.neomafishmod.Config;
 import com.mafuyu33.neomafishmod.item.ModItems;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -33,19 +34,19 @@ public class UseEntityHandler  {
             if (entity instanceof Llama && !world.isClientSide()) {//羊驼
                 world.playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.LLAMA_HURT, SoundSource.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-                entity.spawnAtLocation(ModItems.LLAMA_ITEM);
+                entity.spawnAtLocation(((ServerLevel)world), ModItems.LLAMA_ITEM.get());
                 entity.remove(Entity.RemovalReason.DISCARDED);
             }
             if (entity instanceof Villager && !world.isClientSide()) {//村民
                 world.playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.VILLAGER_HURT, SoundSource.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-                entity.spawnAtLocation(ModItems.VILLAGER_ITEM);
+                entity.spawnAtLocation(((ServerLevel)world), ModItems.VILLAGER_ITEM.get());
                 entity.remove(Entity.RemovalReason.DISCARDED);
             }
             if (entity instanceof IronGolem && !world.isClientSide()) {//铁傀儡
                 world.playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.IRON_GOLEM_HURT, SoundSource.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-                entity.spawnAtLocation(ModItems.IRON_GOLEM_ITEM);
+                entity.spawnAtLocation(((ServerLevel)world), ModItems.IRON_GOLEM_ITEM.get());
                 entity.remove(Entity.RemovalReason.DISCARDED);
             }
         }

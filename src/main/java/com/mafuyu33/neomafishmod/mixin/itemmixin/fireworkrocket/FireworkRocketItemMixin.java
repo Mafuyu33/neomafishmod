@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.mixin.itemmixin.fireworkrocket;
 import com.mafuyu33.neomafishmod.Config;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FireworkRocketItem;
@@ -43,7 +44,7 @@ public abstract class FireworkRocketItemMixin extends Item {
         if (fireworkCanUseOnEntity)
         {
             Player player = context.getPlayer();
-            ItemStack breastplate = player.getInventory().getArmor(2);
+            ItemStack breastplate = player.getInventory().getItem(EquipmentSlot.CHEST.getIndex());
             if (breastplate.getItem()== Items.ELYTRA)
             {
                 player.setDeltaMovement(0,10,0);

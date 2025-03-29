@@ -15,6 +15,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
+import java.util.List;
+
 @EventBusSubscriber
 public class AttackBlockHandler {
     static BlockPos startPos;
@@ -24,7 +26,7 @@ public class AttackBlockHandler {
         Player player = event.getEntity();
         BlockPos pos = event.getPos();
         if(!level.isClientSide) {
-            Iterable<ItemStack> handItemStacks = player.getHandSlots();
+            Iterable<ItemStack> handItemStacks = List.of(player.getMainHandItem(), player.getOffhandItem());
             for (ItemStack itemstack : handItemStacks) {
                 if (itemstack.is(Items.BRUSH)) {
                     //有附魔

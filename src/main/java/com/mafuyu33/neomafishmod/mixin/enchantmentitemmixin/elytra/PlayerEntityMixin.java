@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-	@Shadow public abstract ItemStack getItemBySlot(EquipmentSlot slot1);
 
 	// 假设这些变量是在类中定义的，以便跨多个ticks记住上一次的位置
 	@Unique

@@ -15,9 +15,9 @@ public class VillagerItem extends Item {
     }
 
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("tooltip.mafishmod.villager_item.tooltip"));
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    }
+//    @Override
+//    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+//        tooltipComponents.add(Component.translatable("tooltip.mafishmod.villager_item.tooltip"));
+//        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+//    }
 }

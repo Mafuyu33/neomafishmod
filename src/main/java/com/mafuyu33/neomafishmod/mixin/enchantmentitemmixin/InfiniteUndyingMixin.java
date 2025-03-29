@@ -41,8 +41,8 @@ public abstract  class InfiniteUndyingMixin extends Entity implements Attackable
 
     @Shadow
     public abstract void setHealth(float health);
-    @Shadow
-    public abstract boolean removeEffectsCuredBy(net.neoforged.neoforge.common.EffectCure cure);
+
+//    public abstract boolean removeEffectsCuredBy(net.neoforged.neoforge.common.EffectCure cure);
     @Shadow
     public abstract boolean addEffect(MobEffectInstance effectInstance);
     @Shadow
@@ -52,8 +52,6 @@ public abstract  class InfiniteUndyingMixin extends Entity implements Attackable
 
 
     @Shadow public abstract void remove(RemovalReason reason);
-
-    @Shadow @javax.annotation.Nullable private LivingEntity lastHurtByMob;
 
 
     @Shadow public abstract void readAdditionalSaveData(CompoundTag compound);
@@ -105,7 +103,7 @@ public abstract  class InfiniteUndyingMixin extends Entity implements Attackable
                 }
 
                 this.setHealth(1.0F);
-                this.removeEffectsCuredBy(net.neoforged.neoforge.common.EffectCures.PROTECTED_BY_TOTEM);
+//                this.removeEffectsCuredBy(net.neoforged.neoforge.common.EffectCures.PROTECTED_BY_TOTEM);
                 this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
                 this.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
                 this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
@@ -126,22 +124,22 @@ public abstract  class InfiniteUndyingMixin extends Entity implements Attackable
                     }
                 }
 
-                int k = getEnchantmentLevel(itemstack,Enchantments.CHANNELING);//引雷
-                if (k > 0) {
-                    if (this.level() instanceof ServerLevel) {
-                        if (damageSource.getEntity() != null && damageSource.getDirectEntity() != null) {
-                            BlockPos blockPos = lastHurtByMob.getOnPos();
-                            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(this.level());
-                            if (lightningBolt != null) {
-                                lightningBolt.moveTo(Vec3.atBottomCenterOf(blockPos));
-                                lightningBolt.setCause(damageSource.getDirectEntity() instanceof ServerPlayer ? (ServerPlayer) damageSource.getDirectEntity() : null);
-                                this.level().addFreshEntity(lightningBolt);
-                                SoundEvent soundEvent = SoundEvents.LIGHTNING_BOLT_THUNDER;
-                                this.playSound(soundEvent, 5, 1.0F);
-                            }
-                        }
-                    }
-                }
+//                int k = getEnchantmentLevel(itemstack,Enchantments.CHANNELING);//引雷
+//                if (k > 0) {
+//                    if (this.level() instanceof ServerLevel) {
+//                        if (damageSource.getEntity() != null && damageSource.getDirectEntity() != null) {
+//                            BlockPos blockPos = lastHurtByMob.getOnPos();
+//                            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(this.level());
+//                            if (lightningBolt != null) {
+//                                lightningBolt.moveTo(Vec3.atBottomCenterOf(blockPos));
+//                                lightningBolt.setCause(damageSource.getDirectEntity() instanceof ServerPlayer ? (ServerPlayer) damageSource.getDirectEntity() : null);
+//                                this.level().addFreshEntity(lightningBolt);
+//                                SoundEvent soundEvent = SoundEvents.LIGHTNING_BOLT_THUNDER;
+//                                this.playSound(soundEvent, 5, 1.0F);
+//                            }
+//                        }
+//                    }
+//                }
 
                 //
                 this.level().broadcastEntityEvent(this, (byte)35);

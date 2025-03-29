@@ -82,10 +82,12 @@ public class BlockEnchantmentStorage {
     //-----------------------------
     private static int findEnchantmentLevel(ResourceKey<Enchantment> enchantment, ListTag enchantments) {
         for (int i = 0; i < enchantments.size(); i++) {
-            CompoundTag tag = enchantments.getCompound(i);
-            String enchantmentId = tag.getString("id");
-            if (enchantment.location().toString().equals(enchantmentId)) {
-                return tag.getInt("lvl");
+            CompoundTag tag = enchantments.getCompound(i).orElse(null);
+            if (tag != null) {
+                String enchantmentId = tag.getString("id").orElse("");
+                if (enchantment.location().toString().equals(enchantmentId)) {
+                    return tag.getInt("lvl").orElse(0);
+                }
             }
         }
         return 0;
@@ -94,15 +96,17 @@ public class BlockEnchantmentStorage {
     private static int calculateMaxLevel(ListTag enchantments) {
         int maxLevel = 0;
         for (int i = 0; i < enchantments.size(); i++) {
-            CompoundTag tag = enchantments.getCompound(i);
-            String enchantmentId = tag.getString("id");
-            if (enchantmentId != null && !enchantmentId.isEmpty()) {
-                maxLevel = Math.max(maxLevel, tag.getInt("lvl"));
+            CompoundTag tag = enchantments.getCompound(i).orElse(null);
+            if (tag != null) {
+                String enchantmentId = tag.getString("id").orElse("");
+                if (!enchantmentId.isEmpty()) {
+                    int level = tag.getInt("lvl").orElse(0);
+                    maxLevel = Math.max(maxLevel, level);
+                }
             }
         }
         return maxLevel;
     }
-
     private static String generateCacheKey(BlockPos blockPos, ResourceKey<Enchantment> enchantment) {
         return blockPos.toString() + "-" + enchantment.location().toString();
     }

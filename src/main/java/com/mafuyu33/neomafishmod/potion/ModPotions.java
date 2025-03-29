@@ -11,6 +11,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.List;
+
 /**
  * @author Mafuyu33
  */
@@ -26,13 +28,16 @@ public class ModPotions {
     public static Holder<Potion>  BAD_LUCK_OF_SEA_POTION = registerPotion("bad_luck_of_sea_potion",3600,0,ModEffects.BAD_LUCK_OF_SEA_EFFECT);
     public static Holder<Potion>  ROTATE_SCREEN_180_POTION = registerPotion("rotate_screen_180_potion",2000,0,ModEffects.ROTATE_SCREEN_180_EFFECT);
     public static Holder<Potion>  STRONG_ROTATE_SCREEN_180_POTION = registerPotion("strong_rotate_screen_180_potion",2000,1,ModEffects.ROTATE_SCREEN_180_EFFECT);
+    public static Holder<Potion>  ALL_ATTRIBUTES_UP_POTION = registerPotion("all_attributes_up_potion",3600,0,ModEffects.ALL_ATTRIBUTES_UP_EFFECT);
 
     public static void register(IEventBus eventBus){
         POTIONS.register(eventBus);
     }
-    public static DeferredHolder<Potion, Potion> registerPotion(String name, int duration, int amplifier, Holder<MobEffect> statusEffects) {
-        return POTIONS.register(name,()-> new Potion(new MobEffectInstance(statusEffects,duration,amplifier)));
+
+    public static DeferredHolder<Potion, Potion> registerPotion(String name, int duration, int amplifier, Holder<MobEffect> statusEffect) {
+        return POTIONS.register(name, () -> new Potion(
+                name,  // 添加名称参数
+                (new MobEffectInstance(statusEffect, duration, amplifier)
+        )));
     }
-
-
 }

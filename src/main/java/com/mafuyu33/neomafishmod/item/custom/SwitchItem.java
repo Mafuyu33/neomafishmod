@@ -18,11 +18,11 @@ public class SwitchItem extends Item {
         if (remainingUseDuration % 20==0){
             livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));         // 中毒
             livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));       // 虚弱
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));       // 缓慢
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 0)); // 挖掘疲劳
+//            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));       // 缓慢
+//            livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 0)); // 挖掘疲劳
             livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100, 0));      // 失明
             livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, 0));         // 饥饿
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));         // 反胃
+//            livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));         // 反胃
             livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0));         // 凋零
             livingEntity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 100, 0));     // 漂浮
             livingEntity.addEffect(new MobEffectInstance(MobEffects.UNLUCK, 100, 0));         // 不幸

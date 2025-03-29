@@ -27,3 +27,5 @@ entity.getPersistentData().putInt("AAA",66666666);
 附魔Key转换成String
 ResourceKey<Enchantment> enchantment = ModEnchantments.BAD_LUCK_OF_SEA;//这是现在版本的key
 enchantment.location().toString();//这样才是String
+
+new ResourceLocation -> ResourceLocation.fromNamespaceAndPath

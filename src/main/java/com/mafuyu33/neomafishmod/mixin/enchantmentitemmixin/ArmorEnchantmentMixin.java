@@ -1,27 +1,22 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin;
 
-import com.mafuyu33.neomafishmod.enchantment.ModEnchantmentHelper;
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
 import com.mafuyu33.neomafishmod.network.packet.S2C.OneWithShadowS2CPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -38,7 +33,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -55,8 +49,6 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 		super(entityType, level);
 	}
 
-	@Shadow public abstract Iterable<ItemStack> getArmorSlots();
-
 	@Shadow
 	public abstract boolean isSensitiveToWater();
 
@@ -65,19 +57,15 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 	@Shadow @Nullable
 	public abstract DamageSource getLastDamageSource();
 
-	@Shadow public abstract void kill();
-
-	@Shadow public abstract boolean hurt(DamageSource source, float amount);
-
 	@Shadow public abstract void push(Entity entity);
 
 	@Shadow protected abstract void pushEntities();
 
-	@Shadow public abstract Iterable<ItemStack> getArmorAndBodyArmorSlots();
-
 	@Shadow public abstract ItemStack getItemBySlot(EquipmentSlot slot);
 
 	@Shadow @Nullable public abstract LivingEntity getKillCredit();
+
+	@Shadow public abstract void kill(ServerLevel p_376643_);
 
 	@Unique
 	private static Vec3 lastPos= new Vec3(0, 0, 0);
@@ -88,52 +76,52 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 		return this.random;
 	}
 
-	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/DamageSource;is(Lnet/minecraft/tags/TagKey;)Z",ordinal = 2), method = "hurt",cancellable = true)
-	private void init2(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-		Iterable<ItemStack> armorItems = Collections.singleton(this.getItemBySlot(EquipmentSlot.BODY));
-		for (ItemStack armorItem : armorItems) {
-			if (armorItem.getItem() instanceof ArmorItem) {
-				int p = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.SUPER_PROJECTILE_PROTECTION);//超级投射物保护
-				if(p > 0 && source.is(DamageTypeTags.IS_PROJECTILE)){
-					Entity entity = source.getEntity();
-					Entity projectile = source.getDirectEntity();
-					if(projectile!=null && !level().isClientSide) {
-						if (entity instanceof LivingEntity livingEntity) {
-							// 创建物品实体并设置位置
-							double d = this.getX() - livingEntity.getX();
-							double e = this.getY() - livingEntity.getY();
-							double f = this.getZ() - livingEntity.getZ();
-							Projectile newProjectileEntity = new Arrow(this.level(),(LivingEntity) (Object)this, new ItemStack(Items.ARROW),null);
-							newProjectileEntity.setPos(this.getX(), this.getY() + 1, this.getZ());
-							newProjectileEntity.setDeltaMovement(-d * 0.1 * 1.3, -e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08 * 1.3, -f * 0.1 * 1.3);
-							// 将物品实体添加到世界中
-							projectile.discard();
-							this.level().addFreshEntity(newProjectileEntity);
-							cir.setReturnValue(false);
-							break;
-						} else {
-							double offset = 0.0; // 调整的偏移量，可以根据需要调整
-							Vec3 lookVec = this.getViewVector(1.0F);// 获取玩家朝向向量
-							double speedMultiplier = 2.0;
-							Projectile newProjectileEntity = new Arrow(this.level(), (LivingEntity) (Object)this, new ItemStack(Items.ARROW),null);
-							newProjectileEntity.setPos(this.getX()+ lookVec.x * offset, this.getY() + 1.65, this.getZ() + lookVec.z * offset);
-							// 将物品实体速度设置为玩家朝向方向
-							newProjectileEntity.setDeltaMovement(
-									lookVec.x * speedMultiplier,
-									lookVec.y * speedMultiplier,
-									lookVec.z * speedMultiplier
-							);
-							projectile.discard();
-							// 将物品实体添加到世界中
-							this.level().addFreshEntity(newProjectileEntity);
-							cir.setReturnValue(false);
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
+//	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/DamageSource;is(Lnet/minecraft/tags/TagKey;)Z",ordinal = 2), method = "hurt",cancellable = true)
+//	private void init2(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+//		Iterable<ItemStack> armorItems = Collections.singleton(this.getItemBySlot(EquipmentSlot.BODY));
+//		for (ItemStack armorItem : armorItems) {
+//			if (armorItem.getItem() instanceof ArmorItem) {
+//				int p = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.SUPER_PROJECTILE_PROTECTION);//超级投射物保护
+//				if(p > 0 && source.is(DamageTypeTags.IS_PROJECTILE)){
+//					Entity entity = source.getEntity();
+//					Entity projectile = source.getDirectEntity();
+//					if(projectile!=null && !level().isClientSide) {
+//						if (entity instanceof LivingEntity livingEntity) {
+//							// 创建物品实体并设置位置
+//							double d = this.getX() - livingEntity.getX();
+//							double e = this.getY() - livingEntity.getY();
+//							double f = this.getZ() - livingEntity.getZ();
+//							Projectile newProjectileEntity = new Arrow(this.level(),(LivingEntity) (Object)this, new ItemStack(Items.ARROW),null);
+//							newProjectileEntity.setPos(this.getX(), this.getY() + 1, this.getZ());
+//							newProjectileEntity.setDeltaMovement(-d * 0.1 * 1.3, -e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08 * 1.3, -f * 0.1 * 1.3);
+//							// 将物品实体添加到世界中
+//							projectile.discard();
+//							this.level().addFreshEntity(newProjectileEntity);
+//							cir.setReturnValue(false);
+//							break;
+//						} else {
+//							double offset = 0.0; // 调整的偏移量，可以根据需要调整
+//							Vec3 lookVec = this.getViewVector(1.0F);// 获取玩家朝向向量
+//							double speedMultiplier = 2.0;
+//							Projectile newProjectileEntity = new Arrow(this.level(), (LivingEntity) (Object)this, new ItemStack(Items.ARROW),null);
+//							newProjectileEntity.setPos(this.getX()+ lookVec.x * offset, this.getY() + 1.65, this.getZ() + lookVec.z * offset);
+//							// 将物品实体速度设置为玩家朝向方向
+//							newProjectileEntity.setDeltaMovement(
+//									lookVec.x * speedMultiplier,
+//									lookVec.y * speedMultiplier,
+//									lookVec.z * speedMultiplier
+//							);
+//							projectile.discard();
+//							// 将物品实体添加到世界中
+//							this.level().addFreshEntity(newProjectileEntity);
+//							cir.setReturnValue(false);
+//							break;
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 
 
 	@Inject(at = @At("HEAD"), method = "die")
@@ -147,32 +135,32 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					int j = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.KILL_MY_HORSE);//敢杀我的马！
 					int k = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.KILL_MY_HORSE_PLUS);//敢杀我的马！plus
 					if (j>0) {
-						EntityType.WARDEN.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
+						EntityType.WARDEN.spawn(((ServerLevel) world), blockPos,EntitySpawnReason.TRIGGERED);
 					}
 					if (k>0) {
-						EntityType.WARDEN.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.BLAZE.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.CREEPER.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.EVOKER.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.GHAST.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.HOGLIN.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.HUSK.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.MAGMA_CUBE.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.PHANTOM.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.PIGLIN.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.RAVAGER.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.SHULKER.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.SILVERFISH.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.SKELETON.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.SLIME.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.STRAY.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.VEX.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.VINDICATOR.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.WITCH.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.WITHER_SKELETON.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.ZOGLIN.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.ZOMBIE.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
-						EntityType.ZOMBIE_VILLAGER.spawn(((ServerLevel) world), blockPos, MobSpawnType.TRIGGERED);
+						EntityType.WARDEN.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.BLAZE.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.CREEPER.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.EVOKER.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.GHAST.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.HOGLIN.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.HUSK.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.MAGMA_CUBE.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.PHANTOM.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.PIGLIN.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.RAVAGER.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.SHULKER.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.SILVERFISH.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.SKELETON.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.SLIME.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.STRAY.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.VEX.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.VINDICATOR.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.WITCH.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.WITHER_SKELETON.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.ZOGLIN.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.ZOMBIE.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
+						EntityType.ZOMBIE_VILLAGER.spawn(((ServerLevel) world), blockPos, EntitySpawnReason.TRIGGERED);
 					}
 				}
 			}
@@ -181,14 +169,14 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 //
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void init1(CallbackInfo info) {
-		Iterable<ItemStack> armorItems = this.getArmorAndBodyArmorSlots();
+		Iterable<ItemStack> armorItems = this.getArmorItems();
 
 		if (this.getType() == EntityType.HORSE){
 			for (ItemStack armorItem : armorItems) {//检测马铠
-				Iterable<ItemStack> armorAndBodyArmorSlots = this.getArmorAndBodyArmorSlots();
+				Iterable<ItemStack> armorAndBodyArmorSlots = this.getArmorItems();
 				int k = InjectHelper.getEnchantmentLevel(armorItem, Enchantments.FROST_WALKER);
 				int j = InjectHelper.getEnchantmentLevel(armorItem, Enchantments.FIRE_ASPECT);
-				int i = InjectHelper.getEnchantmentLevel(armorItem, Enchantments.CHANNELING);
+//				int i = InjectHelper.getEnchantmentLevel(armorItem, Enchantments.CHANNELING);
 				if (k>0) {//冰霜行者
 					nEOFORGE1_21$freezeWater((LivingEntity) (Object)this, level(), this.blockPosition(), k+1);
 				}
@@ -197,22 +185,22 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					BlockPos blockPos = this.blockPosition();
 					world.setBlock(blockPos, Blocks.FIRE.defaultBlockState(), 3);
 				}
-				if (i>0) {//引雷
-					BlockPos blockPos = this.blockPosition();
-					LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
-					if (lightningEntity != null) {
-						lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
-						this.level().addFreshEntity(lightningEntity);
-						SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
-						this.playSound(soundEvent, 5, 1.0F);
-					}
-				}
+//				if (i>0) {//引雷
+//					BlockPos blockPos = this.blockPosition();
+//					LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
+//					if (lightningEntity != null) {
+//						lightningEntity.moveto(Vec3.atBottomCenterOf(blockPos));
+//						this.level().addFreshEntity(lightningEntity);
+//						SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
+//						this.playSound(soundEvent, 5, 1.0F);
+//					}
+//				}
 			}
 		}
 
 
 		for (ItemStack armorItem : armorItems) {
-			if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.BOOTS) {//鞋子
+			if (armorItem.get(DataComponents.EQUIPPABLE) != null) {
 				int k = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.BAD_LUCK_OF_SEA);//海之嫌弃
 				if (k > 0) {
 					Level world = this.level();
@@ -271,17 +259,17 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					world.setBlock(blockPos, Blocks.FIRE.defaultBlockState(), 3);
 				}
 
-				int i = InjectHelper.getEnchantmentLevel(armorItem, Enchantments.CHANNELING);//引雷
-				if (i > 0) {
-					BlockPos blockPos = this.blockPosition();
-					LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
-					if (lightningEntity != null) {
-						lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
-						this.level().addFreshEntity(lightningEntity);
-						SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
-						this.playSound(soundEvent, 5, 1.0F);
-					}
-				}
+//				int i = InjectHelper.getEnchantmentLevel(armorItem, Enchantments.CHANNELING);//引雷
+//				if (i > 0) {
+//					BlockPos blockPos = this.blockPosition();
+//					LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(this.level());
+//					if (lightningEntity != null) {
+//						lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
+//						this.level().addFreshEntity(lightningEntity);
+//						SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
+//						this.playSound(soundEvent, 5, 1.0F);
+//					}
+//				}
 
 				int m = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.EIGHT_GODS_PASS_SEA);//八仙过海
 				if (m > 0) {
@@ -303,25 +291,25 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 				}
 
 			}
-			if (level().isClientSide && armorItem.getItem() instanceof ArmorItem
-					&& ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.HELMET) {//帽子
+			if (level().isClientSide
+					&& armorItem.get(DataComponents.EQUIPPABLE) != null) {
 				int o = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.MUTE);//静音
 				if (o > 0 && this.isAlwaysTicking()) {
 					nEOFORGE1_21$mute();
 				}
 			}
-			if (armorItem.getItem() instanceof ArmorItem) {//随便什么装甲
+			if (armorItem.get(DataComponents.EQUIPPABLE) != null) {
 				int p = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.NO_BLAST_PROTECTION);//爆炸不保护
 				if (p > 0 && this.getLastDamageSource()!= null){
 					// todo
-					if(this.getLastDamageSource().typeHolder().getKey().toString().contains("explosion")) {
-						this.kill();
+					if(this.getLastDamageSource().typeHolder().getKey().toString().contains("explosion") && !level().isClientSide) {
+						this.kill((ServerLevel) this.level());
 					}
 				}
 			}
 			//todo
 			//是不是可以专门做一个moving的发包。
-			if (armorItem.getItem() instanceof ArmorItem) {
+			if (armorItem.get(DataComponents.EQUIPPABLE) != null) {
 				int q = InjectHelper.getEnchantmentLevel(armorItem, ModEnchantments.ONE_WITH_SHADOWS);//融身入影
 				if (!this.level().isClientSide && q > 0) {
 					Vec3 currentPos = this.position();
@@ -411,5 +399,17 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 		int deltaZ = Math.abs(playerPos.getZ() - targetPos.getZ());
 
 		return deltaX <= 3 && deltaY <= 30 && deltaZ <= 3;
+	}
+	@Unique
+	private Iterable<ItemStack> getArmorItems() {
+		List<ItemStack> armorItems = new ArrayList<>();
+		// 遍历所有装备槽位
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			// 只选择盔甲槽位
+			if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
+				armorItems.add(this.getItemBySlot(slot));
+			}
+		}
+		return armorItems;
 	}
 }

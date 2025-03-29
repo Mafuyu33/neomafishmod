@@ -16,12 +16,12 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(TridentItem.class)
 public abstract class TridentItemMixin{
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"), method = "releaseUsing")
-    private void init(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci , @Local ThrownTrident throwntrident) {
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/Projectile;spawnProjectileFromRotation(Lnet/minecraft/world/entity/projectile/Projectile$ProjectileFactory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;FFF)Lnet/minecraft/world/entity/projectile/Projectile;"), method = "releaseUsing")
+    private void init(ItemStack stack, Level level, LivingEntity entityLiving, int p_43397_, CallbackInfoReturnable<Boolean> cir) {
         int k = InjectHelper.getEnchantmentLevel(stack, Enchantments.MULTISHOT);
         int o = ModEnchantmentHelper.getEnchantmentLevel(ModEnchantments.REDIRECT_PROJECTILE,stack);
         if(k>0){

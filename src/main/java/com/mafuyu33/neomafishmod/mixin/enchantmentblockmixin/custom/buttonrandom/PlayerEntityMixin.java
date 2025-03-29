@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.mixin.enchantmentblockmixin.custom.buttonrando
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import com.mafuyu33.neomafishmod.event.PlayerServerEvent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.effect.MobEffect;
@@ -53,8 +55,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract Inventory getInventory();
 
     @Shadow public abstract double entityInteractionRange();
-
-    @Shadow public abstract ItemStack eat(Level level, ItemStack food, FoodProperties foodProperties);
 
     @Shadow public abstract boolean addItem(ItemStack stack);
 
@@ -150,7 +150,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 // grantRandomItem
                 randomItemStack.setCount(randomNumber);
                 if (!this.getInventory().add(randomItemStack)) {
-                    this.spawnAtLocation(randomItem);
+                    this.spawnAtLocation(((ServerLevel) level()),randomItem);
                 }
                 clearRandomItems(randomNumber,randomItemStack);
 
@@ -168,7 +168,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 //        List<MobEffect> POSITIVE_EFFECTS = StreamSupport.stream(BuiltInRegistries.MOB_EFFECT.spliterator(), false)
 //                .filter(effect -> effect.getCategory() == MobEffectCategory.BENEFICIAL || effect.getCategory() == MobEffectCategory.NEUTRAL)
 //                .toList();
-        Optional<HolderLookup.RegistryLookup<MobEffect>> mobEffectRegistryLookup = level().registryAccess().lookup(Registries.MOB_EFFECT);
+        Optional<Registry<MobEffect>> mobEffectRegistryLookup = level().registryAccess().lookup(Registries.MOB_EFFECT);
         HolderLookup.RegistryLookup<MobEffect> mobEffectRegistryLookup1 = mobEffectRegistryLookup.get();
         List<Holder.Reference<MobEffect>> POSITIVE_EFFECTS = mobEffectRegistryLookup1.listElements().filter(mobEffectReference -> mobEffectReference.value().getCategory() == MobEffectCategory.BENEFICIAL || mobEffectReference.value().getCategory() == MobEffectCategory.NEUTRAL).toList();
 
@@ -177,13 +177,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 //                .filter(enchantment -> !enchantment.isCursed())
 //                .toList();
 
-        Optional<HolderLookup.RegistryLookup<Enchantment>> lookup = level().registryAccess().lookup(Registries.ENCHANTMENT);
+        Optional<Registry<Enchantment>> lookup = level().registryAccess().lookup(Registries.ENCHANTMENT);
         HolderLookup.RegistryLookup<Enchantment> enchantmentRegistryLookup = lookup.get();
         List<Holder.Reference<Enchantment>> POSITIVE_ENCHANTMENTS = enchantmentRegistryLookup.listElements().filter(enchantmentReference -> !enchantmentReference.is(EnchantmentTags.CURSE)).toList();
 
 
         List<Item> RANDOM_ITEMS = StreamSupport.stream(BuiltInRegistries.ITEM.spliterator(), false)
-                .filter(item -> item.getFoodProperties(item.getDefaultInstance(), null) == null)
                 .toList();
 
         int randomChoice = random.nextInt(4);
@@ -204,7 +203,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 //                .filter(effect -> effect.getCategory() == MobEffectCategory.HARMFUL)
 //                .toList();
 
-        Optional<HolderLookup.RegistryLookup<MobEffect>> mobEffectRegistryLookup = level().registryAccess().lookup(Registries.MOB_EFFECT);
+        Optional<Registry<MobEffect>> mobEffectRegistryLookup = level().registryAccess().lookup(Registries.MOB_EFFECT);
         HolderLookup.RegistryLookup<MobEffect> mobEffectRegistryLookup1 = mobEffectRegistryLookup.get();
         List<Holder.Reference<MobEffect>> NEGATIVE_EFFECTS = mobEffectRegistryLookup1.listElements().filter(mobEffectReference -> mobEffectReference.value().getCategory() == MobEffectCategory.HARMFUL).toList();
 
@@ -213,7 +212,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 //        List<Enchantment> NEGATIVE_ENCHANTMENTS = StreamSupport.stream(Registries.ENCHANTMENT.spliterator(), false)
 //                .filter(Enchantment::isCursed)
 //                .toList();
-        Optional<HolderLookup.RegistryLookup<Enchantment>> lookup = level().registryAccess().lookup(Registries.ENCHANTMENT);
+        Optional<Registry<Enchantment>> lookup = level().registryAccess().lookup(Registries.ENCHANTMENT);
         HolderLookup.RegistryLookup<Enchantment> enchantmentRegistryLookup = lookup.get();
         List<Holder.Reference<Enchantment>> NEGATIVE_ENCHANTMENTS = enchantmentRegistryLookup.listElements().filter(enchantmentReference -> enchantmentReference.is(EnchantmentTags.CURSE)).toList();
 
@@ -269,7 +268,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Unique
     private void clearRandomItems(int itemCount, ItemStack priorityItem) {
         Player player = (Player) (Object) this; // 获取当前玩家实体
-        List<ItemStack> inventory = player.getInventory().items; // 获取玩家物品栏
+        List<ItemStack> inventory = player.getInventory().getNonEquipmentItems(); // 获取玩家物品栏
 
         Random random = new Random();
         int itemsCleared = 0;
@@ -327,7 +326,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (!RANDOM_ITEMS.isEmpty()) {
             randomItem = RANDOM_ITEMS.get(random.nextInt(RANDOM_ITEMS.size()));
             randomItemStack = new ItemStack(randomItem);
-            return randomItem.getDescription().getString();
+            return randomItem.getDescriptionId();
         }
         return "一个随机物品";
     }

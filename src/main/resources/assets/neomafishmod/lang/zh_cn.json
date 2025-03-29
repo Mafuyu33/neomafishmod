@@ -203,6 +203,7 @@
   "effect.neomafishmod.emergency_teleport_effect": "应激传送",
   "effect.neomafishmod.bad_luck_of_sea_effect": "海之嫌弃",
   "effect.neomafishmod.rotate_screen_180_effect": "反转了！",
+  "effect.neomafishmod.all_attributes_up_effect": "全属性提升",
 
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
@@ -247,5 +248,10 @@
   "item.minecraft.potion.effect.strong_rotate_screen_180_potion": "反转魔药",
   "item.minecraft.splash_potion.effect.strong_rotate_screen_180_potion": "反转魔药（喷溅）",
   "item.minecraft.lingering_potion.effect.strong_rotate_screen_180_potion": "反转魔药（滞留）",
-  "item.minecraft.tipped_arrow.effect.strong_rotate_screen_180_potion": "反转之箭"
+  "item.minecraft.tipped_arrow.effect.strong_rotate_screen_180_potion": "反转之箭",
+
+  "item.minecraft.potion.effect.all_attributes_up_potion": "全属性提升药水",
+  "item.minecraft.splash_potion.effect.all_attributes_up_potion": "全属性提升药水（喷溅）",
+  "item.minecraft.lingering_potion.effect.all_attributes_up_potion": "全属性提升药水（滞留）",
+  "item.minecraft.tipped_arrow.effect.all_attributes_up_potion": "全属性提升箭"
 }

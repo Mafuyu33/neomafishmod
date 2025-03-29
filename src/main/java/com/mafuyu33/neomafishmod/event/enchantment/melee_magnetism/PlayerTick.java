@@ -2,6 +2,8 @@ package com.mafuyu33.neomafishmod.event.enchantment.melee_magnetism;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -30,9 +32,9 @@ public class PlayerTick {
                 Vec3 currentLookVec = player.getLookAngle();
                 Vec3 targetLookVec = OnPlayerAttack.targetPosition.subtract(player.position()).normalize();
                 Vec3 interpolatedLookVec = currentLookVec.scale(1 - t).add(targetLookVec.scale(t)).normalize();
-                player.lookAt(player.createCommandSourceStack().getAnchor(), player.position().add(interpolatedLookVec));
+                player.lookAt(player.createCommandSourceStackForNameResolution(((ServerLevel) player.level())).getAnchor(), player.position().add(interpolatedLookVec));
             } else {
-                player.lookAt(player.createCommandSourceStack().getAnchor(), OnPlayerAttack.targetPosition);
+                player.lookAt(player.createCommandSourceStackForNameResolution(((ServerLevel) player.level())).getAnchor(), OnPlayerAttack.targetPosition);
                 OnPlayerAttack.targetPosition = null;
             }
         }

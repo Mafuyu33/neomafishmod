@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(at = @At("HEAD"), method = "fallOn",cancellable = true)
-    private void init(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
+    private void init(Level p_152426_, BlockState p_152427_, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
         int i = BlockEnchantmentStorage.getLevel(Enchantments.FEATHER_FALLING, pos);
         if (i > 0){
             entity.causeFallDamage(fallDistance, (-0.25F * i + 1), entity.damageSources().fall());

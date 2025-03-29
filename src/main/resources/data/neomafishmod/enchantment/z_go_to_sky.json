@@ -15,6 +15,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#minecraft:book",
+  "supported_items": "#minecraft:enchantable/durability",
   "weight": 2
 }

@@ -16,22 +16,24 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.TagType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameType;
@@ -42,6 +44,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.xml.crypto.Data;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class RubyStuffItem extends Item {
     int timer = 0; //计时器
@@ -56,7 +59,7 @@ public class RubyStuffItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+    public InteractionResult use(Level world, Player user, InteractionHand hand) {
         ItemStack mainHandStack = user.getMainHandItem();
         ItemStack offHandStack = user.getOffhandItem();
         ItemStack itemStack;
@@ -114,7 +117,7 @@ public class RubyStuffItem extends Item {
             itemStack = offHandStack;
         }
 
-        return InteractionResultHolder.success(itemStack);
+        return InteractionResult.SUCCESS;
     }
 
 
@@ -122,9 +125,9 @@ public class RubyStuffItem extends Item {
 
 
     @Override
-    public void onCraftedBy(ItemStack stack, Level world, Player player) {
-        super.onCraftedBy(stack, world, player);
-        if(!world.isClientSide()) {
+    public void onCraftedBy(ItemStack stack, Player player) {
+        super.onCraftedBy(stack, player);
+        if(!player.level().isClientSide()) {
 
 
 
@@ -177,8 +180,8 @@ public class RubyStuffItem extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
+    public void inventoryTick(ItemStack stack, ServerLevel world, Entity entity, EquipmentSlot slot) {
+        super.inventoryTick(stack, world, entity, slot);
         if (entity instanceof ServerPlayer) {
             Player player = (Player) entity;
             if (startGoing) {
@@ -252,19 +255,19 @@ public class RubyStuffItem extends Item {
         ItemStack itemStack = context.getItemInHand();
         BlockPos blockPos = context.getClickedPos();
         Level world = context.getLevel();
-        int k = InjectHelper.getEnchantmentLevel(itemStack, Enchantments.CHANNELING);
-        if (k > 0) {//引雷
-            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(context.getLevel());
-            if (lightningEntity != null) {
-                lightningEntity.moveTo(Vec3.atBottomCenterOf(blockPos));
-                lightningEntity.setCause(playerEntity instanceof ServerPlayer ? (ServerPlayer) playerEntity : null);
-                context.getLevel().addFreshEntity(lightningEntity);
-                SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
-                if(playerEntity !=null) {
-                    playerEntity.playSound(soundEvent, 5, 1.0F);
-                }
-            }
-        }
+//        int k = InjectHelper.getEnchantmentLevel(itemStack, Enchantments.CHANNELING);
+//        if (k > 0) {//引雷
+//            LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(context.getLevel());
+//            if (lightningEntity != null) {
+//                lightningEntity.moveto(Vec3.atBottomCenterOf(blockPos));
+//                lightningEntity.setCause(playerEntity instanceof ServerPlayer ? (ServerPlayer) playerEntity : null);
+//                context.getLevel().addFreshEntity(lightningEntity);
+//                SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER.value();
+//                if(playerEntity !=null) {
+//                    playerEntity.playSound(soundEvent, 5, 1.0F);
+//                }
+//            }
+//        }
 
 
         if(playerEntity!=null && playerEntity.hasEffect(ModEffects.FLOWER_EFFECT)) {
@@ -296,9 +299,9 @@ public class RubyStuffItem extends Item {
 
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("tooltip.mafishmod.ruby_stuff.tooltip"));
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        tooltipComponents.accept(Component.translatable("tooltip.mafishmod.ruby_stuff.tooltip"));
+        super.appendHoverText(stack, context, display, tooltipComponents, flag);
     }
 
     // 清除特定的药水状态
@@ -343,5 +346,5 @@ public class RubyStuffItem extends Item {
         System.out.println("未找到符合条件的方块");
         return new CheckResult(false, null); // 未找到符合条件的方块，返回 false
     }
-    
+
 }

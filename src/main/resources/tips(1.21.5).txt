@@ -1,0 +1,17 @@
+给玩家发送消息：
+if (getOwner() instanceof Player player) {
+    player.displayClientMessage(Component.literal(bounceCount + "次"), true);
+}
+
+moveTo改名为snapTo
+
+新版召唤闪电
+private void lightning(BlockPos blockPos) {
+    LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(this.level(), EntitySpawnReason.COMMAND);
+    if (lightningBolt!=null){
+        lightningBolt.snapTo(Vec3.atBottomCenterOf(blockPos));
+        this.level().addFreshEntity(lightningBolt);
+        Holder<SoundEvent> tridentThunder = SoundEvents.TRIDENT_THUNDER;
+        this.playSound(tridentThunder.value());
+    }
+}

@@ -2,7 +2,7 @@ package com.mafuyu33.neomafishmod.setup;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mafuyu33.neomafishmod.entity.ModEntities;
-import com.mafuyu33.neomafishmod.render.CustomWindChargeRenderer;
+//import com.mafuyu33.neomafishmod.render.CustomWindChargeRenderer;
 import com.mafuyu33.neomafishmod.render.itemModel.ItemModelEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -21,13 +21,13 @@ public class ClientSetUp {
         event.registerEntityRenderer(ModEntities.TNT_PROJECTILE.get(),ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.STONE_PROJECTILE.get(),ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.LIGHTNING_PROJECTILE.get(),ThrownItemRenderer::new);
-        event.registerEntityRenderer(ModEntities.CUSTOM_WIND_CHARGE.get(),CustomWindChargeRenderer::new);
+//        event.registerEntityRenderer(ModEntities.CUSTOM_WIND_CHARGE.get(),CustomWindChargeRenderer::new);
     }
 
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
-        ItemModelEvent.registerZhuGeItemProperties();
+//        ItemModelEvent.registerZhuGeItemProperties();
     }
 }

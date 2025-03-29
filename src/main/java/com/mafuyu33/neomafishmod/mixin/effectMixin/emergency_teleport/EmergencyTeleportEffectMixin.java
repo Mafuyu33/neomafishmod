@@ -37,8 +37,8 @@ public abstract class EmergencyTeleportEffectMixin extends Entity implements Att
         super(entityType, level);
     }
 
-    @Inject(method = "hurt", at = @At("HEAD"))
-    private void init(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "hurtServer", at = @At("HEAD"))
+    private void init(ServerLevel p_376221_, DamageSource p_376460_, float p_376610_, CallbackInfoReturnable<Boolean> cir) {
         //应激传送药水
         if(this.hasEffect(ModEffects.EMERGENCY_TELEPORT_EFFECT)) {
                 randomTeleport(this.level(), (LivingEntity) (Object) this);
@@ -51,7 +51,7 @@ public abstract class EmergencyTeleportEffectMixin extends Entity implements Att
         if (!world.isClientSide) {
             for(int i = 0; i < 16; ++i) {
                 double d = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
-                double e = Math.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)world.getMinBuildHeight(), (double)(world.getMinBuildHeight() + ((ServerLevel)world).getLogicalHeight() - 1));
+                double e = Math.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)world.getMinY(), (double)(world.getMinY() + ((ServerLevel)world).getLogicalHeight() - 1));
                 double f = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
                 if (user.isPassenger()) {
                     user.stopRiding();

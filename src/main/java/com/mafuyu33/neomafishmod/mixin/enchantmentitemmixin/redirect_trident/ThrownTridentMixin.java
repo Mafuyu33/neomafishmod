@@ -74,7 +74,7 @@ public abstract class ThrownTridentMixin extends AbstractArrow{
         int k = (Byte)this.entityData.get(ID_REDIRECT);
         if (k > 0 && entity != null) {
             this.dealtDamage=false;
-            if(this.inGround) {
+            if(this.isInGround()) {
                 // 玩家点击左键
                 if (OnPlayerLeftClick.onPlayerLeftClicked()) {
                     // 获取玩家视角方向的射线检测到的坐标

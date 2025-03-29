@@ -7,16 +7,19 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 
 
 public class TimeStopItem extends Item {
@@ -28,7 +31,7 @@ public class TimeStopItem extends Item {
 
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+    public InteractionResult use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
         if(!world.isClientSide){
         startStop=!startStop;
@@ -85,7 +88,7 @@ public class TimeStopItem extends Item {
                 }
             }
         }
-        return InteractionResultHolder.success(itemStack);
+        return InteractionResult.SUCCESS;
     }
 
     private static Vec3 lastPos= new Vec3(0, 0, 0);
@@ -93,8 +96,8 @@ public class TimeStopItem extends Item {
     private static Vec3 lastPosOffController= new Vec3(0, 0, 0);
     private static Vec3 lastPosHMD= new Vec3(0, 0, 0);
     @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
+    public void inventoryTick(ItemStack stack, ServerLevel world, Entity entity, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(stack, world, entity, slot);
 
 //        if (startStop && entity instanceof Player user && !world.isClientSide
 //                && VRPlugin.canRetrieveData(user)) {//有MC-VR-API并且在VR中的时候

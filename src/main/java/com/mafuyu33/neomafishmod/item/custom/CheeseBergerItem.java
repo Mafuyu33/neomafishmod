@@ -34,19 +34,19 @@ public class CheeseBergerItem extends Item{
         return super.interactLivingEntity(stack, user, entity, hand);
     }
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-        if (world.isClientSide && entity instanceof Player) {
-            if (cooldown > 0) {
-                cooldown--;
-            } else {
-                if (hasNearbyCat(world, entity)) {
-                    playCatSound(world, entity);
-                    cooldown = COOLDOWN_TICKS;
-                }
-            }
-        }
-    }
+//    @Override
+//    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+//        if (world.isClientSide && entity instanceof Player) {
+//            if (cooldown > 0) {
+//                cooldown--;
+//            } else {
+//                if (hasNearbyCat(world, entity)) {
+//                    playCatSound(world, entity);
+//                    cooldown = COOLDOWN_TICKS;
+//                }
+//            }
+//        }
+//    }
 
     private boolean hasNearbyCat(Level world, Entity entity) {
         return !world.getEntitiesOfClass(Cat.class, entity.getBoundingBox().inflate(8.0), cat -> true).isEmpty();

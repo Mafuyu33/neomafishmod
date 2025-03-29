@@ -36,7 +36,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
 				if (boundingBox.intersects(livingEntity.getBoundingBox())) {
 					// 对生物实体造成伤害
 					DamageSource damageSource = damageSources().fallingBlock(fallingBlockEntity);
-					livingEntity.hurt(damageSource, fallingBlockEntity.fallDistance);
+					livingEntity.hurt(damageSource, (float) fallingBlockEntity.fallDistance);
 				}
 			}
 		}

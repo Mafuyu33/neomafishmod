@@ -4,6 +4,7 @@ import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.flag.FeatureElement;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +32,7 @@ public abstract class AbstractBlockMixin implements FeatureElement {
         int k = BlockEnchantmentStorage.getLevel(ModEnchantments.SUPER_PROJECTILE_PROTECTION,hit.getBlockPos());
         if(k>0 && !level.isClientSide){
             // 获取命中表面的法向量
-            Vec3i normalVec3i = hit.getDirection().getNormal();
+            Vec3i normalVec3i = hit.getDirection().getUnitVec3i();
             Vec3 normal = new Vec3(normalVec3i.getX(), normalVec3i.getY(), normalVec3i.getZ());
 
             // 获取投射物的入射方向
@@ -43,11 +44,11 @@ public abstract class AbstractBlockMixin implements FeatureElement {
 
             try {
                 // 使用反射创建新的投射物实例
-                Projectile newProjectile = (Projectile) projectile.getType().create(level);
+                Projectile newProjectile = (Projectile) projectile.getType().create(level, EntitySpawnReason.COMMAND);
                 if (newProjectile != null) {
                     // 复制所有字段
                     neomafishmod$copyFields(projectile, newProjectile);
-                    newProjectile.moveTo(projectile.getX(), projectile.getY(), projectile.getZ(), projectile.getYRot(), projectile.getXRot());
+                    newProjectile.snapTo(projectile.getX(), projectile.getY(), projectile.getZ(), projectile.getYRot(), projectile.getXRot());
                     newProjectile.setDeltaMovement(reflection.scale(k * 0.1+0.9));
                     //设置速度上限，如果速度大于一个特定的数值，就会被限制在这个数值上
                     double maxSpeed = 50;

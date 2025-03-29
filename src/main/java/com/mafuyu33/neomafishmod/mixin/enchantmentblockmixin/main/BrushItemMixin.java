@@ -26,11 +26,6 @@ public abstract class BrushItemMixin extends Item {
 		super(properties);
 	}
 
-	@Override
-	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		return super.hurtEnemy(stack, target, attacker);
-	}
-
 	@Inject(at = @At("HEAD"), method = "useOn")
 	private void init(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
 		//只在服务端运行

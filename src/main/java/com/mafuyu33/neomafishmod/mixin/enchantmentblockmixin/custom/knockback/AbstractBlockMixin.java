@@ -3,6 +3,7 @@ package com.mafuyu33.neomafishmod.mixin.enchantmentblockmixin.custom.knockback;
 import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureElement;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BlockBehaviour.class)
 public abstract class AbstractBlockMixin implements FeatureElement {
     @Inject(at = @At("HEAD"), method = "entityInside")
-    private void init3(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
+    private void init3(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier p_405359_, CallbackInfo ci) {
         int k = BlockEnchantmentStorage.getLevel(Enchantments.KNOCKBACK,pos);
         if (!level.isClientSide() && k > 0) {
             entity.push(0,k*0.5,0);

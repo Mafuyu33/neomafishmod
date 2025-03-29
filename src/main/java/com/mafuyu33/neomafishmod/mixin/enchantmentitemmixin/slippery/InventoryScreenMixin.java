@@ -2,8 +2,10 @@ package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin.slippery;
 
 import com.mafuyu33.neomafishmod.enchantment.ModEnchantments;
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
-import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+
+import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,26 +19,33 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Mafuyu33
+ */
 @Mixin(InventoryScreen.class)
-public abstract class InventoryScreenMixin extends EffectRenderingInventoryScreen<InventoryMenu> {
+public abstract class InventoryScreenMixin extends AbstractRecipeBookScreen<InventoryMenu> {
 
 	public InventoryScreenMixin(InventoryMenu menu, Inventory playerInventory, Component title) {
-		super(menu, playerInventory, title);
+		super(menu, null, playerInventory, title);
+		// 传null作为RecipeBookComponent，实际初始化会在InventoryScreen中处理
 	}
 
-	@Inject(at = @At(value = "HEAD"), method = "mouseClicked",cancellable = true)
-	private void init(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir){
-		Slot slot = this.findSlot(mouseX, mouseY);
-		System.out.println(slot);
-		if(slot!=null) {
-			ItemStack itemStack = slot.getItem();
-			System.out.println(itemStack);
-			System.out.println(itemStack.getEnchantments());
-			if (InjectHelper.getEnchantmentLevel(itemStack, ModEnchantments.SLIPPERY) > 0) {
-				if(placeItemInPlayerInventory(this.minecraft.player, itemStack)){
-					cir.cancel();
+	@Inject(at = @At(value = "HEAD"), method = "mouseReleased", cancellable = true)
+	private void init(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+		// 使用父类的isHovering方法检查槽位
+		for (Slot slot : this.menu.slots) {
+			if (this.isHovering(slot.x, slot.y, 16, 16, mouseX, mouseY)) {
+				ItemStack itemStack = slot.getItem();
+				if (!itemStack.isEmpty() && InjectHelper.getEnchantmentLevel(itemStack, ModEnchantments.SLIPPERY) > 0) {
+					if (placeItemInPlayerInventory(this.minecraft.player, itemStack)) {
+						cir.setReturnValue(true);
+						cir.cancel();
+						break;
+					}
 				}
 			}
 		}
@@ -61,41 +70,38 @@ public abstract class InventoryScreenMixin extends EffectRenderingInventoryScree
 		// 获取玩家背包
 		Inventory playerInventory = player.getInventory();
 
-		//数量
-		int count = itemStack.getCount();
-
-		// 获取玩家背包的所有物品槽位
-		NonNullList<ItemStack> slots = playerInventory.items;
-
 		// 创建一个随机数生成器
 		Random random = new Random();
 
-		// 循环直到找到一个空槽位
-		int attempts = 0;
-		while (attempts < 100) { // 防止无限循环
-			// 生成一个随机的槽位索引
-			int slotIndex = random.nextInt(slots.size());
+		// 获取物品总数
+		int count = itemStack.getCount();
 
-			// 获取该槽位的物品堆
-			ItemStack slotStack = slots.get(slotIndex);
+		// 创建空槽位列表
+		List<Integer> emptySlots = new ArrayList<>();
 
-			// 检查该槽位是否为空
-			if (slotStack.isEmpty()) {
-				// 如果槽位为空，则将物品放置到该槽位
-
-				slots.set(slotIndex, itemStack.copy());
-				itemStack.shrink(count);
-				// 可选：通知玩家物品已经放置到背包中
-				System.out.println("已将物品放置到背包中");
-				return true;
+		// 查找所有空槽位
+		for (int i = 0; i < playerInventory.getContainerSize(); i++) {
+			// 只检查主物品栏的36个槽位(0-35)，不包括装备槽
+			if (i < 36 && playerInventory.getItem(i).isEmpty()) {
+				emptySlots.add(i);
 			}
-
-			// 尝试下一个槽位
-			attempts++;
 		}
 
-		// 如果没有找到空槽位，则在控制台输出消息
-		System.out.println("无法找到空槽位放置物品");
-		return false;
+		// 如果没有空槽位，返回失败
+		if (emptySlots.isEmpty()) {
+			return false;
+		}
+
+		// 随机选择一个空槽位
+		int slotIndex = emptySlots.get(random.nextInt(emptySlots.size()));
+
+		// 将物品放入选定的槽位
+		playerInventory.setItem(slotIndex, itemStack.copy());
+
+		// 清空原始物品堆
+		itemStack.setCount(0);
+
+		System.out.println("已将物品放置到背包中的槽位: " + slotIndex);
+		return true;
 	}
 }

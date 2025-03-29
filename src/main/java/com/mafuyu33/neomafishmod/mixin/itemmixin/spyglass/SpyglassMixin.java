@@ -34,8 +34,6 @@ public abstract class SpyglassMixin extends LivingEntity {
 	@Shadow
 	public abstract boolean isScoping();
 
-	@Shadow public abstract Iterable<ItemStack> getHandSlots();
-
 	@Unique
 	BlockPos lastHitBlockPos;
 
@@ -84,7 +82,7 @@ public abstract class SpyglassMixin extends LivingEntity {
 
 					// 根据粒子密度生成粒子
 					if (level().isClientSide && random.nextFloat() < density) {
-						level().addParticle(ParticleTypes.COMPOSTER, true, particleX, particleY, particleZ, 0, 0.05, 0);
+						level().addParticle(ParticleTypes.COMPOSTER, particleX, particleY, particleZ, 0, 0.05, 0);
 					}
 				}
 			}

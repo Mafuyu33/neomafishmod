@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -25,32 +24,32 @@ public class ItemRendererMixin {
 	@Unique
 	private float neomafishmod$currentScale = 1.0f;
 
-	@Inject(method = "render",at= @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V"))
-	public void renderItem(
-			ItemStack itemStack,
-			ItemDisplayContext displayContext,
-			boolean leftHand,
-			PoseStack poseStack,
-			MultiBufferSource bufferSource,
-			int combinedLight,
-			int combinedOverlay,
-			BakedModel p_model,
-			CallbackInfo ci
-	){
-		if (BuiltInRegistries.ITEM.getKey(itemStack.getItem()).equals(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"ruyijingu")))
-		{
-			if(displayContext != ItemDisplayContext.GUI) {
-				// 设置缩放的增量
-				float scaleIncrement = 0.1f;
-
-				if (KeyInputHandler.plusKey.isDown()) {
-					neomafishmod$currentScale += scaleIncrement;
-				} else if (KeyInputHandler.minusKey.isDown()) {
-					neomafishmod$currentScale = Math.max(0.1f, neomafishmod$currentScale - scaleIncrement);
-				}
-				poseStack.scale(neomafishmod$currentScale, neomafishmod$currentScale, neomafishmod$currentScale);
-			}
-		}
-
-	}
+//	@Inject(method = "render",at= @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V"))
+//	public void renderItem(
+//			ItemStack itemStack,
+//			ItemDisplayContext displayContext,
+//			boolean leftHand,
+//			PoseStack poseStack,
+//			MultiBufferSource bufferSource,
+//			int combinedLight,
+//			int combinedOverlay,
+//			BakedModel p_model,
+//			CallbackInfo ci
+//	){
+//		if (BuiltInRegistries.ITEM.getKey(itemStack.getItem()).equals(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"ruyijingu")))
+//		{
+//			if(displayContext != ItemDisplayContext.GUI) {
+//				// 设置缩放的增量
+//				float scaleIncrement = 0.1f;
+//
+//				if (KeyInputHandler.plusKey.isDown()) {
+//					neomafishmod$currentScale += scaleIncrement;
+//				} else if (KeyInputHandler.minusKey.isDown()) {
+//					neomafishmod$currentScale = Math.max(0.1f, neomafishmod$currentScale - scaleIncrement);
+//				}
+//				poseStack.scale(neomafishmod$currentScale, neomafishmod$currentScale, neomafishmod$currentScale);
+//			}
+//		}
+//
+//	}
 }

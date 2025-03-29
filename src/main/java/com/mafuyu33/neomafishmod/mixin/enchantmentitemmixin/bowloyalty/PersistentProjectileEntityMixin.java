@@ -1,10 +1,12 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentitemmixin.bowloyalty;
 
 import com.mafuyu33.neomafishmod.mixinhelper.InjectHelper;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -34,8 +36,6 @@ public abstract class PersistentProjectileEntityMixin extends Projectile {
 	}
 
 	@Shadow public abstract ItemStack getPickupItemStackOrigin();
-	@Shadow
-	protected boolean inGround;
 
 	@Shadow public abstract void setNoPhysics(boolean noClip);
 
@@ -44,6 +44,8 @@ public abstract class PersistentProjectileEntityMixin extends Projectile {
 	@Shadow public AbstractArrow.Pickup pickup;
 
 	@Shadow protected abstract ItemStack getPickupItem();
+
+	@Shadow protected abstract boolean isInGround();
 
 	@Unique
 	private static EntityDataAccessor<Byte> LOYALTY;
@@ -59,10 +61,10 @@ public abstract class PersistentProjectileEntityMixin extends Projectile {
 			this.entityData.set(LOYALTY, (byte) loyaltyLevel);
 		}
 		loyaltyLevel = this.entityData.get(LOYALTY);
-		if (loyaltyLevel > 0 && (this.inGround || this.isNoPhysics()) && entity != null) {
+		if (loyaltyLevel > 0 && (this.isInGround() || this.isNoPhysics()) && entity != null) {
 			if (!this.isOwnerAlive()) {
 				if (!this.level().isClientSide && this.pickup == AbstractArrow.Pickup.ALLOWED) {
-					this.spawnAtLocation(this.getPickupItem(), 0.1F);
+					this.spawnAtLocation(((ServerLevel) level()),this.getPickupItem(), 0.1F);
 				}
 				this.discard();
 			} else {

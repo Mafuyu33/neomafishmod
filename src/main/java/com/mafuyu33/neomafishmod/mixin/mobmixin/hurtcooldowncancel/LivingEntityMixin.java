@@ -1,8 +1,9 @@
 package com.mafuyu33.neomafishmod.mixin.mobmixin.hurtcooldowncancel;
 
 import com.mafuyu33.neomafishmod.Config;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -27,8 +28,8 @@ public abstract class LivingEntityMixin extends Entity {
 		super(entityType, level);
 	}
 
-	@Inject(method = "hurt",at = @At("TAIL"))
-	private void init(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	@Inject(method = "hurtServer",at = @At("TAIL"))
+	private void init(ServerLevel p_376221_, DamageSource p_376460_, float p_376610_, CallbackInfoReturnable<Boolean> cir) {
 		if(Config.isHurtCoolDownCanceled()) {
 			this.invulnerableTime = 0;
 		}

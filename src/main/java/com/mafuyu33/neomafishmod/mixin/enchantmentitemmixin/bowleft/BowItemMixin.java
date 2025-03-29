@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.minecraft.world.item.BowItem.getPowerForTime;
 
@@ -34,7 +35,7 @@ public abstract class BowItemMixin  extends ProjectileWeaponItem {
 	}
 
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/BowItem;shoot(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;Ljava/util/List;FFZLnet/minecraft/world/entity/LivingEntity;)V"), method = "releaseUsing")
-	private void init(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
+	private void init(ItemStack stack, Level p_40668_, LivingEntity entityLiving, int timeLeft, CallbackInfoReturnable<Boolean> cir) {
 		int o = InjectHelper.getEnchantmentLevel(stack, ModEnchantments.BOW_LEFT);
 		if(entityLiving instanceof Player playerEntity && o>0) {
 			int i = this.getUseDuration(stack,entityLiving) - timeLeft;

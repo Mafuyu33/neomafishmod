@@ -37,9 +37,6 @@ public abstract class MobEntityMixin extends LivingEntity implements Targeting,L
     }
 
 
-    @Shadow public abstract void dropLeash(boolean sendPacket, boolean dropItem);
-
-
     /**
      * @author
      * Mafish
@@ -77,7 +74,7 @@ public abstract class MobEntityMixin extends LivingEntity implements Targeting,L
 //                    if(!getWorld().isClient) {
 //                        this.detachLeashWithoutClearNbt(true, false);
 //                    }
-                        cir.setReturnValue(InteractionResult.sidedSuccess(this.level().isClientSide));
+                        cir.setReturnValue(InteractionResult.SUCCESS);
                     }
                 }
             }
