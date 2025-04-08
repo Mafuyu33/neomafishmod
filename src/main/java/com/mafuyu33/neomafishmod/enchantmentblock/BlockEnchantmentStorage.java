@@ -115,5 +115,16 @@ public class BlockEnchantmentStorage {
         return blockPos.toString() + "-" + enchantments.hashCode();
     }
 
-
+    public static int clearAll() {
+        MinecraftServer server = ServerManager.getServerInstance();
+        BlockStateSaverAndLoader state = BlockStateSaverAndLoader.getServerState(server);
+        if (state != null) {
+            int count = state.blockEnchantments.size();
+            state.blockEnchantments.clear();
+            LEVEL_CACHE.clear();
+            state.setDirty();
+            return count;
+        }
+        return 0;
+    }
 }

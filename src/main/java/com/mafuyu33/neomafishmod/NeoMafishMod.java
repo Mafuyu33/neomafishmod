@@ -1,6 +1,7 @@
 package com.mafuyu33.neomafishmod;
 
 import com.mafuyu33.neomafishmod.block.ModBlock;
+import com.mafuyu33.neomafishmod.command.ModCommands;
 import com.mafuyu33.neomafishmod.datagen.ModDatapackBuiltinEntriesProvider;
 import com.mafuyu33.neomafishmod.effect.ModEffects;
 import com.mafuyu33.neomafishmod.entity.custom.CustomWindChargeEntity;
@@ -27,7 +28,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -55,7 +58,7 @@ public class NeoMafishMod
         ModSounds.register(modEventBus);
         ModEffects.register(modEventBus);
         ModPotions.register(modEventBus);
-
+        NeoForge.EVENT_BUS.addListener(ModCommands::register);
         modContainer.registerConfig(ModConfig.Type.COMMON,Config.SPEC);
     }
     public static ResourceKey<EntityType<?>> id(String name) {
