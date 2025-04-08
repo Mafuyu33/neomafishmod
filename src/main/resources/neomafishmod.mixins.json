@@ -40,6 +40,8 @@
     "enchantmentblockmixin.main.PistonBlockMixin",
     "enchantmentblockmixin.main.PlayerEntityMixin",
     "enchantmentblockmixin.main.WorldMixin",
+    "enchantmentblockmixin.main.experience_bottle.ExperienceBottleItemMixin",
+    "enchantmentblockmixin.main.experience_bottle.ThrownExperienceBottleMixin",
     "enchantmentblockmixin.main.sigleinject.AbstractRedStoneGateBlockMixin",
     "enchantmentblockmixin.main.sigleinject.CobwebBlockMixin",
     "enchantmentblockmixin.main.sigleinject.CommandBlockMixin",
