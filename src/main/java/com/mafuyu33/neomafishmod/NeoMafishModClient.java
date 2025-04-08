@@ -23,5 +23,6 @@ public class NeoMafishModClient
     public NeoMafishModClient(IEventBus modEventBus, ModContainer modContainer)
     {
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+//        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.register(EnchantedBlockRenderer.class);
     }
 }

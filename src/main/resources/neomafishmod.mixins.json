@@ -5,7 +5,6 @@
   "mixins": [
     "ExampleMixin",
     "effectMixin.TeleportEffectMixin",
-    "effectMixin.unlimitedeffect.UnLimitedEffect",
     "effectMixin.antidote.LivingEntityMixin",
     "effectMixin.bad_luck_of_sea.LivingEntityMixin",
     "effectMixin.canclimb.LivingEntityMixin",
