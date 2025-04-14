@@ -1,6 +1,6 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 uniform float time;
 in vec2 texCoord;
 
@@ -22,6 +22,6 @@ void main() {
     ) + vec2(0.5); // 旋转后再移回中心
 
     // 采样纹理
-    vec4 color = texture(DiffuseSampler, rotatedUV);
+    vec4 color = texture(InSampler, rotatedUV);
     fragColor = color;
 }

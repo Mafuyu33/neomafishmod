@@ -5,6 +5,8 @@ import com.mafuyu33.neomafishmod.effect.ModEffects;
 import com.mafuyu33.neomafishmod.event.KeyInputHandler;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelTargetBundle;
+import net.minecraft.client.renderer.PostChain;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -42,57 +44,68 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
     private float neomafishmod$lastTimeValue = 0.0f;
     @Unique
     private CameraType neomafishmod$lastCameraType = null;
-//
-//    @Inject(at=@At("TAIL"),method = "tick")
-//    private void init(CallbackInfo ci){
-//        if(this.level().isClientSide){
-//            Minecraft mc = Minecraft.getInstance();
-//            // 获取当前的 CameraType
-//            CameraType currentCameraType = mc.options.getCameraType();
-//            // 有效果
-//            if(this.hasEffect(ModEffects.ROTATE_SCREEN_180_EFFECT)){
-//                int amp = this.getEffect(ModEffects.ROTATE_SCREEN_180_EFFECT).getAmplifier();
-//                //如果效果的等级等于0
-//                if(amp == 0){
-//                    if (!neomafishmod$effectLoaded) {
-//                        neomafishmod$effectLoaded = true;
-//                        mc.gameRenderer.loadEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"shaders/post/rotate_screen_180.json"));
-//                    }
-//                    // 检测 F5 视角是否变化
-//                    if (neomafishmod$lastCameraType != null && neomafishmod$lastCameraType.isFirstPerson() != currentCameraType.isFirstPerson()) {
-//                        neomafishmod$effectLoaded = true;
-//                        mc.gameRenderer.loadEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "shaders/post/rotate_screen_180.json"));
-//                    }
-//                }else if(amp > 0){
-//                //效果的等级大于0
-//                    float gameTime = mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaTicks();
-//                    float rawTimeValue = (gameTime % 360) * 0.025f * (amp + 1);
-//                    // 进行线性插值
-//                    float smoothTimeValue = neomafishmod$lastTimeValue + (rawTimeValue - neomafishmod$lastTimeValue) * 0.2f;
+
+    @Inject(at=@At("TAIL"),method = "tick")
+    private void init(CallbackInfo ci){
+        if(this.level().isClientSide){
+            Minecraft mc = Minecraft.getInstance();
+            // 获取当前的 CameraType
+            CameraType currentCameraType = mc.options.getCameraType();
+            // 有效果
+            if(this.hasEffect(ModEffects.ROTATE_SCREEN_180_EFFECT)){
+                int amp = this.getEffect(ModEffects.ROTATE_SCREEN_180_EFFECT).getAmplifier();
+                //如果效果的等级等于0
+                if(amp == 0){
+                    if (!neomafishmod$effectLoaded) {
+                        neomafishmod$effectLoaded = true;
+                        mc.gameRenderer.setPostEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"rotate_screen_180"));
+                    }
+                    // 检测 F5 视角是否变化
+                    if (neomafishmod$lastCameraType != null && neomafishmod$lastCameraType.isFirstPerson() != currentCameraType.isFirstPerson()) {
+                        neomafishmod$effectLoaded = true;
+                        mc.gameRenderer.setPostEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "rotate_screen_180"));
+                    }
+                }else if(amp > 0){
+                //效果的等级大于0
+                    float gameTime = mc.level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaTicks();
+                    float rawTimeValue = (gameTime % 360) * 0.025f * (amp + 1);
+                    // 进行线性插值
+                    float smoothTimeValue = neomafishmod$lastTimeValue + (rawTimeValue - neomafishmod$lastTimeValue) * 0.2f;
 //                    if (mc.gameRenderer.currentPostEffect() != null) {
 //                        mc.gameRenderer.currentPostEffect().setUniform("time", smoothTimeValue);
 //                    }
-//                    neomafishmod$lastTimeValue = smoothTimeValue;
-//                    if (!neomafishmod$effectLoaded || neomafishmod$lastEffectAmp != amp) {
-//                        neomafishmod$effectLoaded = true;
-//                        mc.gameRenderer.loadEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"shaders/post/rotate_screen_360.json"));
-//                    }
-//                    // 检测 F5 视角是否变化
-//                    if (neomafishmod$lastCameraType != null && neomafishmod$lastCameraType.isFirstPerson() != currentCameraType.isFirstPerson()) {
-//                        neomafishmod$effectLoaded = true;
-//                        mc.gameRenderer.loadEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "shaders/post/rotate_screen_360.json"));
-//                    }
-//                }
-//                neomafishmod$lastEffectAmp = amp;
-//            }
-//            // 没有效果
-//            if (neomafishmod$effectLoaded && !this.hasEffect(ModEffects.ROTATE_SCREEN_180_EFFECT)) {
-//                neomafishmod$effectLoaded = false;
-//                neomafishmod$lastEffectAmp = -1;
-//                Minecraft.getInstance().gameRenderer.shutdownEffect();
-//            }
-//            // 记录当前 Tick 的 CameraType，作为下一个 Tick 的“上一次视角”
-//            neomafishmod$lastCameraType = currentCameraType;
-//        }
-//    }
+
+                    ResourceLocation postEffectId = mc.gameRenderer.currentPostEffect();
+                    if (postEffectId != null) {
+                        PostChain postchain = mc.getShaderManager().getPostChain(postEffectId, LevelTargetBundle.MAIN_TARGETS);
+                        if (postchain != null) {
+                            postchain.process(mc.getMainRenderTarget(), mc.gameRenderer.resourcePool, (effect)
+                                    -> { effect.setUniform("time", new float[]{smoothTimeValue});
+                            });
+                        }
+                    }
+
+                    neomafishmod$lastTimeValue = smoothTimeValue;
+                    if (!neomafishmod$effectLoaded || neomafishmod$lastEffectAmp != amp) {
+                        neomafishmod$effectLoaded = true;
+                        mc.gameRenderer.setPostEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID,"rotate_screen_360"));
+                    }
+                    // 检测 F5 视角是否变化
+                    if (neomafishmod$lastCameraType != null && neomafishmod$lastCameraType.isFirstPerson() != currentCameraType.isFirstPerson()) {
+                        neomafishmod$effectLoaded = true;
+                        mc.gameRenderer.setPostEffect(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "rotate_screen_360"));
+                    }
+                }
+                neomafishmod$lastEffectAmp = amp;
+            }
+            // 没有效果
+            if (neomafishmod$effectLoaded && !this.hasEffect(ModEffects.ROTATE_SCREEN_180_EFFECT)) {
+                neomafishmod$effectLoaded = false;
+                neomafishmod$lastEffectAmp = -1;
+                Minecraft.getInstance().gameRenderer.clearPostEffect();
+            }
+            // 记录当前 Tick 的 CameraType，作为下一个 Tick 的“上一次视角”
+            neomafishmod$lastCameraType = currentCameraType;
+        }
+    }
 }
