@@ -2,6 +2,7 @@ package com.mafuyu33.neomafishmod.enchantmentblock;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -35,9 +36,17 @@ public class BlockStateSaverAndLoader extends SavedData {
             }
     );
 
+    private static final Codec<BlockPos> POS_STRING = Codec.STRING.comapFlatMap(
+            s -> {
+                try { return DataResult.success(BlockPos.of(Long.parseLong(s))); }
+                catch (NumberFormatException e) { return DataResult.error(() -> "Bad BlockPos key: " + s); }
+            },
+            pos -> Long.toString(pos.asLong())
+    );
+
     // 创建一个Map的编解码器
     private static final Codec<Map<BlockPos, ListTag>> BLOCK_ENCHANTMENTS_CODEC = Codec.unboundedMap(
-            BlockPos.CODEC,
+            POS_STRING,
             LIST_TAG_CODEC
     );
 
