@@ -48,7 +48,16 @@ public abstract class AbstractBlockMixin implements FeatureElement {
                 if (newProjectile != null) {
                     // 复制所有字段
                     neomafishmod$copyFields(projectile, newProjectile);
-                    newProjectile.snapTo(projectile.getX(), projectile.getY(), projectile.getZ(), projectile.getYRot(), projectile.getXRot());
+                    // 命中点在方块表面外再偏移 epsilon
+                    Vec3 spawnPos = hit.getLocation().add(
+                            hit.getDirection().getStepX() * 0.01,
+                            hit.getDirection().getStepY() * 0.01,
+                            hit.getDirection().getStepZ() * 0.01
+                    );
+                    newProjectile.snapTo(
+                            spawnPos.x, spawnPos.y, spawnPos.z,
+                            projectile.getYRot(), projectile.getXRot()
+                    );
                     newProjectile.setDeltaMovement(reflection.scale(k * 0.1+0.9));
                     //设置速度上限，如果速度大于一个特定的数值，就会被限制在这个数值上
                     double maxSpeed = 50;
