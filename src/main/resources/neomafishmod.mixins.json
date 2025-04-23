@@ -104,6 +104,7 @@
     "mobmixin.pandaeatswitch.PandaEntityMixin"
   ],
   "client": [
+    "enchantmentblockmixin.main.renderer.MinecraftMixin",
     "enchantmentitemmixin.slippery.HandledScreenMixin",
     "enchantmentitemmixin.slippery.InventoryScreenMixin"
   ],
