@@ -1,7 +1,6 @@
-package com.mafuyu33.neomafishmod.render.enchantedblock;
+package com.mafuyu33.neomafishmod.enchantmentblock;
 
 import com.mafuyu33.neomafishmod.NeoMafishMod;
-import com.mafuyu33.neomafishmod.enchantmentblock.BlockEnchantmentStorage;
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.pipeline.RenderTarget;
@@ -19,7 +18,6 @@ import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -42,8 +40,10 @@ public class EnchantedBlockRenderer {
     public static final RenderPipeline ENCHANTED_BLOCK_PRE = RenderPipelines.register(
             RenderPipeline.builder(RenderPipelines.TERRAIN_SNIPPET)
                     .withLocation(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "enchanted_block_pre"))
+                    .withVertexShader(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "core/enchanted_block_pre"))
                     .withFragmentShader(ResourceLocation.fromNamespaceAndPath(NeoMafishMod.MODID, "core/enchanted_block_pre"))
                     .withDepthTestFunction(DepthTestFunction.LEQUAL_DEPTH_TEST)
+                    .withUniform("CamPos", UniformType.VEC3)
                     .build()
     );
 
@@ -62,6 +62,61 @@ public class EnchantedBlockRenderer {
 
     );
 
+    private static MeshData preMesh = null;
+    private static volatile boolean dirty = true;
+    private static final RenderSystem.AutoStorageIndexBuffer INDEX_BUFFER = new RenderSystem.AutoStorageIndexBuffer(4, 6, (p_403829_, p_403830_) -> {
+        p_403829_.accept(p_403830_);
+        p_403829_.accept(p_403830_ + 1);
+        p_403829_.accept(p_403830_ + 2);
+        p_403829_.accept(p_403830_ + 2);
+        p_403829_.accept(p_403830_ + 3);
+        p_403829_.accept(p_403830_);
+    });
+
+    public static void markDirty() {
+        dirty = true;
+    }
+
+    private static void updateMesh(RenderLevelStageEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+        BufferBuilder preBufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
+        for (var pos : BlockEnchantmentStorage.getAllEnchantedBlocks()) {
+
+            var state = event.getLevel().getBlockState(pos);
+            BlockStateModel blockstatemodel = mc.getBlockRenderer().getBlockModel(state);
+            event.getPoseStack().pushPose();
+            for (BlockModelPart blockmodelpart : blockstatemodel.collectParts(event.getLevel(), pos, state, RandomSource.create(42L))) {
+                event.getPoseStack().pushPose();
+                event.getPoseStack().translate(pos.getX(), pos.getY(), pos.getZ());
+                for (var direction : Direction.values()) {
+                    ModelBlockRenderer.renderQuadList(event.getPoseStack().last(), preBufferBuilder, 1, 1, 1, blockmodelpart.getQuads(direction), 0xf0, 0);
+                }
+                ModelBlockRenderer.renderQuadList(event.getPoseStack().last(), preBufferBuilder, 1, 1, 1, blockmodelpart.getQuads(null), 0xf0, 0);
+                event.getPoseStack().popPose();
+            }
+            event.getPoseStack().popPose();
+        }
+
+        if (preMesh != null) {
+            preMesh.close();
+        }
+        preMesh = preBufferBuilder.build();
+        if (preMesh == null) {
+            return;
+        }
+        var iboBuffer = preMesh.indexBuffer();
+        if (iboBuffer != null) {
+            ibo = ENCHANTED_BLOCK_PRE.getVertexFormat().uploadImmediateIndexBuffer(iboBuffer);
+            preIndexType = preMesh.drawState().indexType();
+        } else {
+            ibo = INDEX_BUFFER.getBuffer(preMesh.drawState().indexCount());
+            preIndexType = INDEX_BUFFER.type();
+        }
+        vbo = ENCHANTED_BLOCK_PRE.getVertexFormat().uploadImmediateVertexBuffer(preMesh.vertexBuffer());
+    }
+
+    static GpuBuffer ibo, vbo;
+    static VertexFormat.IndexType preIndexType;
 
     @SubscribeEvent
     public static void onRenderLevelLast(RenderLevelStageEvent event) {
@@ -69,55 +124,13 @@ public class EnchantedBlockRenderer {
             return;
         }
         Minecraft mc = Minecraft.getInstance();
-        BufferBuilder preBufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
-        //AABB aabb = new AABB(0, 0, 0, 0, 0, 0);
-        var camPos = event.getCamera().getPosition();
-        //event.getFrustum().prepare(camPos.x, camPos.y, camPos.z);
-        for (var pos : BlockEnchantmentStorage.getAllEnchantedBlocks()) {
-            //aabb.setMinX(pos.getX());
-            //aabb.setMinY(pos.getY());
-            //aabb.setMinZ(pos.getZ());
-            //aabb.setMaxX(pos.getX() + 1);
-            //aabb.setMaxY(pos.getY() + 1);
-            //aabb.setMaxZ(pos.getZ() + 1);
-            //if (!event.getFrustum().isVisible(aabb)) {
-            //    continue;
-            //}
-
-            var state = event.getLevel().getBlockState(pos);
-            BlockStateModel blockstatemodel = mc.getBlockRenderer().getBlockModel(state);
-            float r = 1;
-            float g = 1;
-            float b = 1;
-            event.getPoseStack().pushPose();
-            event.getPoseStack().translate(camPos.multiply(-1, -1, -1));
-            for (BlockModelPart blockmodelpart : blockstatemodel.collectParts(event.getLevel(), pos, state, RandomSource.create(42L))) {
-                event.getPoseStack().pushPose();
-                event.getPoseStack().translate(pos.getX(), pos.getY(), pos.getZ());
-                for (var direction : Direction.values()) {
-                    ModelBlockRenderer.renderQuadList(event.getPoseStack().last(), preBufferBuilder, r, g, b, blockmodelpart.getQuads(direction), 0xf0, 0);
-                }
-                ModelBlockRenderer.renderQuadList(event.getPoseStack().last(), preBufferBuilder, r, g, b, blockmodelpart.getQuads(null), 0xf0, 0);
-                event.getPoseStack().popPose();
-            }
-            event.getPoseStack().popPose();
+        if (dirty) {
+            updateMesh(event);
+            dirty = false;
         }
-        var preMesh = preBufferBuilder.build();
         if (preMesh == null) {
             return;
         }
-        VertexFormat.IndexType preIndexType;
-        GpuBuffer ibo;
-        if (preMesh.indexBuffer() == null) {
-            RenderSystem.AutoStorageIndexBuffer rendersystem$autostorageindexbuffer = RenderSystem.getSequentialBuffer(preMesh.drawState().mode());
-            ibo = rendersystem$autostorageindexbuffer.getBuffer(preMesh.drawState().indexCount());
-            preIndexType = rendersystem$autostorageindexbuffer.type();
-        } else {
-            ibo = ENCHANTED_BLOCK_PRE.getVertexFormat().uploadImmediateIndexBuffer(preMesh.indexBuffer());
-            preIndexType = preMesh.drawState().indexType();
-        }
-        var vbo = ENCHANTED_BLOCK_PRE.getVertexFormat().uploadImmediateVertexBuffer(preMesh.vertexBuffer());
-
         RenderPass prePass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(
                 allWhite.getColorTexture(),
                 OptionalInt.of(0x0),
@@ -129,10 +142,10 @@ public class EnchantedBlockRenderer {
         prePass.setVertexBuffer(0, vbo);
         prePass.bindSampler("Sampler0", mc.gameRenderer.lightTexture().getTarget());
         prePass.bindSampler("Sampler2", mc.gameRenderer.lightTexture().getTarget());
+        var camPos = mc.gameRenderer.getMainCamera().getPosition();
+        prePass.setUniform("CamPos", (float) camPos.x, (float) camPos.y, (float) camPos.z);
         prePass.drawIndexed(0, preMesh.drawState().indexCount());
         prePass.close();
-        preMesh.close();
-
 
         BufferBuilder postBufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         postBufferBuilder.addVertex(0, 0, 0).setUv(0, 0);
@@ -148,7 +161,7 @@ public class EnchantedBlockRenderer {
 
         VertexFormat.IndexType postIndexType;
         GpuBuffer postIbo;
-        if (preMesh.indexBuffer() == null) {
+        if (postMesh.indexBuffer() == null) {
             RenderSystem.AutoStorageIndexBuffer rendersystem$autostorageindexbuffer = RenderSystem.getSequentialBuffer(postMesh.drawState().mode());
             postIbo = rendersystem$autostorageindexbuffer.getBuffer(postMesh.drawState().indexCount());
             postIndexType = rendersystem$autostorageindexbuffer.type();

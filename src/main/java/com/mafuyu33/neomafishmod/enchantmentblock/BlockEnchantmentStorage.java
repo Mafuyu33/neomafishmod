@@ -37,6 +37,8 @@ public class BlockEnchantmentStorage {
             LEVEL_CACHE.put(generateCacheKey(blockPos, enchantments), calculateMaxLevel(enchantments));
 
         }
+        //notify client 如果要做到服务端的话
+        EnchantedBlockRenderer.markDirty();
     }
 
     // 移除方块的附魔数据
@@ -49,6 +51,8 @@ public class BlockEnchantmentStorage {
             // 清除缓存
             LEVEL_CACHE.keySet().removeIf(key -> key.startsWith(blockPos.toString() + "-"));
         }
+        //notify client 如果要做到服务端的话
+        EnchantedBlockRenderer.markDirty();
     }
 
     // 获取指定方块的附魔列表
@@ -123,6 +127,7 @@ public class BlockEnchantmentStorage {
             state.blockEnchantments.clear();
             LEVEL_CACHE.clear();
             state.setDirty();
+            EnchantedBlockRenderer.markDirty();
             return count;
         }
         return 0;

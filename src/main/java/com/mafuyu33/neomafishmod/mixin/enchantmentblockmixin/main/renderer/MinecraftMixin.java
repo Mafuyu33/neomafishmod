@@ -1,6 +1,6 @@
 package com.mafuyu33.neomafishmod.mixin.enchantmentblockmixin.main.renderer;
 
-import com.mafuyu33.neomafishmod.render.enchantedblock.EnchantedBlockRenderer;
+import com.mafuyu33.neomafishmod.enchantmentblock.EnchantedBlockRenderer;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
