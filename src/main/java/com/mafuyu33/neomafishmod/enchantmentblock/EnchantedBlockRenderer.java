@@ -22,6 +22,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
 
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
@@ -186,5 +187,15 @@ public class EnchantedBlockRenderer {
         postPass.close();
         postMesh.close();
     }
+
+    private static boolean firstJoinDone = false;
+    @SubscribeEvent
+    public static void onLevelLoad(LevelEvent.Load event) {
+        // 只在客户端执行 & 只在第一次进入世界时执行
+        if (!event.getLevel().isClientSide() || firstJoinDone) return;
+        firstJoinDone = true;
+        markDirty();
+    }
+
 }
 
