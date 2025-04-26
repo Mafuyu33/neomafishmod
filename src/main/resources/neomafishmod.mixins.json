@@ -38,7 +38,6 @@
     "enchantmentblockmixin.main.BlockMixin",
     "enchantmentblockmixin.main.BrushItemMixin",
     "enchantmentblockmixin.main.PistonBlockMixin",
-    "enchantmentblockmixin.main.PlayerEntityMixin",
     "enchantmentblockmixin.main.WorldMixin",
     "enchantmentblockmixin.main.experience_bottle.ExperienceBottleItemMixin",
     "enchantmentblockmixin.main.experience_bottle.ThrownExperienceBottleMixin",
